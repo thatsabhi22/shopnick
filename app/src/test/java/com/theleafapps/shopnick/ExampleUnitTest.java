@@ -1,4 +1,4 @@
-package com.leafapps.shopnick;
+package com.theleafapps.shopnick;
 
 import org.junit.Test;
 
