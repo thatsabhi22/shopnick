@@ -1,4 +1,4 @@
-package com.leafapps.shopnick;
+package com.theleafapps.shopnick;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
