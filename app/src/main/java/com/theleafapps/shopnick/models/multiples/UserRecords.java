@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.models;
+package com.theleafapps.shopnick.models.multiples;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.theleafapps.shopnick.models.BaseRecord;
