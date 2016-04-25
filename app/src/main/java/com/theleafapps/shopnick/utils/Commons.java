@@ -32,3 +32,49 @@ public class Commons {
 //
 //            AddSubCategoryTask addSubCategoryTask = new AddSubCategoryTask(this,subcats);
 //            addSubCategoryTask.execute();
+
+//
+//    String[] namesArray = {
+//            "Swiss Polo Shirt",
+//            "Lotto Polo Shirt",
+//            "American Swan Polo Shirt"};
+//
+//    String[] prod_desc = {
+//            "Hit the streets in an uber cool style and vogue this season while wearing this unmatched outfit. Made for the man of the hour, this outfit adds more charm to the personality of the wearer."
+//            ,"This season ride high on style wearing this uber smart outfit from the house of Lotto. Subtle and stylish in design, this outfit will certainly add more to your charming personality. Made using quality material, this outfit assures breathability and is skin friendly as well."
+//            ,"Cool and dapper trousers for an energetic carefree and free spirited person that epitomizes active on-the-go fashion. This pair of trousers is splashed in youthful hues and indeed an easy way to effortlessly style yourself"
+//    };
+//
+//    int[] mrp = {699,749,899};
+//    int[] ofp = {399,399,499};
+//
+//    Products products = new Products();
+//for(int i = 0;i<namesArray.length;i++){
+//        Product product                 =   new Product();
+//        product.product_id              =   i+4;
+//        product.sub_category_id         =   8;
+//        product.product_desc            =   prod_desc[i];
+//        product.product_name            =   namesArray[i];
+//        product.unit_mrp                =   mrp[i];
+//        product.unit_offerprice         =   ofp[i];
+//        product.image_url               =   "http://dummyimage.com/130x110/000/fff&text=" + product.product_name;
+//
+//        products.products.add(product);
+//        }
+//
+//        AddProductTask addProductTask = new AddProductTask(this,products);
+//        addProductTask.execute();
+
+//            AddVariantTask addVariantTask = new AddVariantTask(this,products);
+//            addVariantTask.execute();
+//
+//            Variants variants = new Variants();
+//            for(int i = 0;i<namesArray.length;i++){
+//                Variant variant                 =   new Variant();
+//                variant.product_id              =   product.product_id;
+//                variant.variant_id              =   i+1;
+//                variant.variant_name            =   "";
+//                variant.available               =   false;
+//
+//                variants.variants.add(variant);
+//            }

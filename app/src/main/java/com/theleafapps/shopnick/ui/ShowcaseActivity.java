@@ -6,14 +6,20 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.ViewPagerAdapter;
 import com.theleafapps.shopnick.models.Category;
+import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.models.SubCategory;
+import com.theleafapps.shopnick.models.Variant;
 import com.theleafapps.shopnick.models.multiples.Categories;
+import com.theleafapps.shopnick.models.multiples.Products;
 import com.theleafapps.shopnick.models.multiples.SubCategories;
+import com.theleafapps.shopnick.models.multiples.Variants;
+import com.theleafapps.shopnick.tasks.AddProductTask;
 import com.theleafapps.shopnick.tasks.AddSubCategoryTask;
 import com.theleafapps.shopnick.tasks.GetAllCategoriesTask;
 import com.theleafapps.shopnick.tasks.GetAllSubCategoriesTask;
@@ -69,7 +75,7 @@ public class ShowcaseActivity extends AppCompatActivity {
             SubCategories subCat = getAllSubCategoriesTask.subCategoriesReceived;
 
             if (cat != null && cat.categories.size() > 0) {
-                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
                 subCategoriesRec = subCat.subCategories;
 
                 /*****
@@ -77,6 +83,11 @@ public class ShowcaseActivity extends AppCompatActivity {
                  ******/
 
                 for(SubCategory sc : subCategoriesRec){
+
+                    if(TextUtils.isEmpty(sc.image_url)) {
+                        sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name;
+                    }
+
                     if(Commons.catIdToSubCatMap.containsKey(sc.category_id)){
                         Commons.catIdToSubCatMap.get(sc.category_id).add(sc);
                     }
@@ -87,6 +98,7 @@ public class ShowcaseActivity extends AppCompatActivity {
                     }
                 }
             }
+
 
 
             viewPager = (ViewPager) findViewById(R.id.viewpager);

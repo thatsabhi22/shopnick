@@ -21,11 +21,14 @@ public class Category extends BaseRecord{
     @JsonProperty("sequence")
     public int sequence;
 
+    @JsonProperty("image_url")
+    public String image_url;
+
     @Override
     public void setAllNonNull() {
 
-        category_name = getNonNull(category_name);
-        category_desc = getNonNull(category_desc);
-
+        category_name   =   getNonNull(category_name);
+        category_desc   =   getNonNull(category_desc);
+        image_url       =   getNonNull(image_url);
     }
 }

@@ -24,11 +24,15 @@ public class SubCategory extends BaseRecord{
     @JsonProperty("sequence")
     public int sequence;
 
+    @JsonProperty("image_url")
+    public String image_url;
+
     @Override
     public void setAllNonNull() {
 
-        sub_category_name = getNonNull(sub_category_name);
-        sub_category_desc = getNonNull(sub_category_desc);
+        sub_category_name   =   getNonNull(sub_category_name);
+        sub_category_desc   =   getNonNull(sub_category_desc);
+        image_url           =   getNonNull(image_url);
 
     }
 
