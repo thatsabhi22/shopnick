@@ -99,8 +99,6 @@ public class ShowcaseActivity extends AppCompatActivity {
                 }
             }
 
-
-
             viewPager = (ViewPager) findViewById(R.id.viewpager);
             setupViewPager(viewPager);
 
