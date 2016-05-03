@@ -1,6 +1,7 @@
 package com.theleafapps.shopnick.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,8 @@ import android.widget.Toast;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.models.Category;
-import com.theleafapps.shopnick.models.CategoryItem;
 import com.theleafapps.shopnick.models.SubCategory;
+import com.theleafapps.shopnick.ui.ProductListActivity;
 import com.theleafapps.shopnick.utils.MySingleton;
 
 import java.util.Collections;
@@ -23,7 +23,6 @@ import java.util.List;
  * Created by aviator on 19/04/16.
  */
 public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAdapter.MyViewHolder> {
-
 
     Context mContext;
     private LayoutInflater inflater;
@@ -46,10 +45,16 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView name   =   (TextView) v.findViewById(R.id.text_card_name);
+                TextView name       =   (TextView) v.findViewById(R.id.text_card_name);
+                TextView subCatId   =   (TextView) v.findViewById(R.id.idView);
 
                 Toast.makeText(mContext,"Card Clicked ->" + name.getText() + " | Category ->"
-                        + category_id, Toast.LENGTH_SHORT).show();
+                        + category_id + " | SubCategoryId -> " + subCatId.getText() , Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, ProductListActivity.class);
+                intent.putExtra("subCatId",subCatId.getText());
+                mContext.startActivity(intent);
+
             }
         });
 
@@ -64,11 +69,10 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
         SubCategory current = data.get(position);
 
         mImageLoader = MySingleton.getInstance(mContext).getImageLoader();
-
         holder.text_card_name.setText(current.sub_category_name);
         holder.image_card_cover.setImageUrl(current.image_url,mImageLoader);
         holder.text_desc.setText(current.sub_category_desc);
-
+        holder.text_id.setText((String.valueOf(current.sub_category_id)));
     }
 
     @Override
@@ -81,6 +85,7 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
         NetworkImageView image_card_cover;
         TextView text_card_name;
         TextView text_desc;
+        TextView text_id;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -88,7 +93,7 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
             image_card_cover    =   (NetworkImageView) itemView.findViewById(R.id.image_card_cover);
             text_card_name      =   (TextView) itemView.findViewById(R.id.text_card_name);
             text_desc           =   (TextView) itemView.findViewById(R.id.text_desc);
-
+            text_id             =   (TextView) itemView.findViewById(R.id.idView);
         }
     }
 }

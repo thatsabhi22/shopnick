@@ -11,13 +11,10 @@ import android.view.ViewGroup;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.TabbedRecyclerAdapter;
-import com.theleafapps.shopnick.models.Category;
-import com.theleafapps.shopnick.models.CategoryItem;
 import com.theleafapps.shopnick.models.SubCategory;
 import com.theleafapps.shopnick.utils.Commons;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 

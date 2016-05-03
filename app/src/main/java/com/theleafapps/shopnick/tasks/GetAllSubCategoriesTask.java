@@ -46,6 +46,7 @@ public class GetAllSubCategoriesTask extends BaseAsyncRequest {
         // need to include the API key and session token
         applicationApiKey = AppConstants.API_KEY;
         sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
+
     }
 
     @Override

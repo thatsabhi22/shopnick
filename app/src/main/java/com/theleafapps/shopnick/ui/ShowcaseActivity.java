@@ -12,22 +12,14 @@ import android.widget.Toast;
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.ViewPagerAdapter;
 import com.theleafapps.shopnick.models.Category;
-import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.models.SubCategory;
-import com.theleafapps.shopnick.models.Variant;
 import com.theleafapps.shopnick.models.multiples.Categories;
-import com.theleafapps.shopnick.models.multiples.Products;
 import com.theleafapps.shopnick.models.multiples.SubCategories;
-import com.theleafapps.shopnick.models.multiples.Variants;
-import com.theleafapps.shopnick.tasks.AddProductTask;
-import com.theleafapps.shopnick.tasks.AddSubCategoryTask;
 import com.theleafapps.shopnick.tasks.GetAllCategoriesTask;
 import com.theleafapps.shopnick.tasks.GetAllSubCategoriesTask;
 import com.theleafapps.shopnick.ui.fragments.OneFragment;
 import com.theleafapps.shopnick.utils.Commons;
 
-import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +45,8 @@ public class ShowcaseActivity extends AppCompatActivity {
             * Getting All Categories
             ******/
             GetAllCategoriesTask getAllCategoriesTask = new GetAllCategoriesTask(this);
-            boolean x = getAllCategoriesTask.execute().get();
 
+            boolean x = getAllCategoriesTask.execute().get();
 
             Categories cat = getAllCategoriesTask.categoriesReceived;
 
@@ -77,7 +69,7 @@ public class ShowcaseActivity extends AppCompatActivity {
             if (cat != null && cat.categories.size() > 0) {
 //                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
                 subCategoriesRec = subCat.subCategories;
-
+                
                 /*****
                  * Storing All SubCategories corresponding to CategoryId in Common Hashmap
                  ******/
@@ -85,7 +77,7 @@ public class ShowcaseActivity extends AppCompatActivity {
                 for(SubCategory sc : subCategoriesRec){
 
                     if(TextUtils.isEmpty(sc.image_url)) {
-                        sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name;
+                        sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name.replace(" ","");
                     }
 
                     if(Commons.catIdToSubCatMap.containsKey(sc.category_id)){
