@@ -5,4 +5,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Halllooo</string>
+    <string name="price_bar">price_bar</string>
 </resources>
