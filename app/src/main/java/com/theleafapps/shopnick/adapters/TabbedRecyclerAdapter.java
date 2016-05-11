@@ -51,8 +51,10 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
                 Toast.makeText(mContext,"Card Clicked ->" + name.getText() + " | Category ->"
                         + category_id + " | SubCategoryId -> " + subCatId.getText() , Toast.LENGTH_SHORT).show();
 
+                int subcatId = Integer.valueOf(subCatId.getText().toString());
                 Intent intent = new Intent(mContext, ProductListActivity.class);
-                intent.putExtra("subCatId",subCatId.getText());
+                intent.putExtra("subCatId",subcatId);
+                intent.putExtra("categoryId",category_id);
                 mContext.startActivity(intent);
 
             }

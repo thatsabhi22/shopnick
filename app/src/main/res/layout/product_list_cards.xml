@@ -43,6 +43,11 @@
             android:orientation="horizontal"
             android:gravity="center">
 
+        <TextView
+            android:id="@+id/product_id_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/price_mrp"
