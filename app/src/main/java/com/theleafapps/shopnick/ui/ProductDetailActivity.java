@@ -4,42 +4,29 @@ import android.content.Intent;
 import android.graphics.Paint;
 
 import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.adapters.GalleryPagerAdapter;
 import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.tasks.GetProductByIdTask;
 import com.theleafapps.shopnick.utils.MySingleton;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-
 public class ProductDetailActivity extends AppCompatActivity {
 
     Product productRec;
-    @InjectView(R.id.product_detail_name) TextView productName;
-    @InjectView(R.id.product_detail_offer_price)TextView offer_price;
-    @InjectView(R.id.product_detail_mrp)TextView mrp;
-    @InjectView(R.id.product_detail_discount)TextView discount;
-    @InjectView(R.id.product_detail_desc)TextView productDesc;
-//    @InjectView(R.id.product_detail_image) NetworkImageView productImage;
-    @InjectView(R.id.toolbar_product_detail)Toolbar toolbar;
+    TextView productName,offer_price,mrp,discount,productDesc;
+    NetworkImageView productImage;
     private ImageLoader mImageLoader;
+    Toolbar toolbar;
     int subCatId;
-
-    private GalleryPagerAdapter _adapter;
-    @InjectView(R.id.pager)ViewPager _pager;
-    @InjectView(R.id.thumbnails)LinearLayout _thumbnails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +34,18 @@ public class ProductDetailActivity extends AppCompatActivity {
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_product_detail);
-            ButterKnife.inject(this);
 
+            toolbar = (Toolbar) findViewById(R.id.toolbar_product_detail);
             setSupportActionBar(toolbar);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            _adapter = new GalleryPagerAdapter(this,_pager,_thumbnails);
-            _pager.setAdapter(_adapter);
-            _pager.setOffscreenPageLimit(6); // how many images to load into memory
-
+            productName     =   (TextView) findViewById(R.id.product_detail_name);
+            productImage    =   (NetworkImageView) findViewById(R.id.product_detail_image);
+            offer_price     =   (TextView) findViewById(R.id.product_detail_offer_price);
+            mrp             =   (TextView) findViewById(R.id.product_detail_mrp);
+            discount        =   (TextView) findViewById(R.id.product_detail_discount);
+            productDesc     =   (TextView) findViewById(R.id.product_detail_desc);
 
             Intent intent   =   getIntent();
             int productId   =   Integer.valueOf(intent.getStringExtra("productId"));
@@ -73,7 +62,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                 mImageLoader = MySingleton.getInstance(this).getImageLoader();
                 productName.setText(productRec.product_name);
-//                productImage.setImageUrl(productRec.image_url,mImageLoader);
+                productImage.setImageUrl(productRec.image_url,mImageLoader);
                 offer_price.setText("Rs " + String.valueOf((int)productRec.unit_offerprice));
                 mrp.setText("Rs " + String.valueOf((int)productRec.unit_mrp));
                 mrp.setPaintFlags(mrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -88,6 +77,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         }catch(Exception ex){
             ex.printStackTrace();
         }
+
     }
 
     @Override
