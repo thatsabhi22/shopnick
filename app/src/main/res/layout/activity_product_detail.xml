@@ -42,18 +42,47 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/product_detail_image"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:padding="10dp"
-            android:contentDescription="@string/action_settings"
-            android:src="@drawable/nine"
+        <!--<com.android.volley.toolbox.NetworkImageView-->
+            <!--android:id="@+id/product_detail_image"-->
+            <!--android:layout_width="400dp"-->
+            <!--android:layout_height="400dp"-->
+            <!--android:padding="10dp"-->
+            <!--android:contentDescription="@string/action_settings"-->
+            <!--android:src="@drawable/nine"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_margin="5dp" />-->
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="72dp">
+        </android.support.v4.view.ViewPager>
+
+        <ImageButton
+            android:id="@+id/btn_close"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="top|right"
+            android:src="@drawable/ic_close_grey600_24dp"
             android:scaleType="fitCenter"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp" />
+            style="@style/Widget.AppCompat.ActionButton" />
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="172dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimaryDark">
+            <LinearLayout
+                android:id="@+id/thumbnails"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="2dp"/>
+        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/product_detail_name"
@@ -63,7 +92,7 @@
             android:padding="8dp"
             android:layout_gravity="left"
             android:text="product_name"
-            android:layout_below="@id/product_detail_image"
+            android:layout_below="@id/pager"
             android:textColor="#1976D2"
             android:paddingBottom="3dp"
             android:paddingTop="3dp"
