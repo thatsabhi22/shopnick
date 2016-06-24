@@ -120,7 +120,7 @@
                 android:gravity="center_horizontal"/>
 
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/product_detail_offer_price"
                 android:id="@+id/variant_layout">
@@ -147,7 +147,8 @@
                     android:layout_alignEnd="@+id/select_size"
                     android:layout_alignLeft="@+id/select_size"
                     android:layout_alignStart="@+id/select_size"
-                    android:paddingBottom="20dp" />
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -161,7 +162,86 @@
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/variant_spinner"
                     android:layout_toEndOf="@+id/variant_spinner" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ruler"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/select_size"
+                    android:layout_toEndOf="@+id/select_size" />
+
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/variant_layout"
+                android:background="@android:color/darker_gray"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/variant_layout"
+                android:id="@+id/quantity_layout"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity"
+                    android:id="@+id/select_quantity"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="3dp"
+                    android:layout_marginLeft="15dp"
+                    android:padding="8dp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/quantity_spinner"
+                    android:spinnerMode="dialog"
+                    android:layout_alignParentBottom="true"
+                    android:layout_below="@id/select_quantity"
+                    android:layout_alignRight="@+id/select_quantity"
+                    android:layout_alignEnd="@+id/select_quantity"
+                    android:layout_alignLeft="@+id/select_quantity"
+                    android:layout_alignStart="@+id/select_quantity"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="10dp" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/box"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="35dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/select_quantity"
+                    android:layout_toEndOf="@+id/select_quantity" />
+
+            </RelativeLayout>
+            <Button
+                android:id="@+id/buy_button"
+
+                android:text="Buy"
+                android:textColor="#FFFF29"
+                android:textSize="15sp"
+
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+
+                android:layout_alignTop="@+id/variant_layout"
+                android:layout_toRightOf="@+id/variant_layout"
+                android:layout_toEndOf="@+id/variant_layout"
+                android:background="#c53838" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

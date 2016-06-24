@@ -46,9 +46,9 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     TextView productName,offer_price,mrp,discount,productDesc,product_available;
     List<String> url_maps;
     SliderLayout sliderShowFull;
-    Spinner variantSpinner;
+    Spinner variantSpinner,quantitySpinner;
     Toolbar toolbar;
-    int subCatId;
+    int subCatId,size,quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             discount        =   (TextView) findViewById(R.id.product_detail_discount);
             productDesc     =   (TextView) findViewById(R.id.product_detail_desc);
             variantSpinner  =   (Spinner) findViewById(R.id.variant_spinner);
+            quantitySpinner =   (Spinner) findViewById(R.id.quantity_spinner);
 
             Intent intent   =   getIntent();
             int productId   =   Integer.valueOf(intent.getStringExtra("productId"));
@@ -103,7 +104,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
                 setCorrectImageXY();
 
-        /****************************/
+        /************** Setting The Variant Spinner *****************/
 
                 final Map<String,Boolean> variantMap = new LinkedMap<>();
                 final List<String> varList = new ArrayList<>();
@@ -148,6 +149,19 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
                     }
                 });
+        /****************************/
+        /************** Setting The Quantity Spinner *****************/
+
+                List<String> quantityList = new ArrayList<>();
+                for(int i=1;i<=10;i++){
+                    quantityList.add(String.valueOf(i));
+                }
+
+                ArrayAdapter<String> quantityAdapter = new ArrayAdapter<String>(this,
+                        android.R.layout.simple_spinner_item, quantityList);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                quantitySpinner.setAdapter(quantityAdapter);
+
         /****************************/
 
                 productName.setText(productRec.product_name);
