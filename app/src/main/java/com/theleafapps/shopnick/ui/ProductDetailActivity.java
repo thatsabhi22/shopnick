@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,8 +23,6 @@ import android.widget.Toast;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabSelectedListener;
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.models.ProductImage;
@@ -35,6 +34,8 @@ import com.theleafapps.shopnick.tasks.GetAllProductImagesByIdTask;
 import com.theleafapps.shopnick.utils.LinkedMap;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,6 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     Spinner variantSpinner,quantitySpinner;
     Toolbar toolbar;
     int subCatId,size,quantity;
-    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,43 +57,25 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_product_detail);
 
-            relativeLayout = (RelativeLayout) findViewById(R.id.product_detail_layout);
-
-            BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
-            bottomBar.setItemsFromMenu(R.menu.two_buttons_menu, new OnMenuTabSelectedListener() {
-                @Override
-                public void onMenuItemSelected(int itemId) {
-//                    switch (itemId) {
-//                        case R.id.recent_item:
-//                            Snackbar.make(relativeLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
-//                            break;
-//                        case R.id.favorite_item:
-//                            Snackbar.make(relativeLayout, "Favorite Item Selected", Snackbar.LENGTH_LONG).show();
-//                            break;
-//                    }
-                }
-            });
-            bottomBar.setActiveTabColor(Color.RED);
-
-            url_maps    =   new ArrayList<>();
-            toolbar     =   (Toolbar) findViewById(R.id.toolbar_product_detail);
+            url_maps = new ArrayList<>();
+            toolbar = (Toolbar) findViewById(R.id.toolbar_product_detail);
             setSupportActionBar(toolbar);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            product_available   =   (TextView) findViewById(R.id.product_available);
-            sliderShowFull      =   (SliderLayout) findViewById(R.id.product_detail_image);
-            productName         =   (TextView) findViewById(R.id.product_detail_name);
-            offer_price         =   (TextView) findViewById(R.id.product_detail_offer_price);
-            mrp                 =   (TextView) findViewById(R.id.product_detail_mrp);
-            discount            =   (TextView) findViewById(R.id.product_detail_discount);
-            productDesc         =   (TextView) findViewById(R.id.product_detail_desc);
-            variantSpinner      =   (Spinner) findViewById(R.id.variant_spinner);
-            quantitySpinner     =   (Spinner) findViewById(R.id.quantity_spinner);
+            product_available = (TextView) findViewById(R.id.product_available);
+            sliderShowFull = (SliderLayout) findViewById(R.id.product_detail_image);
+            productName     =   (TextView) findViewById(R.id.product_detail_name);
+            offer_price     =   (TextView) findViewById(R.id.product_detail_offer_price);
+            mrp             =   (TextView) findViewById(R.id.product_detail_mrp);
+            discount        =   (TextView) findViewById(R.id.product_detail_discount);
+            productDesc     =   (TextView) findViewById(R.id.product_detail_desc);
+            variantSpinner  =   (Spinner) findViewById(R.id.variant_spinner);
+            quantitySpinner =   (Spinner) findViewById(R.id.quantity_spinner);
 
-            Intent intent       =   getIntent();
-            int productId       =   Integer.valueOf(intent.getStringExtra("productId"));
-            subCatId            =   intent.getIntExtra("subCatId",0);
+            Intent intent   =   getIntent();
+            int productId   =   Integer.valueOf(intent.getStringExtra("productId"));
+            subCatId        =   intent.getIntExtra("subCatId",0);
 
             Toast.makeText(this, "Product id -> " + productId, Toast.LENGTH_LONG).show();
 
