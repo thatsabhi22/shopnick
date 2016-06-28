@@ -123,7 +123,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/product_detail_offer_price"
-                android:id="@+id/variant_layout">
+                android:id="@+id/variant_layout"
+                android:paddingBottom="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -174,18 +175,21 @@
                     android:layout_toEndOf="@+id/select_size" />
 
             </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/variant_layout"
-                android:background="@android:color/darker_gray"/>
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:layout_below="@+id/variant_layout"-->
+                <!--android:background="@android:color/darker_gray"/>-->
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/variant_layout"
                 android:id="@+id/quantity_layout"
-                android:paddingTop="20dp">
+                android:layout_centerVertical="true"
+                android:layout_below="@id/product_detail_offer_price"
+                android:layout_toRightOf="@+id/variant_layout"
+                android:layout_toEndOf="@+id/variant_layout"
+                android:paddingRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -224,24 +228,6 @@
                     android:layout_toEndOf="@+id/select_quantity" />
 
             </RelativeLayout>
-            <Button
-                android:id="@+id/buy_button"
-
-                android:text="Buy"
-                android:textColor="#FFFF29"
-                android:textSize="15sp"
-
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_width="150dp"
-                android:layout_height="35dp"
-                style="@style/Widget.AppCompat.Button.Colored"
-
-                android:layout_alignTop="@+id/variant_layout"
-                android:layout_toRightOf="@+id/variant_layout"
-                android:layout_toEndOf="@+id/variant_layout"
-                android:background="#c53838" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
