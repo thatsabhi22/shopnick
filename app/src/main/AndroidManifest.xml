@@ -18,24 +18,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.ProductListActivity"
             android:parentActivityName=".ui.ShowcaseActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".ui.ShowcaseActivity" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ShowcaseActivity" />
         </activity>
 
         <activity
             android:name=".ui.ProductDetailActivity"
-            android:parentActivityName=".ui.ProductListActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".ui.ProductListActivity" />
-    </activity>
+            android:parentActivityName=".ui.ProductListActivity"
+            >
 
-        <activity android:name=".ui.CheckoutActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.ProductListActivity" />
+        </activity>
+
+
+        <activity android:name=".ui.CheckoutActivity" />
     </application>
 
 </manifest>

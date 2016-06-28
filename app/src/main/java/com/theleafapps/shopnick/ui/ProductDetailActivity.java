@@ -34,8 +34,6 @@ import com.theleafapps.shopnick.tasks.GetAllProductImagesByIdTask;
 import com.theleafapps.shopnick.utils.LinkedMap;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
