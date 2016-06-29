@@ -26,18 +26,23 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.models.Order;
 import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.models.ProductImage;
 import com.theleafapps.shopnick.models.Variant;
+import com.theleafapps.shopnick.models.multiples.Orders;
 import com.theleafapps.shopnick.models.multiples.ProductImages;
+import com.theleafapps.shopnick.tasks.AddNewOrderTask;
 import com.theleafapps.shopnick.tasks.GetAllVariantsByProductIdTask;
 import com.theleafapps.shopnick.tasks.GetProductByIdTask;
 import com.theleafapps.shopnick.tasks.GetAllProductImagesByIdTask;
 import com.theleafapps.shopnick.utils.LinkedMap;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public class ProductDetailActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener {
 
