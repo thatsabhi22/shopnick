@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -41,12 +43,14 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
     Product productRec;
     ProductImages productImagesRec;
-    TextView productName,offer_price,mrp,discount,productDesc,product_available;
+    TextView productName,offer_price,mrp,discount,productDesc,product_avlble;
     List<String> url_maps;
     SliderLayout sliderShowFull;
     Spinner variantSpinner,quantitySpinner;
     Toolbar toolbar;
-    int subCatId,size,quantity;
+    String size;
+    int subCatId,quantity;
+    ImageButton buyNowButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +65,8 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            product_available = (TextView) findViewById(R.id.product_available);
-            sliderShowFull = (SliderLayout) findViewById(R.id.product_detail_image);
+            product_avlble  =   (TextView) findViewById(R.id.product_available);
+            sliderShowFull  =   (SliderLayout) findViewById(R.id.product_detail_image);
             productName     =   (TextView) findViewById(R.id.product_detail_name);
             offer_price     =   (TextView) findViewById(R.id.product_detail_offer_price);
             mrp             =   (TextView) findViewById(R.id.product_detail_mrp);
@@ -70,6 +74,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             productDesc     =   (TextView) findViewById(R.id.product_detail_desc);
             variantSpinner  =   (Spinner) findViewById(R.id.variant_spinner);
             quantitySpinner =   (Spinner) findViewById(R.id.quantity_spinner);
+            buyNowButton    =   (ImageButton) findViewById(R.id.buyNowButton);
 
             Intent intent   =   getIntent();
             int productId   =   Integer.valueOf(intent.getStringExtra("productId"));
@@ -129,16 +134,16 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 variantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String variant = varList.get(position);
-                        Boolean available = variantMap.get(variant);
+                        size = varList.get(position);
+                        Boolean available = variantMap.get(size);
 
                         if(available){
-                            product_available.setText("In Stock");
-                            product_available.setTextColor(Color.GREEN);
+                            product_avlble.setText("In Stock");
+                            product_avlble.setTextColor(Color.GREEN);
                         }
                         else{
-                            product_available.setText("Out Of Stock");
-                            product_available.setTextColor(Color.RED);
+                            product_avlble.setText("Out Of Stock");
+                            product_avlble.setTextColor(Color.RED);
                         }
                     }
 
@@ -147,10 +152,10 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
                     }
                 });
-        /****************************/
+        /*************************************************************/
         /************** Setting The Quantity Spinner *****************/
 
-                List<String> quantityList = new ArrayList<>();
+                final List<String> quantityList = new ArrayList<>();
                 for(int i=1;i<=10;i++){
                     quantityList.add(String.valueOf(i));
                 }
@@ -159,8 +164,20 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                         android.R.layout.simple_spinner_item, quantityList);
                 dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 quantitySpinner.setAdapter(quantityAdapter);
+                quantitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        quantity = Integer.valueOf(quantityList.get(position));
+                    }
 
-        /****************************/
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+
+        /*************************************************************/
 
                 productName.setText(productRec.product_name);
                 offer_price.setText("Rs " + String.valueOf((int)productRec.unit_offerprice));
@@ -173,6 +190,13 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
                 discount.setText(String.valueOf((int)discountValue) + " % off");
                 productDesc.setText(productRec.product_desc);
+
+                buyNowButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(ProductDetailActivity.this,"size ->" + size +" <> quantity ->"+ quantity ,Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         }catch(Exception ex){
             ex.printStackTrace();

@@ -306,6 +306,7 @@
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/buyNowButton"
             android:background="@color/windowBackground"
             android:src="@drawable/buy_now"/>
     </LinearLayout>
