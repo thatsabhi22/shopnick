@@ -150,8 +150,8 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                             } else {
                                 product_avlble.setText("Out Of Stock");
                                 product_avlble.setTextColor(Color.RED);
+                                variant = "";
                             }
-                            variant = "";
                         }
 
                         @Override
@@ -217,6 +217,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                             cartItems.cartItemList.add(cartItem);
 
                             AddNewCartItemTask addNewCartItemTask = new AddNewCartItemTask(ProductDetailActivity.this,cartItems);
+
                             try {
 
                                 addNewCartItemTask.execute().get();

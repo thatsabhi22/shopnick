@@ -35,6 +35,7 @@ public class AddNewCartItemTask extends BaseAsyncRequest {
         verb = "POST";
 
         requestString = ApiInvoker.serialize(cartItems).replace("\"cart_item_id\":0,","");
+        requestString = requestString.replace(",\"cart_item_id\":0","");
 
         applicationApiKey = AppConstants.API_KEY;
         sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
