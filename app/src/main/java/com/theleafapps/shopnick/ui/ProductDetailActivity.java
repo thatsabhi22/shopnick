@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -284,9 +286,21 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 intent.putExtra("subCatId",subCatId);
                 NavUtils.navigateUpTo(this,intent);
                 return true;
+            case R.id.cart_icon:
+                Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
+                Intent in = new Intent(this,CartActivity.class);
+                startActivity(in);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_product_detail, menu);
+        return true;
     }
 
     @Override

@@ -35,7 +35,8 @@
                 android:value=".ui.ProductListActivity" />
         </activity>
         <activity android:name=".ui.CheckoutActivity" />
-        <activity android:name=".ui.NoNetworkActivity"></activity>
+        <activity android:name=".ui.NoNetworkActivity" />
+        <activity android:name=".ui.CartActivity"></activity>
     </application>
 
 </manifest>

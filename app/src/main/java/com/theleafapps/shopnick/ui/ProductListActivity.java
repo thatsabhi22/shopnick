@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.ProductListViewRecyclerAdapter;
@@ -73,12 +76,24 @@ public class ProductListActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_product_detail, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 Intent intent = NavUtils.getParentActivityIntent(this);
                 intent.putExtra("categoryId",catId);
                 NavUtils.navigateUpTo(this,intent);
+                return true;
+            case R.id.cart_icon:
+                Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
+                Intent in = new Intent(this,CartActivity.class);
+                startActivity(in);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
