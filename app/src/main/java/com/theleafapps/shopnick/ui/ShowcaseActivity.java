@@ -55,7 +55,14 @@ public class ShowcaseActivity extends AppCompatActivity {
     static ActionBarDrawerToggle mDrawerToggle;
 
     static String titles[] = {};
-    static int icons[] = {R.drawable.eight,R.drawable.nine,R.drawable.eight,R.drawable.nine,R.drawable.eight};
+    static int icons[] =
+            {
+                    R.drawable.eight,
+                    R.drawable.nine,
+                    R.drawable.eight,
+                    R.drawable.nine,
+                    R.drawable.eight
+            };
 
     static String NAME = "Leaf Apps";
     static int PROFILE = R.drawable.eight;
@@ -140,16 +147,10 @@ public class ShowcaseActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(catId);
 
                 setUpDrawer();
-
             }
             else{
                 Log.d("Tangho","Network Disonnected");
-
             }
-
-
-
-
         }catch(Exception ex){
             ex.printStackTrace();
         }
