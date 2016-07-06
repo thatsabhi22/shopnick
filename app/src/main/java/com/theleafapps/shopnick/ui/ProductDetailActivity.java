@@ -8,15 +8,15 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,20 +26,19 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.models.Order;
+import com.theleafapps.shopnick.models.CartItem;
 import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.models.ProductImage;
 import com.theleafapps.shopnick.models.Variant;
-import com.theleafapps.shopnick.models.multiples.Orders;
+import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.models.multiples.ProductImages;
-import com.theleafapps.shopnick.tasks.AddNewOrderTask;
+import com.theleafapps.shopnick.tasks.AddNewCartItemTask;
 import com.theleafapps.shopnick.tasks.GetAllVariantsByProductIdTask;
 import com.theleafapps.shopnick.tasks.GetProductByIdTask;
 import com.theleafapps.shopnick.tasks.GetAllProductImagesByIdTask;
 import com.theleafapps.shopnick.utils.LinkedMap;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -53,9 +52,10 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     SliderLayout sliderShowFull;
     Spinner variantSpinner,quantitySpinner;
     Toolbar toolbar;
-    String size;
+    String size,variant;
     int subCatId,quantity;
     ImageButton buyNowButton;
+    RelativeLayout variantLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,8 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             variantSpinner  =   (Spinner) findViewById(R.id.variant_spinner);
             quantitySpinner =   (Spinner) findViewById(R.id.quantity_spinner);
             buyNowButton    =   (ImageButton) findViewById(R.id.buyNowButton);
+            variantLayout   =   (RelativeLayout) findViewById(R.id.variant_layout);
+
 
             Intent intent   =   getIntent();
             int productId   =   Integer.valueOf(intent.getStringExtra("productId"));
@@ -116,47 +118,51 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
                 final Map<String,Boolean> variantMap = new LinkedMap<>();
                 final List<String> varList = new ArrayList<>();
+                ArrayAdapter<String> dataAdapter;
                 GetAllVariantsByProductIdTask getAllVariantsByProductIdTask = new GetAllVariantsByProductIdTask(this,productId);
                 getAllVariantsByProductIdTask.execute().get();
 
-                List<Variant> variantList = getAllVariantsByProductIdTask.variantList;
+                final List<Variant> variantList = getAllVariantsByProductIdTask.variantList;
 
-                if(variantList!=null && variantList.size()>0){
+                if(variantList!=null && variantList.size()>0) {
 
-                    Log.d("Tangho","Variants Received");
+                    Log.d("Tangho", "Variants Received");
 
-                    for(Variant variant:variantList){
-                        variantMap.put(variant.variant_name,variant.available);
+                    for (Variant variant : variantList) {
+                        variantMap.put(variant.variant_name, variant.available);
                         varList.add(variant.variant_name);
                     }
+
+                    dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, varList);
+                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    variantSpinner.setAdapter(dataAdapter);
+
+                    variantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            size                =   varList.get(position);
+                            Boolean available   =   variantMap.get(size);
+
+                            if (available) {
+                                product_avlble.setText("In Stock");
+                                product_avlble.setTextColor(Color.GREEN);
+                                variant = size;
+                            } else {
+                                product_avlble.setText("Out Of Stock");
+                                product_avlble.setTextColor(Color.RED);
+                            }
+                            variant = "";
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }else{
+                    //variantLayout.setVisibility(View.GONE);
                 }
 
-                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                        android.R.layout.simple_spinner_item, varList);
-                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                variantSpinner.setAdapter(dataAdapter);
-
-                variantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        size = varList.get(position);
-                        Boolean available = variantMap.get(size);
-
-                        if(available){
-                            product_avlble.setText("In Stock");
-                            product_avlble.setTextColor(Color.GREEN);
-                        }
-                        else{
-                            product_avlble.setText("Out Of Stock");
-                            product_avlble.setTextColor(Color.RED);
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
         /*************************************************************/
         /************** Setting The Quantity Spinner *****************/
 
@@ -167,7 +173,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
                 ArrayAdapter<String> quantityAdapter = new ArrayAdapter<String>(this,
                         android.R.layout.simple_spinner_item, quantityList);
-                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 quantitySpinner.setAdapter(quantityAdapter);
                 quantitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -199,14 +205,40 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 buyNowButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(ProductDetailActivity.this,"size ->" + size +" <> quantity ->"+ quantity ,Toast.LENGTH_LONG).show();
+
+                        if(!TextUtils.isEmpty(variant)){
+                            CartItem cartItem       =   new CartItem();
+                            cartItem.product_id     =   productRec.product_id;
+                            cartItem.quantity       =   quantity;
+                            cartItem.variant        =   variant;
+                            cartItem.customer_id    =   1;
+
+                            CartItems cartItems = new CartItems();
+                            cartItems.cartItemList.add(cartItem);
+
+                            AddNewCartItemTask addNewCartItemTask = new AddNewCartItemTask(ProductDetailActivity.this,cartItems);
+                            try {
+
+                                addNewCartItemTask.execute().get();
+                                Toast.makeText(ProductDetailActivity.this,
+                                        productRec.product_name+" has been added to you cart",Toast.LENGTH_LONG).show();
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } catch (ExecutionException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else{
+                            Toast.makeText(ProductDetailActivity.this,"The selected product is " +
+                                    "out of stock" ,Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }
         }catch(Exception ex){
             ex.printStackTrace();
         }
-
     }
 
     private void setTextSliderView() {

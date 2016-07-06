@@ -3,6 +3,7 @@
     package="com.theleafapps.shopnick">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -10,14 +11,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.ShowcaseActivity">
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.ShowcaseActivity" />
         <activity
             android:name=".ui.ProductListActivity"
             android:parentActivityName=".ui.ShowcaseActivity">
@@ -25,19 +27,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ShowcaseActivity" />
         </activity>
-
         <activity
             android:name=".ui.ProductDetailActivity"
-            android:parentActivityName=".ui.ProductListActivity"
-            >
-
+            android:parentActivityName=".ui.ProductListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ProductListActivity" />
         </activity>
-
-
         <activity android:name=".ui.CheckoutActivity" />
+        <activity android:name=".ui.NoNetworkActivity"></activity>
     </application>
 
 </manifest>

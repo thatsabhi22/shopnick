@@ -1,6 +1,9 @@
 package com.theleafapps.shopnick.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -63,69 +67,88 @@ public class ShowcaseActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_showcase);
 
-            Intent intent   =   getIntent();
-            int catId       =   intent.getIntExtra("categoryId",0);
+            ConnectivityManager cm =
+                    (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-            /*****
-            * Getting All Categories
-            ******/
-            GetAllCategoriesTask getAllCategoriesTask = new GetAllCategoriesTask(this);
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            boolean isConnected = activeNetwork != null &&
+                    activeNetwork.isConnectedOrConnecting();
 
-            boolean x = getAllCategoriesTask.execute().get();
+            if(isConnected){
+                Log.d("Tangho","Network Connected");
 
-            Categories cat = getAllCategoriesTask.categoriesReceived;
+                Intent intent   =   getIntent();
+                int catId       =   intent.getIntExtra("categoryId",0);
 
-            if (cat != null && cat.categories.size() > 0) {
-                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
-                categoriesRec = cat.categories;
-
-                getAllCategoriesTask = null;
-            }
-
-
-            /*****
-             * Getting All Sub Categories
-             ******/
-            GetAllSubCategoriesTask getAllSubCategoriesTask = new GetAllSubCategoriesTask(this);
-            boolean y = getAllSubCategoriesTask.execute().get();
-
-            SubCategories subCat = getAllSubCategoriesTask.subCategoriesReceived;
-
-            if (cat != null && cat.categories.size() > 0) {
-//                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
-                subCategoriesRec = subCat.subCategories;
-                
                 /*****
-                 * Storing All SubCategories corresponding to CategoryId in Common Hashmap
+                 * Getting All Categories
                  ******/
+                GetAllCategoriesTask getAllCategoriesTask = new GetAllCategoriesTask(this);
 
-                for(SubCategory sc : subCategoriesRec){
+                boolean x = getAllCategoriesTask.execute().get();
 
-                    if(TextUtils.isEmpty(sc.image_url)) {
-                        sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name.replace(" ","");
-                    }
+                Categories cat = getAllCategoriesTask.categoriesReceived;
 
-                    if(Commons.catIdToSubCatMap.containsKey(sc.category_id)){
-                        Commons.catIdToSubCatMap.get(sc.category_id).add(sc);
-                    }
-                    else{
-                        List<SubCategory> list = new ArrayList<>();
-                        list.add(sc);
-                        Commons.catIdToSubCatMap.put(sc.category_id,list);
+                if (cat != null && cat.categories.size() > 0) {
+                    Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
+                    categoriesRec = cat.categories;
+
+                    getAllCategoriesTask = null;
+                }
+
+
+                /*****
+                 * Getting All Sub Categories
+                 ******/
+                GetAllSubCategoriesTask getAllSubCategoriesTask = new GetAllSubCategoriesTask(this);
+                boolean y = getAllSubCategoriesTask.execute().get();
+
+                SubCategories subCat = getAllSubCategoriesTask.subCategoriesReceived;
+
+                if (cat != null && cat.categories.size() > 0) {
+//                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
+                    subCategoriesRec = subCat.subCategories;
+
+                    /*****
+                     * Storing All SubCategories corresponding to CategoryId in Common Hashmap
+                     ******/
+
+                    for(SubCategory sc : subCategoriesRec){
+
+                        if(TextUtils.isEmpty(sc.image_url)) {
+                            sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name.replace(" ","");
+                        }
+
+                        if(Commons.catIdToSubCatMap.containsKey(sc.category_id)){
+                            Commons.catIdToSubCatMap.get(sc.category_id).add(sc);
+                        }
+                        else{
+                            List<SubCategory> list = new ArrayList<>();
+                            list.add(sc);
+                            Commons.catIdToSubCatMap.put(sc.category_id,list);
+                        }
                     }
                 }
+
+                viewPager = (ViewPager) findViewById(R.id.viewpager);
+                setupViewPager(viewPager);
+
+                tabLayout = (TabLayout) findViewById(R.id.tabs);
+                tabLayout.setupWithViewPager(viewPager);
+
+                if(catId > 0)
+                    viewPager.setCurrentItem(catId);
+
+                setUpDrawer();
+
+            }
+            else{
+                Log.d("Tangho","Network Disonnected");
+
             }
 
-            viewPager = (ViewPager) findViewById(R.id.viewpager);
-            setupViewPager(viewPager);
 
-            tabLayout = (TabLayout) findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(viewPager);
 
-            if(catId > 0)
-                viewPager.setCurrentItem(catId);
-
-            setUpDrawer();
 
         }catch(Exception ex){
             ex.printStackTrace();
