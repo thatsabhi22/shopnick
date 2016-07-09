@@ -61,13 +61,15 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
+            android:id="@+id/deleteCartItemButton"
             android:src="@drawable/deletecartitem"
+            android:clickable="true"
             android:layout_alignTop="@+id/product_name_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp" />
+            android:layout_marginTop="35dp"
+            android:layout_marginRight="15dp"
+            android:padding="5dp" />
 
         <TextView
             android:layout_width="wrap_content"

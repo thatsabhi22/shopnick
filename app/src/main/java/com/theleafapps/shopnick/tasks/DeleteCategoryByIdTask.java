@@ -2,10 +2,6 @@ package com.theleafapps.shopnick.tasks;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
-
-import com.theleafapps.shopnick.models.multiples.Categories;
-import com.theleafapps.shopnick.ui.ShowcaseActivity;
 import com.theleafapps.shopnick.utils.AppConstants;
 import com.theleafapps.shopnick.utils.PrefUtil;
 
@@ -14,7 +10,6 @@ import org.json.JSONException;
 import java.util.HashMap;
 
 import dfapi.ApiException;
-import dfapi.ApiInvoker;
 import dfapi.BaseAsyncRequest;
 
 /**
@@ -104,14 +99,11 @@ public class DeleteCategoryByIdTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-
         Log.d("Tang Ho",response);
-
     }
 
     @Override
     protected void onCompletion(boolean success) {
-
         if(success){
             Log.d("Tang Ho", "success");
         }
