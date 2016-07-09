@@ -3,25 +3,25 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/product_card_view"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="8dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="5dp">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp">
+        android:paddingBottom="15dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.android.volley.toolbox.NetworkImageView
+            android:layout_width="54dp"
+            android:layout_height="54dp"
             android:src="@drawable/noimage"
-            android:id="@+id/imageView"
+            android:id="@+id/cartItemImageView"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="10dp" />
 
         <TextView
@@ -30,20 +30,20 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="product_name"
             android:id="@+id/product_name_value"
-            android:layout_alignTop="@+id/imageView"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView" />
+            android:layout_alignTop="@+id/cartItemImageView"
+            android:layout_toRightOf="@+id/cartItemImageView"
+            android:layout_toEndOf="@+id/cartItemImageView" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Size          : "
+            android:text="Size           : "
             android:id="@+id/size_label"
             android:layout_below="@+id/product_name_value"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_marginTop="10dp" />
+            android:layout_toRightOf="@+id/cartItemImageView"
+            android:layout_toEndOf="@+id/cartItemImageView"
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_alignTop="@+id/product_name_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp" />
 
         <TextView
@@ -74,9 +74,9 @@
             android:text="Quantity   : "
             android:id="@+id/quantity_label"
             android:layout_below="@+id/size_label"
-            android:layout_toRightOf="@+id/imageView"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_marginTop="10dp" />
+            android:layout_toRightOf="@+id/cartItemImageView"
+            android:layout_toEndOf="@+id/cartItemImageView"
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -94,10 +94,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/update_button_image"
             android:src="@drawable/cartupdatebutton"
-            android:layout_below="@+id/product_quantity_value"
-            android:layout_alignLeft="@+id/product_quantity_value"
-            android:layout_alignStart="@+id/product_quantity_value"
-            android:layout_marginTop="15dp" />
+            android:layout_alignTop="@+id/product_quantity_value"
+            android:layout_toRightOf="@+id/product_quantity_value"
+            android:layout_toEndOf="@+id/product_quantity_value"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -108,7 +109,7 @@
             android:layout_below="@+id/update_button_image"
             android:layout_alignLeft="@+id/quantity_label"
             android:layout_alignStart="@+id/quantity_label"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -126,7 +127,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="qty_val_prod"
-            android:id="@+id/product_quantity"
+            android:id="@+id/multiply_product_qty"
             android:layout_alignTop="@+id/x"
             android:layout_toRightOf="@+id/x"
             android:layout_toEndOf="@+id/x"
@@ -138,9 +139,9 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="="
             android:id="@+id/equals"
-            android:layout_alignTop="@+id/product_quantity"
-            android:layout_toRightOf="@+id/product_quantity"
-            android:layout_toEndOf="@+id/product_quantity"
+            android:layout_alignTop="@+id/multiply_product_qty"
+            android:layout_toRightOf="@+id/multiply_product_qty"
+            android:layout_toEndOf="@+id/multiply_product_qty"
             android:layout_marginLeft="10dp" />
 
         <TextView
@@ -149,9 +150,9 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="net_cost"
             android:id="@+id/net_cost"
-            android:layout_alignTop="@+id/textView3"
-            android:layout_toRightOf="@+id/product_quantity_value"
-            android:layout_toEndOf="@+id/product_quantity_value" />
+            android:layout_alignTop="@+id/currency2"
+            android:layout_toRightOf="@+id/currency2"
+            android:layout_toEndOf="@+id/currency2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -169,10 +170,21 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Rs. "
-            android:id="@+id/textView3"
+            android:id="@+id/currency2"
             android:layout_alignTop="@+id/equals"
             android:layout_toRightOf="@+id/equals"
             android:layout_toEndOf="@+id/equals"
             android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="cart_item_id"
+            android:id="@+id/cart_item_id"
+            android:layout_above="@+id/product_name_value"
+            android:layout_toRightOf="@+id/currency1"
+            android:layout_toEndOf="@+id/currency1" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

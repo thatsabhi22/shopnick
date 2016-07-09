@@ -23,4 +23,7 @@ public class CartItem extends BaseRecord {
 
     @JsonProperty("variant")
     public String variant;
+
+    @JsonProperty("product_by_product_id")
+    public Product product;
 }

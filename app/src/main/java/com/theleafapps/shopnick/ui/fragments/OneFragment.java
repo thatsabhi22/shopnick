@@ -31,34 +31,28 @@ public class OneFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Bundle bundle = this.getArguments();
-
-        int category_id = bundle.getInt("category_id");
-
-        View inflatedView = inflater.inflate(R.layout.fragment_one, container, false);
-
-        recyclerView = (RecyclerView) inflatedView.findViewById(R.id.cardRecyclerView);
+        Bundle bundle       =   this.getArguments();
+        int category_id     =   bundle.getInt("category_id");
+        View inflatedView   =   inflater.inflate(R.layout.fragment_one, container, false);
+        recyclerView        =   (RecyclerView) inflatedView.findViewById(R.id.cardRecyclerView);
 
         if(Commons.catIdToSubCatMap.containsKey(category_id)) {
-            infoList = Commons.catIdToSubCatMap.get(category_id);
+            infoList        =   Commons.catIdToSubCatMap.get(category_id);
         }
 
-        adapter = new TabbedRecyclerAdapter(getActivity(),infoList,category_id);
-
+        adapter             =   new TabbedRecyclerAdapter(getActivity(),infoList,category_id);
         recyclerView.setAdapter(adapter);
 
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL,false);
+        final LinearLayoutManager linearLayoutManager
+                            = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
 
         recyclerView.setLayoutManager(linearLayoutManager);
-
         recyclerView.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(getActivity())
                         .color(Color.RED)
@@ -66,5 +60,4 @@ public class OneFragment extends Fragment {
 
         return inflatedView;
     }
-
 }

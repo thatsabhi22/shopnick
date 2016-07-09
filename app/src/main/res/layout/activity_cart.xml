@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:id="@+id/product_list_screen">
+        android:id="@+id/product_cart_screen_toolbar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_cart"
@@ -25,8 +25,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="This is Cart Baby !!"
-        android:id="@+id/cart"
+        android:text="You Cart is Empty !!"
+        android:id="@+id/emptycart_tv"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/continue_shopping"
+        android:src="@drawable/contshopbutton"
+        android:layout_below="@+id/emptycart_tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:background="@color/windowBackground" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/cart_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/product_cart_screen_toolbar"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
 </RelativeLayout>

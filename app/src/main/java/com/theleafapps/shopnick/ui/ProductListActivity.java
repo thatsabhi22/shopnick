@@ -25,6 +25,7 @@ public class ProductListActivity extends AppCompatActivity {
     Products productsRec;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private Toolbar toolbar;                                     // Declaring the Toolbar Object
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class ProductListActivity extends AppCompatActivity {
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.product_list_recycler_view);
+            recyclerView = (RecyclerView)findViewById(R.id.product_list_recycler_view);
             recyclerView.setHasFixedSize(true);
 
             staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, 1);
