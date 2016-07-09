@@ -5,6 +5,8 @@
     android:id="@+id/product_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="8dp"
     android:layout_marginBottom="5dp">
@@ -186,5 +188,47 @@
             android:layout_above="@+id/product_name_value"
             android:layout_toRightOf="@+id/currency1"
             android:layout_toEndOf="@+id/currency1" />
-    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Shipping Charges"
+        android:id="@+id/unit_shipping_label"
+        android:layout_below="@+id/multiply_product_qty"
+        android:layout_alignRight="@+id/multiply_product_qty"
+        android:layout_alignEnd="@+id/multiply_product_qty"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="="
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/unit_shipping_label"
+        android:layout_alignLeft="@+id/equals"
+        android:layout_alignStart="@+id/equals" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Rs. "
+        android:id="@+id/textView4"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignLeft="@+id/currency2"
+        android:layout_alignStart="@+id/currency2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/unit_shipping_value"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignRight="@+id/net_cost"
+        android:layout_alignEnd="@+id/net_cost" />
+</RelativeLayout>
 </android.support.v7.widget.CardView>

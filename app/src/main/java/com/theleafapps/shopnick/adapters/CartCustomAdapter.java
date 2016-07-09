@@ -2,6 +2,7 @@ package com.theleafapps.shopnick.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,13 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
         CartItem current = cartItemList.get(position);
 
         mImageLoader = MySingleton.getInstance(mContext).getImageLoader();
+
+        if(!TextUtils.isEmpty(current.product.image_url)){
+            String image_url = current.product.image_url;
+            image_url = image_url.replace(".jpg","s.jpg");
+            current.product.image_url = image_url;
+        }
+
         holder.cart_product_image.setImageUrl(current.product.image_url,mImageLoader);
         holder.product_name.setText(current.product.product_name);
         holder.product_size.setText(current.variant);
@@ -66,6 +74,7 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
         holder.multiply_product_qty.setText(String.valueOf(current.quantity));
         holder.net_cost.setText(String.valueOf(current.product.unit_mrp));
         holder.cart_item_id.setText(String.valueOf(current.cart_item_id));
+
     }
 
     @Override
@@ -79,7 +88,7 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         NetworkImageView cart_product_image;
-        TextView product_name,product_size,product_qty;
+        TextView product_name,product_size,product_qty,unit_shipping;
         TextView net_cost,product_mrp,multiply_product_qty;
         TextView cart_item_id;
 
@@ -93,6 +102,7 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
             product_mrp             =   (TextView) itemView.findViewById(R.id.mrp_value);
             multiply_product_qty    =   (TextView) itemView.findViewById(R.id.multiply_product_qty);
             net_cost                =   (TextView) itemView.findViewById(R.id.net_cost);
+            unit_shipping           =   (TextView) itemView.findViewById(R.id.unit_shipping_value);
             cart_item_id            =   (TextView) itemView.findViewById(R.id.cart_item_id);
         }
     }

@@ -31,6 +31,9 @@ public class Product extends BaseRecord{
     @JsonProperty("unit_offerprice")
     public float unit_offerprice;
 
+    @JsonProperty("unit_shipping")
+    public float unit_shipping;
+
     @Override
     public void setAllNonNull() {
 
