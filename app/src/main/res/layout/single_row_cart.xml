@@ -96,7 +96,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/update_button_image"
+            android:id="@+id/updateCartItemButton"
             android:src="@drawable/cartupdatebutton"
             android:layout_alignTop="@+id/product_quantity_value"
             android:layout_toRightOf="@+id/product_quantity_value"
@@ -110,7 +110,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="mrp"
             android:id="@+id/mrp_value"
-            android:layout_below="@+id/update_button_image"
+            android:layout_below="@+id/updateCartItemButton"
             android:layout_alignLeft="@+id/quantity_label"
             android:layout_alignStart="@+id/quantity_label"
             android:layout_marginTop="5dp" />

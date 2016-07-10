@@ -19,10 +19,11 @@ import com.theleafapps.shopnick.adapters.CartCustomAdapter;
 import com.theleafapps.shopnick.dialogs.SimpleDialogClass;
 import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.tasks.GetAllCartItemTask;
+import com.theleafapps.shopnick.utils.Communicator;
 
 import java.util.concurrent.ExecutionException;
 
-public class CartActivity extends AppCompatActivity implements SimpleDialogClass.Communicator {
+public class CartActivity extends AppCompatActivity implements Communicator {
 
     Toolbar toolbar;
     CartCustomAdapter cartCustomAdapter;

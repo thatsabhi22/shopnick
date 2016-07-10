@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.tasks.DeleteCartItemByIdTask;
+import com.theleafapps.shopnick.utils.Communicator;
 
 /**
  * Created by aviator on 29/11/15.
@@ -63,9 +64,5 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
         }catch(Exception e){
             e.printStackTrace();
         }
-    }
-
-    public interface Communicator{
-        public void dialogMessage(String msg);
     }
 }

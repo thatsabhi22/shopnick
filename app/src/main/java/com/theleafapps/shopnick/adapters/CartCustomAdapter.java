@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.dialogs.CartUpdateDialog;
 import com.theleafapps.shopnick.dialogs.SimpleDialogClass;
 import com.theleafapps.shopnick.models.CartItem;
 import com.theleafapps.shopnick.models.multiples.CartItems;
@@ -28,10 +30,13 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
 
     Context mContext;
     CartItems cartItems;
+    CartItem current;
     List<CartItem> cartItemList;
     LayoutInflater inflater;
-    private ImageLoader mImageLoader;
+    ImageLoader mImageLoader;
     FragmentManager fragmentManager;
+    int product_id;
+    String product_name_bundle;
 
     public CartCustomAdapter(Context context, CartItems cartItems, FragmentManager fragmentManager) {
         inflater                =   LayoutInflater.from(context);
@@ -57,7 +62,7 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        CartItem current = cartItemList.get(position);
+        current = cartItemList.get(position);
 
         mImageLoader = MySingleton.getInstance(mContext).getImageLoader();
 
@@ -76,6 +81,8 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
         holder.net_cost.setText(String.valueOf(current.product.unit_mrp));
         holder.cart_item_id.setText(String.valueOf(current.cart_item_id));
         holder.unit_shipping.setText(String.valueOf(current.product.unit_shipping));
+        product_id          =   current.product_id;
+        product_name_bundle =   current.product.product_name;
     }
 
     @Override
@@ -89,16 +96,22 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         NetworkImageView cart_product_image;
-        ImageView delete_cart_item;
+        ImageView delete_cart_item,update_cart_item;
         TextView product_name,product_size,product_qty,unit_shipping;
         TextView net_cost,product_mrp,multiply_product_qty;
         TextView cart_item_id;
+        SimpleDialogClass simpleDialog;
+        CartUpdateDialog cartUpdateDialog;
+        Bundle bundle;
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
-
+            bundle                  =   new Bundle();
+            simpleDialog            =   new SimpleDialogClass();
+            cartUpdateDialog        =   new CartUpdateDialog();
             delete_cart_item        =   (ImageView) itemView.findViewById(R.id.deleteCartItemButton);
+            update_cart_item        =   (ImageView) itemView.findViewById(R.id.updateCartItemButton);
             cart_product_image      =   (NetworkImageView) itemView.findViewById(R.id.cartItemImageView);
             product_name            =   (TextView) itemView.findViewById(R.id.product_name_value);
             product_size            =   (TextView) itemView.findViewById(R.id.size_value);
@@ -109,14 +122,24 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
             unit_shipping           =   (TextView) itemView.findViewById(R.id.unit_shipping_value);
             cart_item_id            =   (TextView) itemView.findViewById(R.id.cart_item_id);
 
+
             delete_cart_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SimpleDialogClass dc = new SimpleDialogClass();
-                    Bundle bb = new Bundle();
-                    bb.putInt("cart_item_id",Integer.parseInt(cart_item_id.getText().toString()));
-                    dc.setArguments(bb);
-                    dc.show(fragmentManager, "Dio");
+                    bundle.putInt("cart_item_id",Integer.parseInt(cart_item_id.getText().toString()));
+                    simpleDialog.setArguments(bundle);
+                    simpleDialog.show(fragmentManager, "delete_cart_item");
+                }
+            });
+
+            update_cart_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bundle.putInt("cart_item_id",Integer.parseInt(cart_item_id.getText().toString()));
+                    bundle.putInt("product_id",product_id);
+                    bundle.putString("product_name",product_name_bundle);
+                    cartUpdateDialog.setArguments(bundle);
+                    cartUpdateDialog.show(fragmentManager, "update_cart_item");
                 }
             });
         }
