@@ -12,30 +12,29 @@ import dfapi.ApiInvoker;
 import dfapi.BaseAsyncRequest;
 
 /**
- * Created by aviator on 30/06/16.
+ * Created by aviator on 11/07/16.
  */
-public class AddNewCartItemTask extends BaseAsyncRequest {
+public class UpdateCartItemTask extends BaseAsyncRequest {
 
     Context context;
     public int cartItemId;
     CartItems cartItems;
 
-    public AddNewCartItemTask(Context context, CartItems cartItems){
+    public UpdateCartItemTask(Context context, CartItems cartItems){
         this.context        =   context;
         this.cartItems      =   cartItems;
     }
 
     @Override
     protected void doSetup() throws ApiException {
-        callerName = "AddNewCartItemTask";
+        callerName = "UpdateCartItemTask";
 
         serviceName = AppConstants.DB_SVC;
         endPoint = "cart_item";
 
-        verb = "POST";
+        verb = "PUT";
 
-        requestString = ApiInvoker.serialize(cartItems).replace("\"cart_item_id\":0,","");
-        requestString = requestString.replace(",\"cart_item_id\":0","");
+        requestString = ApiInvoker.serialize(cartItems);
 
         applicationApiKey = AppConstants.API_KEY;
         sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
@@ -43,7 +42,6 @@ public class AddNewCartItemTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, org.json.JSONException {
-        // response has whole contact record, but we just want the id
         CartItems cartItems   =   (CartItems) ApiInvoker.deserialize(response, "", CartItems.class);
         cartItemId            =   cartItems.cartItemList.get(0).cart_item_id;
     }

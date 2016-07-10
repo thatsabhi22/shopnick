@@ -33,7 +33,7 @@ import com.theleafapps.shopnick.models.ProductImage;
 import com.theleafapps.shopnick.models.Variant;
 import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.models.multiples.ProductImages;
-import com.theleafapps.shopnick.tasks.AddNewCartItemTask;
+import com.theleafapps.shopnick.tasks.AddCartItemTask;
 import com.theleafapps.shopnick.tasks.GetAllVariantsByProductIdTask;
 import com.theleafapps.shopnick.tasks.GetProductByIdTask;
 import com.theleafapps.shopnick.tasks.GetAllProductImagesByIdTask;
@@ -217,11 +217,11 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                             CartItems cartItems = new CartItems();
                             cartItems.cartItemList.add(cartItem);
 
-                            AddNewCartItemTask addNewCartItemTask = new AddNewCartItemTask(ProductDetailActivity.this,cartItems);
+                            AddCartItemTask addCartItemTask = new AddCartItemTask(ProductDetailActivity.this,cartItems);
 
                             try {
 
-                                addNewCartItemTask.execute().get();
+                                addCartItemTask.execute().get();
                                 Toast.makeText(ProductDetailActivity.this,
                                         productRec.product_name+" has been added to you cart",Toast.LENGTH_LONG).show();
 

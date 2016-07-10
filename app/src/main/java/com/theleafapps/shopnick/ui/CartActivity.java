@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.CartCustomAdapter;
-import com.theleafapps.shopnick.dialogs.SimpleDialogClass;
 import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.tasks.GetAllCartItemTask;
 import com.theleafapps.shopnick.utils.Communicator;
