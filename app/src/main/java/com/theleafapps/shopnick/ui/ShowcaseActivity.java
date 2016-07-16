@@ -77,14 +77,14 @@ public class ShowcaseActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_showcase);
 
-            ConnectivityManager cm =
-                    (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+//            ConnectivityManager cm =
+//                    (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//            boolean isConnected = activeNetwork != null &&
+//                    activeNetwork.isConnectedOrConnecting();
 
-            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-            boolean isConnected = activeNetwork != null &&
-                    activeNetwork.isConnectedOrConnecting();
-
-            if(isConnected){
+            if(Commons.hasActiveInternetConnection(this)){
                 Log.d("Tangho","Network Connected");
 
                 Intent intent   =   getIntent();

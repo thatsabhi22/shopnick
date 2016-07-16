@@ -1,7 +1,16 @@
 package com.theleafapps.shopnick.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.StrictMode;
+import android.util.Log;
+
 import com.theleafapps.shopnick.models.SubCategory;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +21,39 @@ import java.util.Map;
 public class Commons {
 
     public static Map<Integer,List<SubCategory>> catIdToSubCatMap = new HashMap<>();
+
+    public static boolean hasActiveInternetConnection(Context context) {
+
+        ConnectivityManager cm =
+                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        if (isConnected) {
+            try {
+                HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
+                urlc.setRequestProperty("User-Agent", "Test");
+                urlc.setRequestProperty("Connection", "close");
+                urlc.setConnectTimeout(100);
+                urlc.connect();
+
+                return (urlc.getResponseCode() == 200);
+            } catch (IOException e) {
+                Log.e("Tangho", "Error checking internet connection", e);
+            }
+        } else {
+            Log.d("Tangho", "No network available!");
+        }
+        return false;
+    }
 
 }
 

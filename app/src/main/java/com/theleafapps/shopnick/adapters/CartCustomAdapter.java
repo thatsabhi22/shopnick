@@ -77,7 +77,7 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
         holder.product_qty.setText(String.valueOf(current.quantity));
         holder.product_mrp.setText(String.valueOf(current.product.unit_mrp));
         holder.multiply_product_qty.setText(String.valueOf(current.quantity));
-        holder.net_cost.setText(String.valueOf(current.product.unit_mrp));
+        holder.net_cost.setText(String.valueOf(current.product.unit_mrp * current.quantity));
         holder.cart_item_id.setText(String.valueOf(current.cart_item_id));
         holder.unit_shipping.setText(String.valueOf(current.product.unit_shipping));
         product_id          =   current.product_id;
