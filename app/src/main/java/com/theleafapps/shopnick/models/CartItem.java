@@ -18,6 +18,9 @@ public class CartItem extends BaseRecord {
     @JsonProperty("product_id")
     public int product_id;
 
+    @JsonProperty("customer_dev_id")
+    public String customer_dev_id;
+
     @JsonProperty("quantity")
     public int quantity;
 

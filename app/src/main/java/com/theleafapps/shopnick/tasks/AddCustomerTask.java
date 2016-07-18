@@ -3,7 +3,7 @@ package com.theleafapps.shopnick.tasks;
 import android.content.Context;
 import android.util.Log;
 
-import com.theleafapps.shopnick.models.multiples.CartItems;
+import com.theleafapps.shopnick.models.multiples.Customers;
 import com.theleafapps.shopnick.utils.AppConstants;
 import com.theleafapps.shopnick.utils.PrefUtil;
 
@@ -12,33 +12,30 @@ import dfapi.ApiInvoker;
 import dfapi.BaseAsyncRequest;
 
 /**
- * Created by aviator on 30/06/16.
+ * Created by aviator on 18/07/16.
  */
-public class AddCartItemTask extends BaseAsyncRequest {
+public class AddCustomerTask extends BaseAsyncRequest {
 
     Context context;
-    public int cartItemId;
-    CartItems cartItems;
+    public int customerId;
+    Customers customersObj;
 
-    public AddCartItemTask(Context context, CartItems cartItems){
+    public AddCustomerTask(Context context, Customers customers){
         this.context        =   context;
-        this.cartItems      =   cartItems;
+        this.customersObj      =   customers;
     }
 
     @Override
     protected void doSetup() throws ApiException {
-        callerName = "AddCartItemTask";
+        callerName = "AddCustomerTask";
 
         serviceName = AppConstants.DB_SVC;
-        endPoint = "cart_item";
+        endPoint = "customer";
 
         verb = "POST";
 
-        requestString = ApiInvoker.serialize(cartItems).replace("\"cart_item_id\":0,","");
-        requestString = requestString.replace(",\"cart_item_id\":0","");
-
+        requestString = ApiInvoker.serialize(customersObj).replace("\"customer_id\":0,","");
         requestString = requestString.replace(",\"customer_id\":0","");
-        requestString = requestString.replace("\"customer_id\":0,","");
 
         applicationApiKey = AppConstants.API_KEY;
         sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
@@ -47,8 +44,8 @@ public class AddCartItemTask extends BaseAsyncRequest {
     @Override
     protected void processResponse(String response) throws ApiException, org.json.JSONException {
         // response has whole contact record, but we just want the id
-        CartItems cartItems   =   (CartItems) ApiInvoker.deserialize(response, "", CartItems.class);
-        cartItemId            =   cartItems.cartItemList.get(0).cart_item_id;
+        Customers customersObj   =   (Customers) ApiInvoker.deserialize(response, "", Customers.class);
+        customerId               =   customersObj.customers.get(0).customer_id;
     }
 
     @Override
@@ -57,4 +54,5 @@ public class AddCartItemTask extends BaseAsyncRequest {
             Log.d("Tang Ho","Success");
         }
     }
+
 }

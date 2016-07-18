@@ -4,6 +4,12 @@
     tools:context="com.theleafapps.shopnick">
 
     <item
+        android:id="@+id/user_profile"
+        android:icon="@drawable/user_profile"
+        android:title="Profile"
+        app:showAsAction="always"
+        />
+    <item
         android:id="@+id/cart_icon"
         android:icon="@drawable/cart"
         android:title="Cart"

@@ -67,7 +67,7 @@
             android:layout_alignTop="@+id/product_name_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="45dp"
             android:layout_marginRight="15dp"
             android:padding="5dp" />
 
@@ -101,8 +101,19 @@
             android:layout_alignTop="@+id/product_quantity_value"
             android:layout_toRightOf="@+id/product_quantity_value"
             android:layout_toEndOf="@+id/product_quantity_value"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="7dp"
             android:layout_marginTop="2dp" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:id="@+id/ruler"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="4dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/updateCartItemButton"
+            android:background="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,7 +121,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="mrp"
             android:id="@+id/mrp_value"
-            android:layout_below="@+id/updateCartItemButton"
+            android:layout_below="@+id/ruler"
             android:layout_alignLeft="@+id/quantity_label"
             android:layout_alignStart="@+id/quantity_label"
             android:layout_marginTop="5dp" />
@@ -200,7 +211,7 @@
         android:layout_below="@+id/multiply_product_qty"
         android:layout_alignRight="@+id/multiply_product_qty"
         android:layout_alignEnd="@+id/multiply_product_qty"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:layout_width="wrap_content"

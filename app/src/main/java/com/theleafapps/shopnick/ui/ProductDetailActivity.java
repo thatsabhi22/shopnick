@@ -1,6 +1,8 @@
 package com.theleafapps.shopnick.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
 
@@ -212,7 +214,9 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                             cartItem.product_id     =   productRec.product_id;
                             cartItem.quantity       =   quantity;
                             cartItem.variant        =   variant;
-                            cartItem.customer_id    =   1;
+
+                            SharedPreferences sharedPreferences = getSharedPreferences("Shopnick",Context.MODE_PRIVATE);
+                            cartItem.customer_id    =   Integer.valueOf(sharedPreferences.getString("cid",""));
 
                             CartItems cartItems = new CartItems();
                             cartItems.cartItemList.add(cartItem);

@@ -36,7 +36,8 @@
         </activity>
         <activity android:name=".ui.CheckoutActivity" />
         <activity android:name=".ui.NoNetworkActivity" />
-        <activity android:name=".ui.CartActivity"></activity>
+        <activity android:name=".ui.CartActivity" />
+        <activity android:name=".ui.AuthActivity"></activity>
     </application>
 
 </manifest>
