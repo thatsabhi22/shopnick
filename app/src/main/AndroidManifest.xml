@@ -34,10 +34,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ProductListActivity" />
         </activity>
-        <activity android:name=".ui.CheckoutActivity" />
-        <activity android:name=".ui.NoNetworkActivity" />
         <activity android:name=".ui.CartActivity" />
-        <activity android:name=".ui.AuthActivity"></activity>
+
+        <activity
+            android:name=".ui.CheckoutActivity"
+            android:parentActivityName=".ui.CartActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.CartActivity" />
+        </activity>
+
+        <activity android:name=".ui.NoNetworkActivity" />
+
+        <activity android:name=".ui.AuthActivity"/>
     </application>
 
 </manifest>
