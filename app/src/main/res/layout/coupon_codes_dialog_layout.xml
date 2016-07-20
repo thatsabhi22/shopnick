@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=
+            "SN25P\nUse this code to get 25 % OFF \non the cart value.\nMinumum cart value Rs. 2000\n\nSN100V\nUse code and get Rs. 100 OFF\n on the cart value.\nMinimum cart value Rs. 600\n\nSN200V\NUse code and get Rs. 200 OFF\n on the cart value.\nMinimum cart value Rs. 1200"
+        android:id="@+id/coupon_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:text="OK"
+        android:id="@+id/ok"
+        android:background="@color/windowBackground"
+        android:layout_below="@+id/coupon_text"
+        android:layout_alignRight="@+id/coupon_text"
+        android:layout_alignEnd="@+id/coupon_text"
+        android:layout_marginTop="15dp" />
+
+</RelativeLayout>

@@ -73,7 +73,7 @@ public class CartActivity extends AppCompatActivity implements Communicator {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CartActivity.this,CheckoutActivity.class);
-                intent.putExtra("total",cart_total);
+                intent.putExtra("cart_total",cart_total);
                 startActivity(intent);
             }
         });

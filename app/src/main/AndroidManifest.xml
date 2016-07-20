@@ -35,7 +35,6 @@
                 android:value=".ui.ProductListActivity" />
         </activity>
         <activity android:name=".ui.CartActivity" />
-
         <activity
             android:name=".ui.CheckoutActivity"
             android:parentActivityName=".ui.CartActivity">
@@ -43,10 +42,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.CartActivity" />
         </activity>
-
         <activity android:name=".ui.NoNetworkActivity" />
-
-        <activity android:name=".ui.AuthActivity"/>
+        <activity android:name=".ui.AuthActivity" />
+        <activity android:name=".ui.PaymentSuccessActivity"></activity>
     </application>
 
 </manifest>

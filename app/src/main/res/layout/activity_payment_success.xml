@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.theleafapps.shopnick.ui.PaymentSuccessActivity"
+    android:background="@color/light_green_400">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/paymentSuccessIcon"
+        android:src="@drawable/success"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/orderPlacedLabel"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Order Sent !"
+        android:id="@+id/orderPlacedLabel"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:textColor="#ffffff"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/continue_shopping_payment_success_button"
+        android:src="@drawable/contshopbutton"
+        android:layout_marginBottom="70dp"
+        android:background="@color/windowBackground"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Your Order has been placed \nsuccessfully"
+        android:id="@+id/payment_success_message_label"
+        android:layout_below="@+id/paymentSuccessIcon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Rs. _ was deducted from your wallet \nfor this purchase."
+        android:id="@+id/wallet_status_msg_tv"
+        android:layout_marginTop="34dp"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:layout_below="@+id/payment_success_message_label"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

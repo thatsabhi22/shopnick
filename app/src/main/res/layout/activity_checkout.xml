@@ -27,11 +27,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Total Amount \nto be Paid"
         android:id="@+id/checkout_total_amount_label"
-        android:layout_marginTop="35dp"
-        android:layout_below="@+id/checkout_screen_toolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="25dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/ruler_checkout"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,10 +37,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Shopnick Wallet \nBalance"
         android:id="@+id/wallet_balance"
-        android:layout_below="@+id/checkout_total_amount_label"
-        android:layout_alignLeft="@+id/checkout_total_amount_label"
-        android:layout_alignStart="@+id/checkout_total_amount_label"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/checkout_screen_toolbar"
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,35 +47,32 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Rs."
         android:id="@+id/currency3"
-        android:layout_alignTop="@+id/checkout_total_amount_label"
-        android:layout_toRightOf="@+id/checkout_total_amount_label"
-        android:layout_toEndOf="@+id/checkout_total_amount_label"
-        android:layout_marginLeft="50dp"
-        android:textColor="@color/accent_material_light" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="20000"
-        android:id="@+id/checkout_total_amount_value"
-        android:layout_alignTop="@+id/currency3"
-        android:layout_alignParentRight="false"
-        android:layout_toRightOf="@+id/currency3"
-        android:layout_alignParentEnd="false"
         android:textColor="@color/accent_material_light"
-        android:layout_marginLeft="20dp" />
+        android:layout_alignTop="@+id/checkout_total_amount_label"
+        android:layout_alignLeft="@+id/currency5"
+        android:layout_alignStart="@+id/currency5" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="- Rs."
+        android:text="0"
+        android:id="@+id/checkout_total_amount_value"
+        android:textColor="@color/accent_material_light"
+        android:layout_alignTop="@+id/currency3"
+        android:layout_alignRight="@+id/checkout_wallet_amount_value"
+        android:layout_alignEnd="@+id/checkout_wallet_amount_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Rs."
+        android:layout_toRightOf="@+id/wallet_balance"
         android:id="@+id/currency5"
         android:textColor="@color/accent_material_light"
         android:layout_alignTop="@+id/wallet_balance"
-        android:layout_alignLeft="@+id/currency3"
-        android:layout_alignStart="@+id/currency3" />
+        android:layout_marginLeft="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -88,8 +82,8 @@
         android:id="@+id/checkout_wallet_amount_value"
         android:textColor="@color/accent_material_light"
         android:layout_alignTop="@+id/currency5"
-        android:layout_alignRight="@+id/checkout_total_amount_value"
-        android:layout_alignEnd="@+id/checkout_total_amount_value" />
+        android:layout_toRightOf="@+id/currency5"
+        android:layout_marginLeft="10dp" />
 
     <View
         android:layout_width="fill_parent"
@@ -106,16 +100,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm Order"
-        android:id="@+id/button"
-        android:background="#e17494"
+        android:id="@+id/confirm_order_button"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:textColor="#ffffff"
         android:textSize="18sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:layout_below="@+id/ruler_checkout"
+        android:layout_marginTop="52dp"
+        android:layout_below="@+id/promocode_result_tv"
         android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:focusable="false"
+        android:textColor="@color/grey_700" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/promocode_edit_text"
+        android:hint="Have Promocode ?\nTap on top right icon for coupons"
+        android:layout_below="@+id/checkout_total_amount_label"
+        android:layout_alignLeft="@+id/checkout_total_amount_label"
+        android:layout_alignStart="@+id/checkout_total_amount_label"
+        android:layout_alignRight="@+id/confirm_order_button"
+        android:layout_alignEnd="@+id/confirm_order_button"
         android:layout_marginTop="60dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="&lt;promo result>"
+        android:id="@+id/promocode_result_tv"
+        android:layout_below="@+id/promocode_edit_text"
+        android:layout_alignLeft="@+id/promocode_edit_text"
+        android:layout_alignStart="@+id/promocode_edit_text"
+        android:visibility="invisible" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply"
+        android:id="@+id/apply_promocode_button"
+        android:layout_alignBottom="@+id/promocode_edit_text"
+        android:layout_toRightOf="@+id/promocode_edit_text"
+        android:layout_toEndOf="@+id/promocode_edit_text"
+        android:layout_marginLeft="10dp" />
 
 </RelativeLayout>
