@@ -22,17 +22,26 @@ import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.dialogs.CouponCodesDialog;
 import com.theleafapps.shopnick.models.Coupon;
 import com.theleafapps.shopnick.models.Customer;
+import com.theleafapps.shopnick.models.multiples.Customers;
+import com.theleafapps.shopnick.tasks.DeleteMultipleCartItemsTask;
 import com.theleafapps.shopnick.tasks.GetCouponByCodeTask;
 import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
+import com.theleafapps.shopnick.tasks.UpdateCustomerWalletValueTask;
 import com.theleafapps.shopnick.utils.Communicator;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class CheckoutActivity extends AppCompatActivity implements Communicator {
 
     ActionBar actionBar;
+    SharedPreferences sharedPreferences;
+    Customer customer;
     Toolbar toolbar;
-    float wallet_value = 0;
+    double wallet_value = 0;
     float cart_total   = 0;
     double deduction   = 0;
     TextView wallet_value_tv,total_amount_value_tv,promocode_result_tv;
@@ -40,14 +49,26 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
     CouponCodesDialog couponCodesDialog;
     FragmentManager fragmentManager;
     EditText promocode_edit_text;
+    String cid = "";
+    List<Integer> cart_item_id_array;
+    JSONArray cartItemIdJsonArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
-        Intent intent = getIntent();
-        cart_total = intent.getIntExtra("cart_total",0);
+        cart_item_id_array      =   new ArrayList<>();
+        cartItemIdJsonArray     =   new JSONArray();
+        Intent intent           =   getIntent();
+        cart_total              =   intent.getIntExtra("cart_total",0);
+        cart_item_id_array      =   intent.getIntegerArrayListExtra("cart_item_id_array");
+
+        if(cart_item_id_array.size()>0){
+             for(int id : cart_item_id_array){
+                 cartItemIdJsonArray.put(id);
+             }
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_checkout);
         setSupportActionBar(toolbar);
@@ -66,16 +87,15 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
         fragmentManager         =   getFragmentManager();
 
         try {
-            SharedPreferences sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
-            String cid = sharedPreferences.getString("cid", "");
+            sharedPreferences   =   getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
+            cid                 =   sharedPreferences.getString("cid", "");
 
             if (!TextUtils.isEmpty(cid) && Integer.parseInt(cid) != 0) {
                 GetCustomerByIdTask getCustomerByIdTask = new GetCustomerByIdTask(this, Integer.parseInt(cid));
                 getCustomerByIdTask.execute().get();
 
-                Customer customer = getCustomerByIdTask.customerRec;
-                wallet_value = customer.wallet_value;
-
+                customer        =   getCustomerByIdTask.customerRec;
+                wallet_value    =   customer.wallet_value;
 
             }
         } catch (InterruptedException e) {
@@ -86,12 +106,6 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
 
         wallet_value_tv.setText(String.valueOf(wallet_value));
         total_amount_value_tv.setText(String.valueOf(cart_total));
-
-        if(wallet_value > cart_total){
-            confirm_order_button.setBackgroundColor(Color.parseColor("#e17494"));
-            confirm_order_button.setTextColor(Color.parseColor("#ffffff"));
-            confirm_order_button.setEnabled(true);
-        }
 
         coupon_code_apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,10 +183,39 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(CheckoutActivity.this,PaymentSuccessActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                if(wallet_value > cart_total) {
+                    try {
+                        customer.wallet_value   =   customer.wallet_value - cart_total - deduction;
+                        Customers customersObj  =   new Customers();
+                        customersObj.customers.add(customer);
 
+                        UpdateCustomerWalletValueTask updateCustomerWalletValueTask
+                                = new UpdateCustomerWalletValueTask(CheckoutActivity.this, customersObj);
+                        updateCustomerWalletValueTask.execute().get();
+
+                        DeleteMultipleCartItemsTask deleteMultipleCartItemsTask
+                                = new DeleteMultipleCartItemsTask(CheckoutActivity.this,cartItemIdJsonArray);
+                        deleteMultipleCartItemsTask.execute().get();
+
+                        Intent intent = new Intent(CheckoutActivity.this, PaymentSuccessActivity.class);
+                        intent.putExtra("deduction", deduction);
+                        intent.putExtra("net_cost", cart_total - deduction);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    Intent intent = new Intent(CheckoutActivity.this, AddMoneyActivity.class);
+                    intent.putExtra("customer_id",customer.customer_id);
+                    intent.putExtra("cart_total",cart_total);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.utils.Commons;
 import com.theleafapps.shopnick.utils.DotProgressBar;
 
 public class NoNetworkActivity extends AppCompatActivity {

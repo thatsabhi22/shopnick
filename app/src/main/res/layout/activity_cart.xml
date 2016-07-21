@@ -38,7 +38,7 @@
         android:layout_below="@+id/emptycart_tv"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:background="@color/windowBackground" />
+        android:background="?android:attr/selectableItemBackground" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cart_recycler_view"

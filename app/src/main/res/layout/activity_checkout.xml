@@ -106,12 +106,11 @@
         android:textSize="18sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:layout_marginTop="52dp"
         android:layout_below="@+id/promocode_result_tv"
         android:layout_centerHorizontal="true"
-        android:enabled="false"
-        android:focusable="false"
-        android:textColor="@color/grey_700" />
+        android:textColor="#ffffff"
+        android:layout_marginTop="50dp"
+        android:background="#e17494" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -123,7 +122,8 @@
         android:layout_alignStart="@+id/checkout_total_amount_label"
         android:layout_alignRight="@+id/confirm_order_button"
         android:layout_alignEnd="@+id/confirm_order_button"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="60dp"
+        android:textColorHint="@color/blue_grey_400" />
 
     <TextView
         android:layout_width="wrap_content"

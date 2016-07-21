@@ -8,7 +8,6 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.models.Customer;
@@ -16,7 +15,6 @@ import com.theleafapps.shopnick.models.multiples.Customers;
 import com.theleafapps.shopnick.tasks.AddCustomerTask;
 import com.theleafapps.shopnick.tasks.GetCustomerByCustomerDevIdTask;
 import com.theleafapps.shopnick.utils.Commons;
-import com.theleafapps.shopnick.utils.EncryptUtils;
 
 import java.util.concurrent.ExecutionException;
 

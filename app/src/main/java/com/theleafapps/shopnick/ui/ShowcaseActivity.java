@@ -1,9 +1,6 @@
 package com.theleafapps.shopnick.ui;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -288,10 +285,15 @@ public class ShowcaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
+            case R.id.user_profile:
+                intent = new Intent(this,CustomerProfileActivity.class);
+                startActivity(intent);
+                return true;
             case R.id.cart_icon:
                 Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(this,CartActivity.class);
+                intent = new Intent(this,CartActivity.class);
                 startActivity(intent);
                 return true;
             default:

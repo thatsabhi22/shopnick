@@ -34,7 +34,7 @@ public class Customer extends BaseRecord{
     public String country;
 
     @JsonProperty("wallet_value")
-    public Float wallet_value;
+    public double wallet_value;
 
     @JsonProperty("zipcode")
     public String zipcode;

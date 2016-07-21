@@ -24,6 +24,7 @@ import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.tasks.GetAllCartItemTask;
 import com.theleafapps.shopnick.utils.Communicator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -40,6 +41,7 @@ public class CartActivity extends AppCompatActivity implements Communicator {
     FragmentManager fragmentManager;
     ImageButton proceed_payment_button;
     static Context mContext;
+    ArrayList<Integer> cart_item_id_array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class CartActivity extends AppCompatActivity implements Communicator {
         total_card_view         =   (CardView)      findViewById(R.id.total_cart_value_card_view);
         grand_total_value_tv    =   (TextView)      findViewById(R.id.grand_total_value_tv);
         proceed_payment_button  =   (ImageButton)   findViewById(R.id.proceed_for_payment_button);
+        cart_item_id_array      =   new ArrayList<>();
         cartItems               =   getCartItems();
         fragmentManager         =   getFragmentManager();
 
@@ -73,6 +76,7 @@ public class CartActivity extends AppCompatActivity implements Communicator {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CartActivity.this,CheckoutActivity.class);
+                intent.putIntegerArrayListExtra("cart_item_id_array",cart_item_id_array);
                 intent.putExtra("cart_total",cart_total);
                 startActivity(intent);
             }
@@ -83,6 +87,7 @@ public class CartActivity extends AppCompatActivity implements Communicator {
         int total = 0;
         for(CartItem item : cartItemList){
 
+            cart_item_id_array.add(item.cart_item_id);
             total += item.product.unit_mrp * item.quantity;
             total += item.product.unit_shipping;
 

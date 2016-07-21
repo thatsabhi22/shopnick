@@ -66,7 +66,7 @@ public class CartUpdateDialog extends DialogFragment implements View.OnClickList
         cart_item_id        =   bundle.getInt("cart_item_id");
         product_id          =   bundle.getInt("product_id");
         product_name        =   bundle.getString("product_name");
-        View view           =   inflater.inflate(R.layout.update_cart_item_dialog,null);
+        View view           =   inflater.inflate(R.layout.dialog_layout_update_cart_item,null);
         variantSpinner      =   (Spinner) view.findViewById(R.id.cart_update_dialog_variant_spinner);
         quantitySpinner     =   (Spinner) view.findViewById(R.id.cart_update_dialog_quantity_spinner);
         update              =   (Button) view.findViewById(R.id.cart_update_dialog_update_button);

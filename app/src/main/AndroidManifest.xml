@@ -44,7 +44,9 @@
         </activity>
         <activity android:name=".ui.NoNetworkActivity" />
         <activity android:name=".ui.AuthActivity" />
-        <activity android:name=".ui.PaymentSuccessActivity"></activity>
+        <activity android:name=".ui.PaymentSuccessActivity" />
+        <activity android:name=".ui.AddMoneyActivity" />
+        <activity android:name=".ui.CustomerProfileActivity" />
     </application>
 
 </manifest>
