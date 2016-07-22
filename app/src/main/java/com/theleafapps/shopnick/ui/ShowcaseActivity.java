@@ -1,15 +1,16 @@
 package com.theleafapps.shopnick.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,17 +18,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.adapters.NavigationDrawerRecyclerAdapter;
+import com.theleafapps.shopnick.adapters.ExpandableListAdapter;
 import com.theleafapps.shopnick.adapters.ViewPagerAdapter;
 import com.theleafapps.shopnick.models.Category;
+import com.theleafapps.shopnick.models.Customer;
+import com.theleafapps.shopnick.models.ExpandedMenuModel;
 import com.theleafapps.shopnick.models.SubCategory;
 import com.theleafapps.shopnick.models.multiples.Categories;
 import com.theleafapps.shopnick.models.multiples.SubCategories;
 import com.theleafapps.shopnick.tasks.GetAllCategoriesTask;
 import com.theleafapps.shopnick.tasks.GetAllSubCategoriesTask;
+import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
 import com.theleafapps.shopnick.ui.fragments.OneFragment;
 import com.theleafapps.shopnick.utils.Commons;
 
@@ -38,34 +44,21 @@ import java.util.List;
 
 public class ShowcaseActivity extends AppCompatActivity {
 
+    TextView customer_name,customer_email;
     List<Category> categoriesRec;
     List<SubCategory> subCategoriesRec;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    List<ExpandedMenuModel> listDataHeader;
+    NavigationView navigationView;
+    DrawerLayout mDrawerLayout;
+    ExpandableListAdapter mMenuAdapter;
+    ExpandableListView expandableList;
+    HashMap<ExpandedMenuModel, List<String>> listDataChild;
 
     private Toolbar toolbar;                                     // Declaring the Toolbar Object
 
-    static RecyclerView mRecyclerView;                           // Declaring RecyclerView
-    static RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
-    static RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
-    protected static DrawerLayout mDrawer;                       // Declaring DrawerLayout
-
-    static ActionBarDrawerToggle mDrawerToggle;
-
-    static String titles[] = {};
-    static int icons[] =
-            {
-                    R.drawable.eight,
-                    R.drawable.nine,
-                    R.drawable.eight,
-                    R.drawable.nine,
-                    R.drawable.eight
-            };
-
     static String NAME = "Leaf Apps";
-    static int PROFILE = R.drawable.eight;
     static String EMAIL = "theleafapps@gmail.com";
 
     @Override
@@ -74,12 +67,51 @@ public class ShowcaseActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_showcase);
 
-//            ConnectivityManager cm =
-//                    (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-//            boolean isConnected = activeNetwork != null &&
-//                    activeNetwork.isConnectedOrConnecting();
+            toolbar = (Toolbar) findViewById(R.id.toolbar_showcase);
+            setSupportActionBar(toolbar);
+
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_drawer);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            customer_name    =   (TextView) findViewById(R.id.customer_name);
+            customer_email   =   (TextView) findViewById(R.id.customer_email);
+            mDrawerLayout    =   (DrawerLayout) findViewById(R.id.drawerLayout_showcase);
+            expandableList   =   (ExpandableListView) findViewById(R.id.exp_navigation_menu);
+            navigationView   =   (NavigationView) findViewById(R.id.nav_view);
+
+            if (navigationView != null) {
+                setupDrawerContent(navigationView);
+            }
+
+            expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+                    //Log.d("DEBUG", "submenu item clicked");
+                    return false;
+                }
+            });
+
+            expandableList.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+                @Override
+                public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                    //Log.d("DEBUG", "heading clicked");
+                    return false;
+                }
+            });
+
+            SharedPreferences sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
+            String cid = sharedPreferences.getString("cid","");
+
+            if(!TextUtils.isEmpty(cid) && Integer.parseInt(cid) != 0){
+                GetCustomerByIdTask getCustomerByIdTask = new GetCustomerByIdTask(this,Integer.parseInt(cid));
+                getCustomerByIdTask.execute().get();
+
+                Customer customer   =   getCustomerByIdTask.customerRec;
+                NAME                =   customer.first_name + " " + customer.last_name;
+                EMAIL               =   customer.email;
+            }
+            customer_name.setText(NAME);
+            customer_email.setText(EMAIL);
 
             if(Commons.hasActiveInternetConnection(this)){
                 Log.d("Tangho","Network Connected");
@@ -137,6 +169,13 @@ public class ShowcaseActivity extends AppCompatActivity {
                     }
                 }
 
+                prepareListData();
+
+                mMenuAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild, expandableList);
+
+                // setting list adapter
+                expandableList.setAdapter(mMenuAdapter);
+
                 viewPager = (ViewPager) findViewById(R.id.viewpager);
                 setupViewPager(viewPager);
 
@@ -146,7 +185,6 @@ public class ShowcaseActivity extends AppCompatActivity {
                 if(catId > 0)
                     viewPager.setCurrentItem(catId);
 
-                setUpDrawer();
             }
             else{
                 Log.d("Tangho","Network Disonnected");
@@ -155,70 +193,6 @@ public class ShowcaseActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
     }
-
-    public void setUpDrawer() {
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.navList); // Assigning the RecyclerView Object to the xml View
-
-        mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-
-        mAdapter = new NavigationDrawerRecyclerAdapter(titles,icons,NAME,EMAIL,PROFILE);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-
-        mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
-
-        mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
-
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mDrawer = (DrawerLayout) findViewById(R.id.drawerLayout);        // Drawer object Assigned to the view
-
-        mDrawerToggle = new ActionBarDrawerToggle(this,mDrawer,toolbar,R.string.openDrawer,R.string.closeDrawer){
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
-                // open I am not going to put anything here)
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                // Code here will execute once drawer is closed
-            }
-
-        }; // Drawer Toggle Object Made
-
-        mDrawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-    }
-
-    // Catch the events related to the drawer to arrange views according to this
-    // action if necessary...
-    private DrawerLayout.DrawerListener mDrawerListener = new DrawerLayout.DrawerListener() {
-
-        @Override
-        public void onDrawerStateChanged(int status) {
-
-        }
-
-        @Override
-        public void onDrawerSlide(View view, float slideArg) {
-
-        }
-
-        @Override
-        public void onDrawerOpened(View view) {
-            Toast.makeText(getApplicationContext(),"Drawer Opened ... ",Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onDrawerClosed(View view) {
-        }
-    };
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -237,43 +211,6 @@ public class ShowcaseActivity extends AppCompatActivity {
             }
         }
         viewPager.setAdapter(adapter);
-    }
-
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-        // Adding child data
-        listDataHeader.add("Batsman");
-        listDataHeader.add("Bowler");
-        listDataHeader.add("All rounder");
-        listDataHeader.add("Wicket keeper");
-
-        // Adding child data
-        List<String> batsman = new ArrayList<String>();
-        batsman.add("V. Kohli");
-        batsman.add("G.J. Bailey");
-        batsman.add("H.M. Amla");
-
-        List<String> bowler = new ArrayList<String>();
-        bowler.add("D.W. Steyn");
-        bowler.add("J.M. Anderson");
-        bowler.add("M.G. Johnson");
-
-        List<String> all = new ArrayList<String>();
-        all.add("R.A. Jadeja");
-        all.add("Shakib Al Hasan");
-        all.add("D.J. Bravo");
-
-        List<String> wk = new ArrayList<String>();
-        wk.add("A.B. de Villiers");
-        wk.add("M.S. Dhoni");
-        wk.add("K.C. Sangakkara");
-
-        listDataChild.put(listDataHeader.get(0), batsman); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), bowler);
-        listDataChild.put(listDataHeader.get(2), all);
-        listDataChild.put(listDataHeader.get(2), wk);
     }
 
     @Override
@@ -296,10 +233,52 @@ public class ShowcaseActivity extends AppCompatActivity {
                 intent = new Intent(this,CartActivity.class);
                 startActivity(intent);
                 return true;
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void prepareListData() {
+        int i=0;
+        listDataHeader = new ArrayList<ExpandedMenuModel>();
+        listDataChild = new HashMap<ExpandedMenuModel, List<String>>();
+
+        if(categoriesRec!=null && categoriesRec.size() > 0){
+            for(Category category : categoriesRec){
+
+                ExpandedMenuModel item = new ExpandedMenuModel();
+                item.setIconName(category.category_name);
+
+                // Adding data header
+                listDataHeader.add(item);
+
+                List<String> heading = new ArrayList<String>();
+                List<SubCategory> subCats = Commons.catIdToSubCatMap.get(category.category_id);
+
+                for(SubCategory subcat:subCats){
+                    heading.add(subcat.sub_category_name);
+                }
+                listDataChild.put(listDataHeader.get(i), heading);
+                i++;
+            }
+        }
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        //revision: this don't works, use setOnChildClickListener() and setOnGroupClickListener() above instead
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        menuItem.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
+
+    }
 }
 

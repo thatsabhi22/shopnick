@@ -24,6 +24,9 @@ public class Customer extends BaseRecord{
     @JsonProperty("mobile")
     public String mobile;
 
+    @JsonProperty("email")
+    public String email;
+
     @JsonProperty("address")
     public String address;
 

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawerLayout"
-    android:layout_gravity="left"
+    android:id="@+id/drawerLayout_showcase"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:elevation="40dp">
+    android:fitsSystemWindows="true">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.theleafapps.shopnick.ui.ShowcaseActivity">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.theleafapps.shopnick.ui.ShowcaseActivity">
 
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,7 +25,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_showcase"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -51,14 +50,65 @@
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/navList"
-        android:layout_width="320dp"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:background="#ffffff"
-        android:scrollbars="vertical">
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true">
 
-    </android.support.v7.widget.RecyclerView>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/navtexture">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/user_profile"
+                android:id="@+id/imageView"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="&lt;customer_name>"
+                android:id="@+id/customer_name"
+                android:layout_below="@+id/imageView"
+                android:layout_alignLeft="@+id/imageView"
+                android:layout_alignStart="@+id/imageView"
+                android:layout_marginTop="10dp"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="&lt;customer_email>"
+                android:id="@+id/customer_email"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/customer_name"
+                android:layout_alignLeft="@+id/customer_name"
+                android:layout_alignStart="@+id/customer_name"
+                android:layout_marginTop="3dp" />
+
+        </RelativeLayout>
+
+        <ExpandableListView
+            android:id="@+id/exp_navigation_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:listSelector="@android:color/transparent"
+            android:layout_marginTop="120dp"
+            android:background="@android:color/white">
+        </ExpandableListView>
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

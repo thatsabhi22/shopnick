@@ -28,8 +28,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-
-
         try {
             SharedPreferences sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -94,6 +92,7 @@ public class SplashActivity extends AppCompatActivity {
             Double value                = 10000.0;
             customer.customer_dev_id    = and_id;
             customer.city               = "Austin";
+            customer.email              = "john@doe.com";
             customer.first_name         = "John";
             customer.last_name          = "Doe";
             customer.city               = "Ipsum City";
@@ -109,6 +108,7 @@ public class SplashActivity extends AppCompatActivity {
             AddCustomerTask addCustomerTask = new AddCustomerTask(this, customers);
             addCustomerTask.execute().get();
 
+            customer.customer_id        = addCustomerTask.customerId;
 
         } catch (InterruptedException e) {
             e.printStackTrace();

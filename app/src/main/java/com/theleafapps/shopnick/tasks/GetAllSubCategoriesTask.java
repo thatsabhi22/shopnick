@@ -51,7 +51,7 @@ public class GetAllSubCategoriesTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-        Log.d("Tang Ho"," >>>>> " + response);
+//        Log.d("Tang Ho"," >>>>> " + response);
         subCategoriesReceived =
                 (SubCategories) ApiInvoker.deserialize(response, "", SubCategories.class);
     }
@@ -59,7 +59,7 @@ public class GetAllSubCategoriesTask extends BaseAsyncRequest {
     @Override
     protected void onCompletion(boolean success) {
         if(success && subCategoriesReceived != null && subCategoriesReceived.subCategories.size() > 0){
-
+            Log.d("Tang Ho"," >>>>> AllSubCategories Received");
         }
     }
 }

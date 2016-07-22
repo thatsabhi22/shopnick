@@ -1,12 +1,15 @@
 package com.theleafapps.shopnick.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.theleafapps.shopnick.R;
@@ -20,9 +23,10 @@ public class CustomerProfileActivity extends AppCompatActivity {
     Toolbar toolbar;
     ActionBar actionBar;
 
-    TextView c_wallet_value,c_first_name_value,c_last_name_value;
+    TextView c_first_name_value,c_last_name_value;
     TextView c_address_value,c_zipcode_value,c_country_value;
     TextView c_mobile_value,c_wallet_amount_value;
+    Button c_profile_shop_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
         c_country_value         =   (TextView) findViewById(R.id.c_country_value);
         c_mobile_value          =   (TextView) findViewById(R.id.c_mobile_value);
         c_wallet_amount_value   =   (TextView) findViewById(R.id.c_wallet_amount_value);
-
+        c_profile_shop_button   =   (Button) findViewById(R.id.c_profile_shop_button);
 
         SharedPreferences sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
         String cid = sharedPreferences.getString("cid","");
@@ -76,5 +80,15 @@ public class CustomerProfileActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+
+
+        c_profile_shop_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerProfileActivity.this,ShowcaseActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
     }
 }

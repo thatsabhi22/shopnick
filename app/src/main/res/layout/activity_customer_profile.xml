@@ -189,11 +189,13 @@
         android:textSize="15sp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:backgroundTintMode="src_atop"
-        android:backgroundTint="@color/amber_50"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
-        android:stateListAnimator="@color/accent_material_dark" />
+        android:stateListAnimator="@color/accent_material_dark"
+        android:textColor="#ffffff"
+        android:foreground="@color/abc_search_url_text_normal"
+        android:focusable="true"
+        android:background="#e17494" />
 
     <TextView
         android:layout_width="wrap_content"
