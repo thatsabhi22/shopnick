@@ -278,7 +278,6 @@ public class ShowcaseActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-
     }
 }
 

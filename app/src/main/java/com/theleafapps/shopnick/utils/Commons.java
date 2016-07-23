@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class Commons {
 
-    public static Map<Integer,List<SubCategory>> catIdToSubCatMap = new HashMap<>();
+    public static LinkedMap<Integer,List<SubCategory>> catIdToSubCatMap = new LinkedMap<>();
 
     public static boolean hasActiveInternetConnection(Context context) {
 

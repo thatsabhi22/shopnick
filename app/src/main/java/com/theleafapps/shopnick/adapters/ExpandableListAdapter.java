@@ -1,6 +1,7 @@
 package com.theleafapps.shopnick.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,14 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.models.ExpandedMenuModel;
+import com.theleafapps.shopnick.models.SubCategory;
+import com.theleafapps.shopnick.ui.ProductListActivity;
+import com.theleafapps.shopnick.utils.Commons;
+import com.theleafapps.shopnick.utils.LinkedMap;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by aviator on 22/07/16.
@@ -23,6 +30,7 @@ import java.util.List;
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context mContext;
+    private List<SubCategory> subCatList;
     private List<ExpandedMenuModel> mListDataHeader; // header titles
 
     // child data in format of header title, child title
@@ -46,10 +54,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         int childCount = 0;
-//        if (groupPosition != 2) {
-            childCount = this.mListDataChild.get(this.mListDataHeader.get(groupPosition))
-                    .size();
-//        }
+        childCount = this.mListDataChild.get(this.mListDataHeader.get(groupPosition)).size();
         return childCount;
     }
 
@@ -102,17 +107,36 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final String childText = (String) getChild(groupPosition, childPosition);
 
+        subCatList = Commons.catIdToSubCatMap.getValue(groupPosition);
+
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_submenu, null);
         }
 
-        TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.submenu);
+        TextView txtListChildSubCatId   =   (TextView) convertView.findViewById(R.id.nav_sub_cat_id_tv);
+        TextView txtListChildCatId      =   (TextView) convertView.findViewById(R.id.nav_cat_id_tv);
+        TextView txtListChild           =   (TextView) convertView.findViewById(R.id.submenu);
 
+        txtListChildSubCatId.setText(String.valueOf(subCatList.get(childPosition).sub_category_id));
+        txtListChildCatId.setText(String.valueOf(Commons.catIdToSubCatMap.getEntry(groupPosition).getKey()));
         txtListChild.setText(childText);
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"child clicked",Toast.LENGTH_LONG).show();
+                String subCatIdStr  =   ((TextView)((LinearLayout) v).getChildAt(0)).getText().toString();
+                String catIdStr     =   ((TextView)((LinearLayout) v).getChildAt(1)).getText().toString();
+                int subCatId        =   Integer.parseInt(subCatIdStr);
+                int catId           =   Integer.parseInt(catIdStr);
+                Intent intent = new Intent(mContext, ProductListActivity.class);
+                intent.putExtra("categoryId",catId);
+                intent.putExtra("subCatId",subCatId);
+                mContext.startActivity(intent);
+            }
+        });
         return convertView;
     }
 
@@ -120,4 +144,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
+
 }
