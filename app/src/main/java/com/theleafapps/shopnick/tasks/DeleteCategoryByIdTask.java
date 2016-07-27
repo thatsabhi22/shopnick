@@ -99,7 +99,7 @@ public class DeleteCategoryByIdTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-        Log.d("Tang Ho",response);
+        //Log.d("Tang Ho",response);
     }
 
     @Override

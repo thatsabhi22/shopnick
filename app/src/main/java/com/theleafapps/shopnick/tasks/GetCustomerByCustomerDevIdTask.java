@@ -55,7 +55,7 @@ public class GetCustomerByCustomerDevIdTask extends BaseAsyncRequest{
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-        Log.d("Tang Ho"," >>>>> " + response);
+        //Log.d("Tang Ho"," >>>>> " + response);
         customersRec =
                 (Customers) ApiInvoker.deserialize(response, "", Customers.class);
         if(customersRec.customers.size()> 0)

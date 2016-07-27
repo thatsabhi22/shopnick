@@ -21,11 +21,48 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/product_list_screen"
+        android:background="@color/pink_200"
+        android:orientation="horizontal"
+        android:id="@+id/filter_section_layout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort"
+            android:background="@color/amber_50"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginRight="2dp"
+            android:clickable="true"
+            android:id="@+id/product_list_sort_tv"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter"
+            android:layout_marginLeft="2dp"
+            android:background="@color/amber_50"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:id="@+id/product_list_filter_tv"
+            android:textStyle="bold" />
+    </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/product_list_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/filter_section_layout"
         android:scrollbars="vertical"
-        android:layout_below="@+id/product_list_screen" />
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

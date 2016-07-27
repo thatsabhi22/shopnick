@@ -49,8 +49,8 @@ public class ProductListViewRecyclerAdapter extends
                 TextView name       =   (TextView) v.findViewById(R.id.product_name);
                 TextView productId  =   (TextView) v.findViewById(R.id.product_id_textview);
 
-                Toast.makeText(mContext,"Card Clicked -> Product Name : " + name.getText() + " | Product Id ->"
-                        + productId.getText() , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext,"Card Clicked -> Product Name : " + name.getText() + " | Product Id ->"
+//                        + productId.getText() , Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, ProductDetailActivity.class);
                 intent.putExtra("productId",productId.getText());

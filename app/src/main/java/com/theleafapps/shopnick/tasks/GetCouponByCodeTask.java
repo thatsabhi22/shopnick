@@ -56,7 +56,7 @@ public class GetCouponByCodeTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-        Log.d("Tang Ho"," >>>>> " + response);
+        //Log.d("Tang Ho"," >>>>> " + response);
         couponsRec =
                 (Coupons) ApiInvoker.deserialize(response, "", Coupons.class);
         if(couponsRec.coupons.size()> 0)

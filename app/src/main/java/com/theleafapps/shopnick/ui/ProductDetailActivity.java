@@ -1,5 +1,6 @@
 package com.theleafapps.shopnick.ui;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -283,9 +284,14 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
+            case R.id.user_profile:
+                intent = new Intent(this,CustomerProfileActivity.class);
+                startActivity(intent);
+                return true;
             case android.R.id.home:
-                Intent intent = NavUtils.getParentActivityIntent(this);
+                intent = NavUtils.getParentActivityIntent(this);
                 intent.putExtra("subCatId",subCatId);
                 NavUtils.navigateUpTo(this,intent);
                 return true;

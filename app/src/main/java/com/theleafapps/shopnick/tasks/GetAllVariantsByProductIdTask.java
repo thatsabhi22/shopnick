@@ -58,7 +58,7 @@ public class GetAllVariantsByProductIdTask extends BaseAsyncRequest{
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-        Log.d("Tang Ho"," >>>>> " + response);
+        //Log.d("Tang Ho"," >>>>> " + response);
         variantsRec =
                 (Variants) ApiInvoker.deserialize(response, "", Variants.class);
         if(variantsRec!=null)

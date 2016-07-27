@@ -23,10 +23,12 @@ public class GetProductsBySubCatIdTask extends BaseAsyncRequest {
     Context context;
     public Products productsRec;
     int subCatId;
+    String sort_str;
 
-    public GetProductsBySubCatIdTask(Context context, int subCataId){
-        this.context = context;
-        this.subCatId = subCataId;
+    public GetProductsBySubCatIdTask(Context context, int subCataId, String sort_str){
+        this.context    =   context;
+        this.subCatId   =   subCataId;
+        this.sort_str   =   sort_str;
     }
 
     @Override
@@ -40,7 +42,7 @@ public class GetProductsBySubCatIdTask extends BaseAsyncRequest {
         // filter to only select the contacts in this group
         queryParams = new HashMap<>();
         queryParams.put("filter", "sub_category_id=" + subCatId);
-//        queryParams.put("order", "sequence%20ASC");
+        queryParams.put("order", sort_str);
 
         // request without related would return just {id, contact_group_id, contact_id}
         // set the related field to go get the contact mRecordsList referenced by
@@ -55,7 +57,7 @@ public class GetProductsBySubCatIdTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-        Log.d("Tang Ho"," >>>>> " + response);
+        //Log.d("Tang Ho"," >>>>> " + response);
         productsRec =
                 (Products) ApiInvoker.deserialize(response, "", Products.class);
     }

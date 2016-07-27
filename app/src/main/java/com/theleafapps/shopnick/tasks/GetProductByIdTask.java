@@ -56,7 +56,7 @@ public class GetProductByIdTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-        Log.d("Tang Ho"," >>>>> " + response);
+        //Log.d("Tang Ho"," >>>>> " + response);
         productsRec =
                 (Products) ApiInvoker.deserialize(response, "", Products.class);
         if(productsRec.products.size()> 0)

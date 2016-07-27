@@ -54,7 +54,7 @@ public class GetAllCartItemTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, JSONException {
-        Log.d("Tang Ho"," >>>>> " + response);
+        //Log.d("Tang Ho"," >>>>> " + response);
         cartItemsReceived =
                 (CartItems) ApiInvoker.deserialize(response, "", CartItems.class);
     }

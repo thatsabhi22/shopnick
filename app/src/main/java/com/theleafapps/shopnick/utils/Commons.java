@@ -12,9 +12,7 @@ import com.theleafapps.shopnick.models.SubCategory;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by aviator on 23/04/16.
@@ -22,6 +20,10 @@ import java.util.Map;
 public class Commons {
 
     public static LinkedMap<Integer,List<SubCategory>> catIdToSubCatMap = new LinkedMap<>();
+
+    public static  final CharSequence[] sort_options = {
+            "Popularity", "Price Low to High", "Price High to Low", "Discount High to Low"
+    };
 
     public static boolean hasActiveInternetConnection(Context context) {
 
