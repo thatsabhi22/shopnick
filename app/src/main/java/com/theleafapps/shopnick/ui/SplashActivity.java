@@ -59,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 /*
                  * Showing splash screen with a timer. This will be useful when you
-                 * want to show case app logo / company
+                 * want to show case app logo_small / company
                  */
 
                 @Override

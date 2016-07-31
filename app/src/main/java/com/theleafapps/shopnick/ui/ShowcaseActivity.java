@@ -29,8 +29,10 @@ import com.theleafapps.shopnick.models.Category;
 import com.theleafapps.shopnick.models.Customer;
 import com.theleafapps.shopnick.models.ExpandedMenuModel;
 import com.theleafapps.shopnick.models.SubCategory;
+import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.models.multiples.Categories;
 import com.theleafapps.shopnick.models.multiples.SubCategories;
+import com.theleafapps.shopnick.tasks.GetAllCartItemTask;
 import com.theleafapps.shopnick.tasks.GetAllCategoriesTask;
 import com.theleafapps.shopnick.tasks.GetAllSubCategoriesTask;
 import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
@@ -55,11 +57,14 @@ public class ShowcaseActivity extends AppCompatActivity {
     ExpandableListAdapter mMenuAdapter;
     ExpandableListView expandableList;
     HashMap<ExpandedMenuModel, List<String>> listDataChild;
+    MenuItem menuItem;
+    Menu menu;
 
     private Toolbar toolbar;                                     // Declaring the Toolbar Object
 
-    static String NAME = "Leaf Apps";
-    static String EMAIL = "theleafapps@gmail.com";
+    static String NAME  =   "Leaf Apps";
+    static String EMAIL =   "theleafapps@gmail.com";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,22 @@ public class ShowcaseActivity extends AppCompatActivity {
 
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_drawer);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setIcon(R.drawable.logo_small);
+
+            if(!Commons.hasActiveInternetConnection(this)){
+                Intent intent1 = new Intent(this,NoNetworkActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent1);
+            }
+
+            if(menu!=null) {
+                menuItem = menu.findItem(R.id.cart_icon);
+                if (Commons.cartItemCount < 1) {
+                    menuItem.setIcon(R.drawable.cart);
+                } else {
+                    menuItem.setIcon(R.drawable.cartfull);
+                }
+            }
 
             customer_name    =   (TextView) findViewById(R.id.customer_name);
             customer_email   =   (TextView) findViewById(R.id.customer_email);
@@ -119,18 +140,29 @@ public class ShowcaseActivity extends AppCompatActivity {
                 Intent intent   =   getIntent();
                 int catId       =   intent.getIntExtra("categoryId",0);
 
+
+                if(!TextUtils.isEmpty(cid) && Integer.parseInt(cid)!=0){
+                    GetAllCartItemTask getAllCartItemTask = new GetAllCartItemTask(this,Integer.parseInt(cid));
+                    getAllCartItemTask.execute().get();
+
+
+                    CartItems cartItems = getAllCartItemTask.cartItemsReceived;
+                    if(cartItems!=null && cartItems.cartItemList.size()>0){
+                        Commons.cartItemCount = cartItems.cartItemList.size();
+                    }
+                }
+
                 /*****
                  * Getting All Categories
                  ******/
-                GetAllCategoriesTask getAllCategoriesTask = new GetAllCategoriesTask(this);
-
-                boolean x = getAllCategoriesTask.execute().get();
-
-                Categories cat = getAllCategoriesTask.categoriesReceived;
+                GetAllCategoriesTask getAllCategoriesTask
+                                    =   new GetAllCategoriesTask(this);
+                boolean x           =   getAllCategoriesTask.execute().get();
+                Categories cat      =   getAllCategoriesTask.categoriesReceived;
 
                 if (cat != null && cat.categories.size() > 0) {
                     Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
-                    categoriesRec = cat.categories;
+                    categoriesRec   =   cat.categories;
 
                     getAllCategoriesTask = null;
                 }
@@ -139,32 +171,35 @@ public class ShowcaseActivity extends AppCompatActivity {
                 /*****
                  * Getting All Sub Categories
                  ******/
-                GetAllSubCategoriesTask getAllSubCategoriesTask = new GetAllSubCategoriesTask(this);
-                boolean y = getAllSubCategoriesTask.execute().get();
 
-                SubCategories subCat = getAllSubCategoriesTask.subCategoriesReceived;
+                if(Commons.catIdToSubCatMap.size() == 0){
+                    GetAllSubCategoriesTask getAllSubCategoriesTask = new GetAllSubCategoriesTask(this);
+                    boolean y = getAllSubCategoriesTask.execute().get();
 
-                if (cat != null && cat.categories.size() > 0) {
-//                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
-                    subCategoriesRec = subCat.subCategories;
+                    SubCategories subCat = getAllSubCategoriesTask.subCategoriesReceived;
 
-                    /*****
-                     * Storing All SubCategories corresponding to CategoryId in Common Hashmap
-                     ******/
+                    if (cat != null && cat.categories.size() > 0) {
+    //                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
+                        subCategoriesRec = subCat.subCategories;
 
-                    for(SubCategory sc : subCategoriesRec){
+                        /*****
+                         * Storing All SubCategories corresponding to CategoryId in Common Hashmap
+                         ******/
 
-                        if(TextUtils.isEmpty(sc.image_url)) {
-                            sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name.replace(" ","");
-                        }
+                        for(SubCategory sc : subCategoriesRec){
 
-                        if(Commons.catIdToSubCatMap.containsKey(sc.category_id)){
-                            Commons.catIdToSubCatMap.get(sc.category_id).add(sc);
-                        }
-                        else{
-                            List<SubCategory> list = new ArrayList<>();
-                            list.add(sc);
-                            Commons.catIdToSubCatMap.put(sc.category_id,list);
+                            if(TextUtils.isEmpty(sc.image_url)) {
+                                sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name.replace(" ","");
+                            }
+
+                            if(Commons.catIdToSubCatMap.containsKey(sc.category_id)){
+                                Commons.catIdToSubCatMap.get(sc.category_id).add(sc);
+                            }
+                            else{
+                                List<SubCategory> list = new ArrayList<>();
+                                list.add(sc);
+                                Commons.catIdToSubCatMap.put(sc.category_id,list);
+                            }
                         }
                     }
                 }
@@ -187,7 +222,7 @@ public class ShowcaseActivity extends AppCompatActivity {
 
             }
             else{
-                Log.d("Tangho","Network Disonnected");
+                Log.d("Tangho","Network Disconnected");
             }
         }catch(Exception ex){
             ex.printStackTrace();
@@ -217,6 +252,12 @@ public class ShowcaseActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_product_detail, menu);
+        MenuItem menuItem = menu.findItem(R.id.cart_icon);
+        this.menu = menu;
+        if(Commons.cartItemCount>0)
+            menuItem.setIcon(R.drawable.cartfull);
+        else
+            menuItem.setIcon(R.drawable.cart);
         return true;
     }
 
@@ -263,6 +304,19 @@ public class ShowcaseActivity extends AppCompatActivity {
                 }
                 listDataChild.put(listDataHeader.get(i), heading);
                 i++;
+            }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(menu!=null) {
+            menuItem = menu.findItem(R.id.cart_icon);
+            if (Commons.cartItemCount < 1) {
+                menuItem.setIcon(R.drawable.cart);
+            } else {
+                menuItem.setIcon(R.drawable.cartfull);
             }
         }
     }

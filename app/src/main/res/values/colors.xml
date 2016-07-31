@@ -6,7 +6,7 @@
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#c8e8ff</color>
-    <color name="Red">#FF0000</color>
+    <color name="Red">#ff0000</color>
     <color name="darkRed">#8B0000</color>
     <color name="maroon">#800000</color>
 
@@ -112,7 +112,7 @@
     <color name="blue_grey_900">#263238</color>
 
     <color name="pink_50">#FCE4EC</color>
-    <color name="pink_100">#F8BBD0</color>
+    <color name="pink_100">#f8bbd0</color>
     <color name="pink_200">#F48FB1</color>
     <color name="pink_300">#F06292</color>
     <color name="pink_400">#EC407A</color>

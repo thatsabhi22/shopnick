@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class Commons {
 
+    public static int cartItemCount;
+
     public static LinkedMap<Integer,List<SubCategory>> catIdToSubCatMap = new LinkedMap<>();
 
     public static  final CharSequence[] sort_options = {
@@ -45,7 +47,7 @@ public class Commons {
                 HttpURLConnection urlc = (HttpURLConnection) (new URL("http://www.google.com").openConnection());
                 urlc.setRequestProperty("User-Agent", "Test");
                 urlc.setRequestProperty("Connection", "close");
-                urlc.setConnectTimeout(300);
+                urlc.setConnectTimeout(1000);
                 urlc.connect();
 
                 return (urlc.getResponseCode() == 200);

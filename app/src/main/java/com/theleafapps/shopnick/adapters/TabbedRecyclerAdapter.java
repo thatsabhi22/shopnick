@@ -55,6 +55,7 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
                 Intent intent = new Intent(mContext, ProductListActivity.class);
                 intent.putExtra("subCatId",subcatId);
                 intent.putExtra("categoryId",category_id);
+                intent.putExtra("title",name.getText());
                 mContext.startActivity(intent);
 
             }

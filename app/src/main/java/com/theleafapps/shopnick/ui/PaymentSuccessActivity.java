@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.utils.Commons;
 
 public class PaymentSuccessActivity extends AppCompatActivity {
 
@@ -18,6 +19,12 @@ public class PaymentSuccessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_success);
+
+        if(!Commons.hasActiveInternetConnection(this)){
+            Intent intent1 = new Intent(this,NoNetworkActivity.class);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+        }
 
         Intent intent       =   getIntent();
         double net_cost     =   intent.getDoubleExtra("net_cost",0);

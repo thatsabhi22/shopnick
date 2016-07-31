@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.FilterActivity"
+    android:textAlignment="center">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:id="@+id/filter_activity_app_bar_layout">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_filter_activity"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </android.support.design.widget.AppBarLayout>
+
+<TabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/filter_tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/filter_activity_app_bar_layout">
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <FrameLayout android:layout_width="0dip"
+            android:layout_height="fill_parent" android:layout_weight="0.2">
+            <TabWidget android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+            <LinearLayout android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+                <Button android:layout_height="40dp"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1.0"
+                    android:text="Price"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/windowBackground"
+                    android:id="@+id/price_filter_button"
+                    android:onClick="tabHandler"/>
+                <Button android:layout_height="40dp"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1.0"
+                    android:text="Discount"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/windowBackground"
+                    android:id="@+id/discount_filter_button"
+                    android:onClick="tabHandler"/>
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.8">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_filter_layout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Price Range (in Rs.)"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="40dp"
+                    android:id="@+id/price_range_label"/>
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/price_range_low_value"
+                    android:layout_gravity="left|center_vertical"
+                    android:minWidth="60dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/price_range_label"
+                    android:layout_alignLeft="@+id/price_range_label"
+                    android:layout_alignStart="@+id/price_range_label"
+                    android:inputType="number"
+                    android:hint="from"
+                    android:textAlignment="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="-"
+                    android:id="@+id/to_label"
+                    android:layout_alignTop="@+id/price_range_low_value"
+                    android:layout_toRightOf="@+id/price_range_low_value"
+                    android:layout_toEndOf="@+id/price_range_low_value"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="10dp" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/price_range_high_value"
+                    android:layout_gravity="center"
+                    android:layout_below="@id/price_range_label"
+                    android:minWidth="60dp"
+                    android:layout_alignParentBottom="false"
+                    android:layout_toRightOf="@+id/to_label"
+                    android:layout_toEndOf="@+id/to_label"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:inputType="number"
+                    android:hint="to"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="."
+                    android:id="@+id/price_range_msg_tv"
+                    android:layout_below="@+id/price_range_low_value"
+                    android:layout_gravity="left|bottom"
+                    android:layout_alignParentBottom="false"
+                    android:layout_alignLeft="@+id/price_range_low_value"
+                    android:layout_alignStart="@+id/price_range_low_value"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/Red" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/discount_filter_layout">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Non Discounted Items"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="40dp"
+                        android:id="@+id/non_disc_radio"
+                        android:layout_gravity="left|bottom" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/non_disc_radio"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="20dp"
+                        android:text="Discounted Items"
+                        android:id="@+id/disc_radio"
+                        android:layout_gravity="left|bottom" />
+                </RadioGroup>
+
+
+            </RelativeLayout>
+
+
+        </FrameLayout>
+    </LinearLayout>
+</TabHost>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:text="Apply"
+        android:id="@+id/apply_filter_button"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/pink_200"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+</RelativeLayout>

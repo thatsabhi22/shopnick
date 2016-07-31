@@ -55,6 +55,7 @@ public class ProductListViewRecyclerAdapter extends
                 Intent intent = new Intent(mContext, ProductDetailActivity.class);
                 intent.putExtra("productId",productId.getText());
                 intent.putExtra("subCatId",subCatId);
+                intent.putExtra("title",name.getText());
                 mContext.startActivity(intent);
 
             }
@@ -69,7 +70,8 @@ public class ProductListViewRecyclerAdapter extends
 
         mImageLoader = MySingleton.getInstance(mContext).getImageLoader();
         holder.productName.setText(productList.get(position).product_name);
-        holder.productImage.setImageUrl(productList.get(position).image_url,mImageLoader);
+        String url = productList.get(position).image_url.replace(".jpg","m.jpg");
+        holder.productImage.setImageUrl(url,mImageLoader);
         holder.productMrp.setText("Rs " + String.valueOf(productList.get(position).unit_mrp));
         holder.productMrp.setPaintFlags(holder.productMrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.productOfferPrice.setText("Rs " + productList.get(position).unit_offerprice);

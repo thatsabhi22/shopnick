@@ -22,6 +22,7 @@ import com.theleafapps.shopnick.adapters.CartCustomAdapter;
 import com.theleafapps.shopnick.models.CartItem;
 import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.tasks.GetAllCartItemTask;
+import com.theleafapps.shopnick.utils.Commons;
 import com.theleafapps.shopnick.utils.Communicator;
 
 import java.util.ArrayList;
@@ -52,6 +53,12 @@ public class CartActivity extends AppCompatActivity implements Communicator {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(!Commons.hasActiveInternetConnection(this)){
+            Intent intent1 = new Intent(this,NoNetworkActivity.class);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+        }
 
         mContext                =   CartActivity.this;
         continue_shop_btn       =   (ImageButton)   findViewById(R.id.continue_shopping);

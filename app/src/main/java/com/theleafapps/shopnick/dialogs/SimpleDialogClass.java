@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.tasks.DeleteCartItemByIdTask;
+import com.theleafapps.shopnick.utils.Commons;
 import com.theleafapps.shopnick.utils.Communicator;
 
 /**
@@ -53,6 +54,7 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
                 DeleteCartItemByIdTask deleteCartItemByIdTask = new DeleteCartItemByIdTask(getActivity().getApplicationContext(),cart_item_id);
                 deleteCartItemByIdTask.execute().get();
 
+                Commons.cartItemCount--;
                 Toast.makeText(getActivity(),"CartItem Deleted",Toast.LENGTH_SHORT).show();
                 bundle.clear();
                 comm.dialogMessage("Yes Was Clicked with position");

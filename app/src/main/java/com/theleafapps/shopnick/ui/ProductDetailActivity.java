@@ -1,6 +1,5 @@
 package com.theleafapps.shopnick.ui;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +39,7 @@ import com.theleafapps.shopnick.tasks.AddCartItemTask;
 import com.theleafapps.shopnick.tasks.GetAllVariantsByProductIdTask;
 import com.theleafapps.shopnick.tasks.GetProductByIdTask;
 import com.theleafapps.shopnick.tasks.GetAllProductImagesByIdTask;
+import com.theleafapps.shopnick.utils.Commons;
 import com.theleafapps.shopnick.utils.LinkedMap;
 
 import java.util.ArrayList;
@@ -60,6 +60,8 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     int subCatId,quantity;
     ImageButton buyNowButton;
     RelativeLayout variantLayout;
+    Menu menu;
+    MenuItem menuItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,11 +70,27 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_product_detail);
 
+            if(menu!=null) {
+                menuItem = menu.findItem(R.id.cart_icon);
+
+                if (Commons.cartItemCount > 0)
+                    menuItem.setIcon(R.drawable.cartfull);
+                else
+                    menuItem.setIcon(R.drawable.cart);
+            }
+
             url_maps = new ArrayList<>();
             toolbar = (Toolbar) findViewById(R.id.toolbar_product_detail);
             setSupportActionBar(toolbar);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setIcon(R.drawable.logo_small);
+
+            if(!Commons.hasActiveInternetConnection(this)){
+                Intent intent1 = new Intent(this,NoNetworkActivity.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent1);
+            }
 
             product_avlble  =   (TextView) findViewById(R.id.product_available);
             sliderShowFull  =   (SliderLayout) findViewById(R.id.product_detail_image);
@@ -90,11 +108,20 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             Intent intent   =   getIntent();
             int productId   =   Integer.valueOf(intent.getStringExtra("productId"));
             subCatId        =   intent.getIntExtra("subCatId",0);
+            String title    =   intent.getStringExtra("title");
+
+            if(!TextUtils.isEmpty(title)){
+                if(title.length() > 10){
+                    title = title.substring(0,12).concat("...");
+                }
+                getSupportActionBar().setTitle(title);
+            }
 
             Toast.makeText(this, "Product id -> " + productId, Toast.LENGTH_LONG).show();
 
             GetProductByIdTask getProductByIdTask = new GetProductByIdTask(this, productId);
             getProductByIdTask.execute().get();
+
 
             productRec = getProductByIdTask.productRec;
 
@@ -229,6 +256,9 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                                 addCartItemTask.execute().get();
                                 Toast.makeText(ProductDetailActivity.this,
                                         productRec.product_name+" has been added to you cart",Toast.LENGTH_LONG).show();
+                                menuItem = menu.findItem(R.id.cart_icon);
+                                menuItem.setIcon(R.drawable.cartfull);
+                                Commons.cartItemCount++;
 
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
@@ -283,6 +313,19 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(menu!=null) {
+            menuItem = menu.findItem(R.id.cart_icon);
+            if (Commons.cartItemCount < 1) {
+                menuItem.setIcon(R.drawable.cart);
+            } else {
+                menuItem.setIcon(R.drawable.cartfull);
+            }
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
@@ -309,6 +352,12 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_product_detail, menu);
+        MenuItem menuItem = menu.findItem(R.id.cart_icon);
+        this.menu = menu;
+        if(Commons.cartItemCount>0)
+            menuItem.setIcon(R.drawable.cartfull);
+        else
+            menuItem.setIcon(R.drawable.cart);
         return true;
     }
 

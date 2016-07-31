@@ -6,6 +6,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -158,7 +159,7 @@ public class BaseAsyncRequest extends AsyncTask<Void, Void, Boolean> {
      * @throws ApiException
      * @throws JSONException
      */
-    protected void doSetup() throws ApiException, JSONException { }
+    protected void doSetup() throws ApiException, JSONException, UnsupportedEncodingException { }
 
     /**
      * Work with the result from the API call, runs asynchronously.

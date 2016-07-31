@@ -27,6 +27,7 @@ import com.theleafapps.shopnick.tasks.DeleteMultipleCartItemsTask;
 import com.theleafapps.shopnick.tasks.GetCouponByCodeTask;
 import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
 import com.theleafapps.shopnick.tasks.UpdateCustomerWalletValueTask;
+import com.theleafapps.shopnick.utils.Commons;
 import com.theleafapps.shopnick.utils.Communicator;
 
 import org.json.JSONArray;
@@ -72,6 +73,12 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_checkout);
         setSupportActionBar(toolbar);
+
+        if(!Commons.hasActiveInternetConnection(this)){
+            Intent intent1 = new Intent(this,NoNetworkActivity.class);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+        }
 
         actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

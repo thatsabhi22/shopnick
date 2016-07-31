@@ -180,20 +180,18 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Continue Shopping"
+        android:layout_height="40dp"
+        android:text="Continue  Shopping"
         android:id="@+id/c_profile_shop_button"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/ruler7"
         android:layout_centerHorizontal="true"
-        android:textSize="15sp"
+        android:textSize="13sp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:stateListAnimator="@color/accent_material_dark"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:textColor="#ffffff"
-        android:foreground="@color/abc_search_url_text_normal"
         android:focusable="true"
         android:background="#e17494" />
 

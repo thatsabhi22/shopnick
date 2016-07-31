@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.models.Customer;
 import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
+import com.theleafapps.shopnick.utils.Commons;
 
 import java.util.concurrent.ExecutionException;
 
@@ -35,6 +36,12 @@ public class CustomerProfileActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_customer_profile);
         setSupportActionBar(toolbar);
+
+        if(!Commons.hasActiveInternetConnection(this)){
+            Intent intent1 = new Intent(this,NoNetworkActivity.class);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+        }
 
         actionBar =  getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
