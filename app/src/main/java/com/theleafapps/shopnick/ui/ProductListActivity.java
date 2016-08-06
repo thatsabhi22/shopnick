@@ -109,7 +109,7 @@ public class ProductListActivity extends AppCompatActivity {
 
                 if (productsRec != null && productsRec.products.size() > 0) {
                     ProductListViewRecyclerAdapter rcAdapter = new ProductListViewRecyclerAdapter(
-                            ProductListActivity.this, productsRec.products, subCatId);
+                            ProductListActivity.this, productsRec.products, subCatId,catId);
                     recyclerView.setAdapter(rcAdapter);
                 }else{
                     no_product_tv.setVisibility(View.VISIBLE);
@@ -136,7 +136,7 @@ public class ProductListActivity extends AppCompatActivity {
                         builder.setItems(Commons.sort_options, new DialogInterface.OnClickListener() {
                             public void onClick(final DialogInterface dialog, int item) {
                                 // Do something with the selection
-                                Toast.makeText(ProductListActivity.this, "Dikha...." + item, Toast.LENGTH_LONG).show();
+                                // Toast.makeText(ProductListActivity.this, "Dikha...." + item, Toast.LENGTH_LONG).show();
                                 switch (item) {
                                     case 1:
                                         sort_str.append("unit_offerprice%20ASC");
@@ -207,6 +207,7 @@ public class ProductListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 intent = NavUtils.getParentActivityIntent(this);
+                intent.putExtra("categoryId",catId-1);
                 NavUtils.navigateUpTo(this,intent);
                 return true;
             case R.id.user_profile:

@@ -160,7 +160,7 @@ public class ShowcaseActivity extends AppCompatActivity {
                 Categories cat      =   getAllCategoriesTask.categoriesReceived;
 
                 if (cat != null && cat.categories.size() > 0) {
-                    Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
                     categoriesRec   =   cat.categories;
 
                     getAllCategoriesTask = null;
@@ -269,7 +269,7 @@ public class ShowcaseActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.cart_icon:
-                Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
+//                Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
                 intent = new Intent(this,CartActivity.class);
                 startActivity(intent);
                 return true;

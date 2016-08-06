@@ -55,7 +55,7 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
                 deleteCartItemByIdTask.execute().get();
 
                 Commons.cartItemCount--;
-                Toast.makeText(getActivity(),"CartItem Deleted",Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(),"CartItem Deleted",Toast.LENGTH_SHORT).show();
                 bundle.clear();
                 comm.dialogMessage("Yes Was Clicked with position");
                 dismiss();

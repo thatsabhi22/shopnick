@@ -126,7 +126,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"child clicked",Toast.LENGTH_LONG).show();
+//                Toast.makeText(mContext,"child clicked",Toast.LENGTH_LONG).show();
                 String subCatIdStr  =   ((TextView)((LinearLayout) v).getChildAt(0)).getText().toString();
                 String catIdStr     =   ((TextView)((LinearLayout) v).getChildAt(1)).getText().toString();
                 int subCatId        =   Integer.parseInt(subCatIdStr);

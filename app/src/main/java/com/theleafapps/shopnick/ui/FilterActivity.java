@@ -114,20 +114,20 @@ public class FilterActivity extends AppCompatActivity {
                         filterList.add("(unit_offerprice%3E" + low_val +")AND" +
                                 "(unit_offerprice%3C"+ high_val + ")");
                     }
-                    Toast.makeText(FilterActivity.this,"Both populated",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(FilterActivity.this,"Both populated",Toast.LENGTH_LONG).show();
                 }
                 else if(!TextUtils.isEmpty(low_val) &&
                         TextUtils.isEmpty(high_val)){
                     filterList.add("(unit_offerprice%3E" + low_val+")");
-                    Toast.makeText(FilterActivity.this,"Low yes high no",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(FilterActivity.this,"Low yes high no",Toast.LENGTH_LONG).show();
                 }
                 else if(TextUtils.isEmpty(low_val) &&
                         !TextUtils.isEmpty(high_val)){
                     filterList.add("(unit_offerprice%3C" + high_val +")");
-                    Toast.makeText(FilterActivity.this,"low no high yes",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(FilterActivity.this,"low no high yes",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(FilterActivity.this,"low no high no",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(FilterActivity.this,"low no high no",Toast.LENGTH_LONG).show();
                 }
 
                 //Check for Discounted Item

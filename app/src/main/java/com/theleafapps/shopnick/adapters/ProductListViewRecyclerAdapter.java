@@ -28,11 +28,13 @@ public class ProductListViewRecyclerAdapter extends
     List<Product> productList;
     private ImageLoader mImageLoader;
     int subCatId;
+    int catId;
 
-    public ProductListViewRecyclerAdapter(Context context, List<Product> productList, int subCatId) {
-        this.productList    = productList;
-        this.mContext       = context;
-        this.subCatId       = subCatId;
+    public ProductListViewRecyclerAdapter(Context context, List<Product> productList, int subCatId,int catId) {
+        this.productList    =   productList;
+        this.mContext       =   context;
+        this.subCatId       =   subCatId;
+        this.catId          =   catId;
     }
 
     @Override
@@ -52,6 +54,7 @@ public class ProductListViewRecyclerAdapter extends
                 Intent intent = new Intent(mContext, ProductDetailActivity.class);
                 intent.putExtra("productId",productId.getText());
                 intent.putExtra("subCatId",subCatId);
+                intent.putExtra("categoryId",catId);
                 intent.putExtra("title",name.getText());
                 mContext.startActivity(intent);
 

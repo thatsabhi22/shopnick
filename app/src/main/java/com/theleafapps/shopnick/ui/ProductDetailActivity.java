@@ -59,7 +59,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     Spinner variantSpinner,quantitySpinner;
     Toolbar toolbar;
     String size,variant;
-    int subCatId,quantity;
+    int subCatId,catId,quantity;
     ImageButton buyNowButton;
     RelativeLayout variantLayout;
     Menu menu;
@@ -110,6 +110,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             Intent intent   = getIntent();
             int productId   = Integer.valueOf(intent.getStringExtra("productId"));
             subCatId        = intent.getIntExtra("subCatId", 0);
+            catId           = intent.getIntExtra("categoryId", 0);
             String title    = intent.getStringExtra("title");
 
             if (!TextUtils.isEmpty(title)) {
@@ -119,7 +120,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 getSupportActionBar().setTitle(title);
             }
 
-            Toast.makeText(this, "Product id -> " + productId, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "Product id -> " + productId, Toast.LENGTH_LONG).show();
 
             GetProductByIdTask getProductByIdTask = new GetProductByIdTask(this, productId);
             getProductByIdTask.execute().get();
@@ -356,6 +357,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             case android.R.id.home:
                 intent = NavUtils.getParentActivityIntent(this);
                 intent.putExtra("subCatId",subCatId);
+                intent.putExtra("categoryId",catId);
                 NavUtils.navigateUpTo(this,intent);
                 return true;
             case R.id.cart_icon:

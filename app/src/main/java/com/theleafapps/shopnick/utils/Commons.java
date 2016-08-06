@@ -27,8 +27,6 @@ public class Commons {
 
     public static int cartItemCount;
 
-    public static String productListTitle;
-
     public static LinkedMap<Integer,List<SubCategory>> catIdToSubCatMap = new LinkedMap<>();
 
     public static  final CharSequence[] sort_options = {
