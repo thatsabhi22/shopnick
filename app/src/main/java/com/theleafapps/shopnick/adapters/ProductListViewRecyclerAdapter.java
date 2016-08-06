@@ -7,16 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.ui.ProductDetailActivity;
-import com.theleafapps.shopnick.ui.ProductListActivity;
 import com.theleafapps.shopnick.utils.MySingleton;
 
 import java.util.List;
@@ -33,9 +30,9 @@ public class ProductListViewRecyclerAdapter extends
     int subCatId;
 
     public ProductListViewRecyclerAdapter(Context context, List<Product> productList, int subCatId) {
-        this.productList = productList;
-        this.mContext = context;
-        this.subCatId = subCatId;
+        this.productList    = productList;
+        this.mContext       = context;
+        this.subCatId       = subCatId;
     }
 
     @Override

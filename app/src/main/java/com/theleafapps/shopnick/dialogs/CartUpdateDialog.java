@@ -2,8 +2,11 @@ package com.theleafapps.shopnick.dialogs;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +43,8 @@ public class CartUpdateDialog extends DialogFragment implements View.OnClickList
     Bundle bundle;
     Button update,cancel;
     Spinner variantSpinner,quantitySpinner;
-    int cart_item_id,product_id;
-    String product_name;
+    int cart_item_id,product_id,c_id;
+    String product_name,c_id_str;
     Variants variantRec;
     Map<String,Boolean> variantMap;
     List<String> varList,quantityList;
@@ -80,22 +83,32 @@ public class CartUpdateDialog extends DialogFragment implements View.OnClickList
 
         try{
 
+            SharedPreferences sharedPreferences
+                            =   getActivity().getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
+            c_id_str        =   sharedPreferences.getString("cid", "");
+
+            if(!TextUtils.isEmpty(c_id_str))
+                c_id        =   Integer.parseInt(c_id_str);
+
             GetAllVariantsByProductIdTask getAllVariantsByProductIdTask
                         = new GetAllVariantsByProductIdTask(getActivity(),product_id);
             getAllVariantsByProductIdTask.execute().get();
             variantRec  = getAllVariantsByProductIdTask.variantsRec;
 
             varList.add("-");
-            if(variantRec!=null && variantRec.variants.size()>0){
+            if(variantRec!=null && variantRec.variants.size()>0) {
                 for (Variant variant : variantRec.variants) {
                     variantMap.put(variant.variant_name, variant.available);
                     varList.add(variant.variant_name);
                 }
-
+            }else{
+                varList.add("Standard");
+                variantMap.put("Standard", true);
+            }
                 variantDataAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, varList);
                 variantDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 variantSpinner.setAdapter(variantDataAdapter);
-            }
+
 
             for(int i=1;i<=10;i++){
                 quantityList.add(String.valueOf(i));
@@ -165,9 +178,10 @@ public class CartUpdateDialog extends DialogFragment implements View.OnClickList
         try{
             if (v.getId()==R.id.cart_update_dialog_update_button){
 
-                Log.d("Tangho","update button clicked - cart_item_id " +
-                        cart_item_id + "variant " + variant + " quantity " + quantity
-                 + "product_id "+ product_id);
+//                Log.d("Tangho","update button clicked - cart_item_id " +
+//                        cart_item_id + "variant " + variant + " quantity " + quantity
+//                 + "product_id "+ product_id);
+
                 if(variant != null){
 
                     CartItem updateCartItem         =   new CartItem();
@@ -175,7 +189,7 @@ public class CartUpdateDialog extends DialogFragment implements View.OnClickList
                     updateCartItem.variant          =   variant;
                     updateCartItem.quantity         =   Integer.parseInt(quantity);
                     updateCartItem.product_id       =   product_id;
-                    updateCartItem.customer_id      =   1;
+                    updateCartItem.customer_id      =   c_id;
 
                     CartItems cartItems = new CartItems();
                     cartItems.cartItemList.add(updateCartItem);

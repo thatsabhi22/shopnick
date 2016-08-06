@@ -140,7 +140,6 @@ public class ShowcaseActivity extends AppCompatActivity {
                 Intent intent   =   getIntent();
                 int catId       =   intent.getIntExtra("categoryId",0);
 
-
                 if(!TextUtils.isEmpty(cid) && Integer.parseInt(cid)!=0){
                     GetAllCartItemTask getAllCartItemTask = new GetAllCartItemTask(this,Integer.parseInt(cid));
                     getAllCartItemTask.execute().get();
@@ -311,6 +310,7 @@ public class ShowcaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         if(menu!=null) {
             menuItem = menu.findItem(R.id.cart_icon);
             if (Commons.cartItemCount < 1) {

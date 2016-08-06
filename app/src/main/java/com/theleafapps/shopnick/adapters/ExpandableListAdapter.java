@@ -131,6 +131,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 String catIdStr     =   ((TextView)((LinearLayout) v).getChildAt(1)).getText().toString();
                 int subCatId        =   Integer.parseInt(subCatIdStr);
                 int catId           =   Integer.parseInt(catIdStr);
+
                 Intent intent = new Intent(mContext, ProductListActivity.class);
                 intent.putExtra("categoryId",catId);
                 intent.putExtra("subCatId",subCatId);

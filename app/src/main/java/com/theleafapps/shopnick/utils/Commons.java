@@ -1,12 +1,16 @@
 package com.theleafapps.shopnick.utils;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.SubCategory;
 
 import java.io.IOException;
@@ -19,7 +23,11 @@ import java.util.List;
  */
 public class Commons {
 
+    public static MyProgressDialog progressDialog;
+
     public static int cartItemCount;
+
+    public static String productListTitle;
 
     public static LinkedMap<Integer,List<SubCategory>> catIdToSubCatMap = new LinkedMap<>();
 
@@ -63,6 +71,14 @@ public class Commons {
     public static String getAdrId(Context ctx) {
         return Settings.Secure.getString(ctx.getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+    }
+
+    public static void showProgressDialog(ProgressDialog dialog){
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+        dialog.setInverseBackgroundForced(false);
+        dialog.show();
     }
 
 //    String key      =   "dumlagakehaisha";

@@ -3,13 +3,13 @@ package com.theleafapps.shopnick.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,8 +20,10 @@ import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.ProductListViewRecyclerAdapter;
+import com.theleafapps.shopnick.models.SubCategory;
 import com.theleafapps.shopnick.models.multiples.Products;
 import com.theleafapps.shopnick.tasks.GetProductsBySubCatIdTask;
+import com.theleafapps.shopnick.tasks.GetSubCatByIdTask;
 import com.theleafapps.shopnick.utils.Commons;
 
 import java.util.concurrent.ExecutionException;
@@ -35,7 +37,7 @@ public class ProductListActivity extends AppCompatActivity {
     Toolbar toolbar;                                     // Declaring the Toolbar Object
     RecyclerView recyclerView;
     LinearLayout filter_section_layout;
-    TextView sort_tv,filter_tv;
+    TextView sort_tv,filter_tv,no_product_tv;
     Menu menu;
     MenuItem menuItem;
 
@@ -67,6 +69,7 @@ public class ProductListActivity extends AppCompatActivity {
             sort_tv                 =   (TextView) findViewById(R.id.product_list_sort_tv);
             filter_tv               =   (TextView) findViewById(R.id.product_list_filter_tv);
             filter_section_layout   =   (LinearLayout) findViewById(R.id.filter_section_layout);
+            no_product_tv           =   (TextView) findViewById(R.id.no_product_tv);
             filter_section_layout.setVisibility(View.GONE);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -85,6 +88,16 @@ public class ProductListActivity extends AppCompatActivity {
             fltr_str            =   intent.getStringExtra("fltr_str");
             title               =   intent.getStringExtra("title");
 
+            if(TextUtils.isEmpty(title)){
+                GetSubCatByIdTask getSubCatByIdTask = new GetSubCatByIdTask(this,subCatId);
+                getSubCatByIdTask.execute().get();
+
+                SubCategory subCategory = getSubCatByIdTask.subCategoryRec;
+
+                if(subCategory!=null){
+                    title = subCategory.sub_category_name;
+                }
+            }
             getSupportActionBar().setTitle(title);
 
             if(subCatId > 0) {
@@ -98,6 +111,8 @@ public class ProductListActivity extends AppCompatActivity {
                     ProductListViewRecyclerAdapter rcAdapter = new ProductListViewRecyclerAdapter(
                             ProductListActivity.this, productsRec.products, subCatId);
                     recyclerView.setAdapter(rcAdapter);
+                }else{
+                    no_product_tv.setVisibility(View.VISIBLE);
                 }
 
                 filter_tv.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +121,7 @@ public class ProductListActivity extends AppCompatActivity {
                         Intent intent = new Intent(ProductListActivity.this, FilterActivity.class);
                         intent.putExtra("categoryId", catId);
                         intent.putExtra("subCatId", subCatId);
+                        intent.putExtra("title",title);
                         startActivity(intent);
                     }
                 });
@@ -117,17 +133,16 @@ public class ProductListActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(ProductListActivity.this);
                         builder.setTitle("Make your selection");
-                        builder.setCancelable(false);
                         builder.setItems(Commons.sort_options, new DialogInterface.OnClickListener() {
                             public void onClick(final DialogInterface dialog, int item) {
                                 // Do something with the selection
                                 Toast.makeText(ProductListActivity.this, "Dikha...." + item, Toast.LENGTH_LONG).show();
                                 switch (item) {
                                     case 1:
-                                        sort_str.append("unit_offerprice ASC");
+                                        sort_str.append("unit_offerprice%20ASC");
                                         break;
                                     case 2:
-                                        sort_str.append("unit_offerprice DESC");
+                                        sort_str.append("unit_offerprice%20DESC");
                                         break;
                                     case 3:
                                         sort_str.append("((unit_offerprice-unit_mrp)/unit_mrp)");
@@ -135,18 +150,14 @@ public class ProductListActivity extends AppCompatActivity {
                                     default:
                                         sort_str.append("");
                                 }
-                                dialog.dismiss();
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    public void run() {
-                                        Intent intent = new Intent(ProductListActivity.this, ProductListActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        intent.putExtra("sort_str", sort_str.toString());
-                                        intent.putExtra("categoryId", catId);
-                                        intent.putExtra("subCatId", subCatId);
-                                        startActivity(intent);
-                                    }
-                                }, 1000);
+                                    dialog.dismiss();
+                                    Intent intent = new Intent(ProductListActivity.this, ProductListActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.putExtra("sort_str", sort_str.toString());
+                                    intent.putExtra("categoryId", catId);
+                                    intent.putExtra("subCatId", subCatId);
+                                    intent.putExtra("title",title);
+                                    startActivity(intent);
                             }
                         });
                         AlertDialog alert = builder.create();
@@ -176,6 +187,7 @@ public class ProductListActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -195,7 +207,6 @@ public class ProductListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 intent = NavUtils.getParentActivityIntent(this);
-                intent.putExtra("categoryId",catId);
                 NavUtils.navigateUpTo(this,intent);
                 return true;
             case R.id.user_profile:

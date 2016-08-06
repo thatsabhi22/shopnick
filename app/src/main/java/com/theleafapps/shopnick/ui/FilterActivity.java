@@ -18,8 +18,6 @@ import android.widget.Toast;
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.utils.Commons;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +54,7 @@ public class FilterActivity extends AppCompatActivity {
         Intent intent           =   getIntent();
         final int catId         =   intent.getIntExtra("categoryId",0);
         final int subCatId      =   intent.getIntExtra("subCatId",0);
+        final String title      =   intent.getStringExtra("title");
 
         price_filter_layout     =   (RelativeLayout) findViewById(R.id.price_filter_layout);
         discount_filter_layout  =   (RelativeLayout) findViewById(R.id.discount_filter_layout);
@@ -103,7 +102,6 @@ public class FilterActivity extends AppCompatActivity {
                 //%3E -  (>)
                 //%3C -  (<)
                 //%3D -  (=)
-
                 if(!TextUtils.isEmpty(low_val) &&
                             !TextUtils.isEmpty(high_val)){
 
@@ -113,7 +111,7 @@ public class FilterActivity extends AppCompatActivity {
                         price_range_msg_tv.setText("Higher Range must be greater\n than Lower");
                     }
                     else{
-                        filterList.add("(unit_offerprice%3E" + low_val +") AND " +
+                        filterList.add("(unit_offerprice%3E" + low_val +")AND" +
                                 "(unit_offerprice%3C"+ high_val + ")");
                     }
                     Toast.makeText(FilterActivity.this,"Both populated",Toast.LENGTH_LONG).show();
@@ -147,10 +145,11 @@ public class FilterActivity extends AppCompatActivity {
                 String connected = TextUtils.join(" AND ",filterList);
 
                 Intent intent = new Intent(FilterActivity.this,ProductListActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("fltr_str",connected);
                 intent.putExtra("categoryId",catId);
                 intent.putExtra("subCatId",subCatId);
+                intent.putExtra("title",title);
                 startActivity(intent);
             }
         });

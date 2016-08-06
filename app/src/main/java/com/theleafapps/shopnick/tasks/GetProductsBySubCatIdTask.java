@@ -10,8 +10,6 @@ import com.theleafapps.shopnick.utils.PrefUtil;
 
 import org.json.JSONException;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 
 import dfapi.ApiException;
@@ -36,9 +34,8 @@ public class GetProductsBySubCatIdTask extends BaseAsyncRequest {
     }
 
     @Override
-    protected void doSetup() throws ApiException, JSONException, UnsupportedEncodingException {
+    protected void doSetup() throws ApiException, JSONException {
         callerName = "getProductsBySubCatId";
-
         serviceName = AppConstants.DB_SVC;
         endPoint = "product";
         verb = "GET";
@@ -48,27 +45,21 @@ public class GetProductsBySubCatIdTask extends BaseAsyncRequest {
         String queryString  =   null;
 
         if(!TextUtils.isEmpty(fltr_str)){
-            fltr_str =  " AND "  + fltr_str;
-            queryString  =   "(sub_category_id%3D" + subCatId+")" + fltr_str;
+            fltr_str =  "AND"  + fltr_str;
+            queryString  =   "(sub_category_id=" + subCatId+")" + fltr_str;
         }
         else{
             fltr_str = "";
-            queryString  =   "sub_category_id%3D" + subCatId + fltr_str;
+            queryString  =   "sub_category_id=" + subCatId + fltr_str;
         }
 
         queryParams = new HashMap<>();
         queryParams.put("filter", queryString);
         queryParams.put("order", sort_str);
 
-        // request without related would return just {id, contact_group_id, contact_id}
-        // set the related field to go get the contact mRecordsList referenced by
-        // each contact_group_relationship record
-        // queryParams.put("related", "contact_by_contact_id");
-
         // need to include the API key and session token
         applicationApiKey = AppConstants.API_KEY;
         sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
-
     }
 
     @Override

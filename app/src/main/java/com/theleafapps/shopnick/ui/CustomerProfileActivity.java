@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -78,16 +79,13 @@ public class CustomerProfileActivity extends AppCompatActivity {
                     c_country_value.setText(customer.country);
                     c_mobile_value.setText(customer.mobile);
                     c_wallet_amount_value.setText(String.valueOf(customer.wallet_value));
-
                 }
-
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
 
         c_profile_shop_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,5 +95,14 @@ public class CustomerProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            default:
+                finish();
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

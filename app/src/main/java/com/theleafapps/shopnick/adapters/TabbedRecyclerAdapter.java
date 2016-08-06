@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -48,8 +47,8 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
                 TextView name       =   (TextView) v.findViewById(R.id.text_card_name);
                 TextView subCatId   =   (TextView) v.findViewById(R.id.idView);
 
-                Toast.makeText(mContext,"Card Clicked ->" + name.getText() + " | Category ->"
-                        + category_id + " | SubCategoryId -> " + subCatId.getText() , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext,"Card Clicked ->" + name.getText() + " | Category ->"
+//                        + category_id + " | SubCategoryId -> " + subCatId.getText() , Toast.LENGTH_SHORT).show();
 
                 int subcatId = Integer.valueOf(subCatId.getText().toString());
                 Intent intent = new Intent(mContext, ProductListActivity.class);

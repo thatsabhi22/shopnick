@@ -7,5 +7,5 @@ public interface AppConstants {
     String INSTANCE_URL = "http://dreamfactory-leafapps.rhcloud.com/api/v2";
     String DB_SVC = "db/_table";
     // API key for your app goes here, see apps tab in admin console
-    String API_KEY = "c7c9d4fe07f4ab6d862c159002473440f50e5487dbdc66944229c4b90183ccdf";
+    String API_KEY = "cd88c4791f4584e1fc4cc37951d5439946b7114ab04555587c881ea7eafaaae1";
 }

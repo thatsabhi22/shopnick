@@ -42,6 +42,8 @@ import com.theleafapps.shopnick.tasks.GetAllProductImagesByIdTask;
 import com.theleafapps.shopnick.utils.Commons;
 import com.theleafapps.shopnick.utils.LinkedMap;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +72,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_product_detail);
 
-            if(menu!=null) {
+            if (menu != null) {
                 menuItem = menu.findItem(R.id.cart_icon);
 
                 if (Commons.cartItemCount > 0)
@@ -79,40 +81,40 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                     menuItem.setIcon(R.drawable.cart);
             }
 
-            url_maps = new ArrayList<>();
-            toolbar = (Toolbar) findViewById(R.id.toolbar_product_detail);
+            url_maps    =   new ArrayList<>();
+            toolbar     =   (Toolbar) findViewById(R.id.toolbar_product_detail);
             setSupportActionBar(toolbar);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setIcon(R.drawable.logo_small);
 
-            if(!Commons.hasActiveInternetConnection(this)){
-                Intent intent1 = new Intent(this,NoNetworkActivity.class);
+            if (!Commons.hasActiveInternetConnection(this)) {
+                Intent intent1 = new Intent(this, NoNetworkActivity.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent1);
             }
 
-            product_avlble  =   (TextView) findViewById(R.id.product_available);
-            sliderShowFull  =   (SliderLayout) findViewById(R.id.product_detail_image);
-            productName     =   (TextView) findViewById(R.id.product_detail_name);
-            offer_price     =   (TextView) findViewById(R.id.product_detail_offer_price);
-            mrp             =   (TextView) findViewById(R.id.product_detail_mrp);
-            discount        =   (TextView) findViewById(R.id.product_detail_discount);
-            productDesc     =   (TextView) findViewById(R.id.product_detail_desc);
-            variantSpinner  =   (Spinner) findViewById(R.id.variant_spinner);
-            quantitySpinner =   (Spinner) findViewById(R.id.quantity_spinner);
-            buyNowButton    =   (ImageButton) findViewById(R.id.buyNowButton);
-            variantLayout   =   (RelativeLayout) findViewById(R.id.variant_layout);
+            product_avlble  = (TextView) findViewById(R.id.product_available);
+            sliderShowFull  = (SliderLayout) findViewById(R.id.product_detail_image);
+            productName     = (TextView) findViewById(R.id.product_detail_name);
+            offer_price     = (TextView) findViewById(R.id.product_detail_offer_price);
+            mrp             = (TextView) findViewById(R.id.product_detail_mrp);
+            discount        = (TextView) findViewById(R.id.product_detail_discount);
+            productDesc     = (TextView) findViewById(R.id.product_detail_desc);
+            variantSpinner  = (Spinner) findViewById(R.id.variant_spinner);
+            quantitySpinner = (Spinner) findViewById(R.id.quantity_spinner);
+            buyNowButton    = (ImageButton) findViewById(R.id.buyNowButton);
+            variantLayout   = (RelativeLayout) findViewById(R.id.variant_layout);
 
 
-            Intent intent   =   getIntent();
-            int productId   =   Integer.valueOf(intent.getStringExtra("productId"));
-            subCatId        =   intent.getIntExtra("subCatId",0);
-            String title    =   intent.getStringExtra("title");
+            Intent intent   = getIntent();
+            int productId   = Integer.valueOf(intent.getStringExtra("productId"));
+            subCatId        = intent.getIntExtra("subCatId", 0);
+            String title    = intent.getStringExtra("title");
 
-            if(!TextUtils.isEmpty(title)){
-                if(title.length() > 10){
-                    title = title.substring(0,12).concat("...");
+            if (!TextUtils.isEmpty(title)) {
+                if (title.length() > 10) {
+                    title = title.substring(0, 10).concat("...");
                 }
                 getSupportActionBar().setTitle(title);
             }
@@ -122,40 +124,49 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             GetProductByIdTask getProductByIdTask = new GetProductByIdTask(this, productId);
             getProductByIdTask.execute().get();
 
-
             productRec = getProductByIdTask.productRec;
 
-            if(productRec != null){
+            if (productRec != null) {
 
                 GetAllProductImagesByIdTask getProductImagesByIdTask = new GetAllProductImagesByIdTask(this, productId);
-                getProductImagesByIdTask.execute().get();
-                productImagesRec = getProductImagesByIdTask.productImagesRec;
 
-                if(productImagesRec!=null && productImagesRec.productImages.size()>0){
+                boolean x        =  getProductImagesByIdTask.execute().get();
+                productImagesRec =  getProductImagesByIdTask.productImagesRec;
 
-                    for(ProductImage productImages : productImagesRec.productImages){
-                        url_maps.add(productImages.image_url);
+                if (productImagesRec != null && productImagesRec.productImages.size() > 0) {
+
+                    for (ProductImage productImages : productImagesRec.productImages) {
+
+                        try{
+                            URL url = new URL(productImages.image_url);
+                            url_maps.add(productImages.image_url);
+                        }catch (MalformedURLException ex) {
+
+                        }
                     }
-                }
-                else{
+
+                    if(url_maps.size()==0){
+                        url_maps.add(productRec.image_url);
+                    }
+
+                } else {
                     url_maps.add(productRec.image_url);
                 }
 
                 setTextSliderView();
-
                 setCorrectImageXY();
 
-        /************** Setting The Variant Spinner *****************/
+                /************** Setting The Variant Spinner *****************/
 
-                final Map<String,Boolean> variantMap = new LinkedMap<>();
+                final Map<String, Boolean> variantMap = new LinkedMap<>();
                 final List<String> varList = new ArrayList<>();
                 ArrayAdapter<String> dataAdapter;
-                GetAllVariantsByProductIdTask getAllVariantsByProductIdTask = new GetAllVariantsByProductIdTask(this,productId);
+                GetAllVariantsByProductIdTask getAllVariantsByProductIdTask = new GetAllVariantsByProductIdTask(this, productId);
                 getAllVariantsByProductIdTask.execute().get();
 
                 final List<Variant> variantList = getAllVariantsByProductIdTask.variantList;
 
-                if(variantList!=null && variantList.size()>0) {
+                if (variantList != null && variantList.size() > 0) {
 
                     Log.d("Tangho", "Variants Received");
 
@@ -163,53 +174,30 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                         variantMap.put(variant.variant_name, variant.available);
                         varList.add(variant.variant_name);
                     }
-
-                    dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, varList);
-                    dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    variantSpinner.setAdapter(dataAdapter);
-
-                    variantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            size                =   varList.get(position);
-                            Boolean available   =   variantMap.get(size);
-
-                            if (available) {
-                                product_avlble.setText("In Stock");
-                                product_avlble.setTextColor(Color.GREEN);
-                                variant = size;
-                            } else {
-                                product_avlble.setText("Out Of Stock");
-                                product_avlble.setTextColor(Color.RED);
-                                variant = "";
-                            }
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
-                }else{
-                    //variantLayout.setVisibility(View.GONE);
+                } else {
+                    varList.add("Standard");
+                    variantMap.put("Standard", true);
                 }
 
-        /*************************************************************/
-        /************** Setting The Quantity Spinner *****************/
+                dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, varList);
+                dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                variantSpinner.setAdapter(dataAdapter);
 
-                final List<String> quantityList = new ArrayList<>();
-                for(int i=1;i<=10;i++){
-                    quantityList.add(String.valueOf(i));
-                }
-
-                ArrayAdapter<String> quantityAdapter = new ArrayAdapter<String>(this,
-                        android.R.layout.simple_spinner_item, quantityList);
-                quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                quantitySpinner.setAdapter(quantityAdapter);
-                quantitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                variantSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        quantity = Integer.valueOf(quantityList.get(position));
+                        size = varList.get(position);
+                        Boolean available = variantMap.get(size);
+
+                        if (available) {
+                            product_avlble.setText("In Stock");
+                            product_avlble.setTextColor(Color.GREEN);
+                            variant = size;
+                        } else {
+                            product_avlble.setText("Out Of Stock");
+                            product_avlble.setTextColor(Color.RED);
+                            variant = "";
+                        }
                     }
 
                     @Override
@@ -217,63 +205,94 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
                     }
                 });
-
-
-        /*************************************************************/
-
-                productName.setText(productRec.product_name);
-                offer_price.setText("Rs " + String.valueOf((int)productRec.unit_offerprice));
-                mrp.setText("Rs " + String.valueOf((int)productRec.unit_mrp));
-                mrp.setPaintFlags(mrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
-                float offerP         =   productRec.unit_offerprice;
-                float mrp            =   productRec.unit_mrp;
-                float discountValue  =   ((offerP - mrp)/mrp)*100 ;
-
-                discount.setText(String.valueOf((int)discountValue) + " % off");
-                productDesc.setText(productRec.product_desc);
-
-                buyNowButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if(!TextUtils.isEmpty(variant)){
-                            CartItem cartItem       =   new CartItem();
-                            cartItem.product_id     =   productRec.product_id;
-                            cartItem.quantity       =   quantity;
-                            cartItem.variant        =   variant;
-
-                            SharedPreferences sharedPreferences = getSharedPreferences("Shopnick",Context.MODE_PRIVATE);
-                            cartItem.customer_id    =   Integer.valueOf(sharedPreferences.getString("cid",""));
-
-                            CartItems cartItems = new CartItems();
-                            cartItems.cartItemList.add(cartItem);
-
-                            AddCartItemTask addCartItemTask = new AddCartItemTask(ProductDetailActivity.this,cartItems);
-
-                            try {
-
-                                addCartItemTask.execute().get();
-                                Toast.makeText(ProductDetailActivity.this,
-                                        productRec.product_name+" has been added to you cart",Toast.LENGTH_LONG).show();
-                                menuItem = menu.findItem(R.id.cart_icon);
-                                menuItem.setIcon(R.drawable.cartfull);
-                                Commons.cartItemCount++;
-
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } catch (ExecutionException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        else{
-                            Toast.makeText(ProductDetailActivity.this,"The selected product is " +
-                                    "out of stock" ,Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+            } else {
+                //variantLayout.setVisibility(View.GONE);
             }
-        }catch(Exception ex){
+
+            /*************************************************************/
+            /************** Setting The Quantity Spinner *****************/
+
+            final List<String> quantityList = new ArrayList<>();
+            for (int i = 1; i <= 10; i++) {
+                quantityList.add(String.valueOf(i));
+            }
+
+            ArrayAdapter<String> quantityAdapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_spinner_item, quantityList);
+            quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            quantitySpinner.setAdapter(quantityAdapter);
+            quantitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    quantity = Integer.valueOf(quantityList.get(position));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            /*************************************************************/
+
+            productName.setText(productRec.product_name);
+            offer_price.setText("Rs " + String.valueOf((int) productRec.unit_offerprice));
+            mrp.setText("Rs " + String.valueOf((int) productRec.unit_mrp));
+            mrp.setPaintFlags(mrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+            float offerP = productRec.unit_offerprice;
+            float mrp = productRec.unit_mrp;
+            float discountValue = ((offerP - mrp) / mrp) * 100;
+
+            discount.setText(String.valueOf((int) discountValue) + " % off");
+            productDesc.setText(productRec.product_desc);
+
+            buyNowButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (!TextUtils.isEmpty(variant)) {
+                        CartItem cartItem    = new CartItem();
+                        cartItem.product_id  = productRec.product_id;
+                        cartItem.quantity    = quantity;
+                        cartItem.variant     = variant;
+
+                        SharedPreferences sharedPreferences
+                                             = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
+                        cartItem.customer_id = Integer.valueOf(sharedPreferences.getString("cid", ""));
+
+                        CartItems cartItems  = new CartItems();
+                        cartItems.cartItemList.add(cartItem);
+
+                        AddCartItemTask addCartItemTask
+                                             = new AddCartItemTask(ProductDetailActivity.this, cartItems);
+
+                        try {
+
+                            addCartItemTask.execute().get();
+                            Toast.makeText(ProductDetailActivity.this,
+                                    productRec.product_name + " has been added to you cart", Toast.LENGTH_LONG).show();
+                            menuItem = menu.findItem(R.id.cart_icon);
+                            menuItem.setIcon(R.drawable.cartfull);
+                            Commons.cartItemCount++;
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(ProductDetailActivity.this, "The selected product is " +
+                                "out of stock", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch(Exception ex){
             ex.printStackTrace();
         }
     }
@@ -299,14 +318,15 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     }
 
     private void setCorrectImageXY() {
-        ViewTreeObserver vto = sliderShowFull.getViewTreeObserver();
+        ViewTreeObserver vto    =   sliderShowFull.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 sliderShowFull.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                int width  = sliderShowFull.getMeasuredWidth();
-                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) sliderShowFull.getLayoutParams();
-                params.height = width;
+                int width       =   sliderShowFull.getMeasuredWidth();
+                RelativeLayout.LayoutParams params
+                                =   (RelativeLayout.LayoutParams) sliderShowFull.getLayoutParams();
+                params.height   =   width;
                 sliderShowFull.setLayoutParams(params);
             }
         });
