@@ -300,8 +300,8 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
+
         android:id="@+id/footer"
-        android:padding="5dp"
         android:layout_alignParentBottom="true"
         android:gravity="center">
         <ImageButton
@@ -309,6 +309,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/buyNowButton"
             android:background="@color/windowBackground"
-            android:src="@drawable/buy_now"/>
+            android:src="@drawable/buy_now"
+             />
     </LinearLayout>
 </RelativeLayout>
