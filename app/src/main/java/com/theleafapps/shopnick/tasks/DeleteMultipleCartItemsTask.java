@@ -50,7 +50,7 @@ public class DeleteMultipleCartItemsTask extends BaseAsyncRequest {
     @Override
     protected void onCompletion(boolean success) {
         if(success){
-            Toast.makeText(context,"Cart Items deleted",Toast.LENGTH_LONG).show();
+            //Toast.makeText(context,"Cart Items deleted",Toast.LENGTH_LONG).show();
         }
     }
 }

@@ -75,9 +75,9 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
         holder.product_name.setText(current.product.product_name);
         holder.product_size.setText(current.variant);
         holder.product_qty.setText(String.valueOf(current.quantity));
-        holder.product_mrp.setText(String.valueOf(current.product.unit_mrp));
+        holder.product_offerprice.setText(String.valueOf(current.product.unit_offerprice));
         holder.multiply_product_qty.setText(String.valueOf(current.quantity));
-        holder.net_cost.setText(String.valueOf(current.product.unit_mrp * current.quantity));
+        holder.net_cost.setText(String.valueOf(current.product.unit_offerprice * current.quantity));
         holder.cart_item_id.setText(String.valueOf(current.cart_item_id));
         holder.unit_shipping.setText(String.valueOf(current.product.unit_shipping));
         product_id          =   current.product_id;
@@ -97,7 +97,7 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
         NetworkImageView cart_product_image;
         ImageView delete_cart_item,update_cart_item;
         TextView product_name,product_size,product_qty,unit_shipping;
-        TextView net_cost,product_mrp,multiply_product_qty;
+        TextView net_cost,product_offerprice,multiply_product_qty;
         TextView cart_item_id;
         SimpleDialogClass simpleDialog;
         CartUpdateDialog cartUpdateDialog;
@@ -115,7 +115,7 @@ public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.My
             product_name            =   (TextView) itemView.findViewById(R.id.product_name_value);
             product_size            =   (TextView) itemView.findViewById(R.id.size_value);
             product_qty             =   (TextView) itemView.findViewById(R.id.product_quantity_value);
-            product_mrp             =   (TextView) itemView.findViewById(R.id.mrp_value);
+            product_offerprice      =   (TextView) itemView.findViewById(R.id.offer_price_value);
             multiply_product_qty    =   (TextView) itemView.findViewById(R.id.multiply_product_qty);
             net_cost                =   (TextView) itemView.findViewById(R.id.net_cost);
             unit_shipping           =   (TextView) itemView.findViewById(R.id.unit_shipping_value);

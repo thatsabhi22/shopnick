@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.dialogs.CouponCodesDialog;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.Coupon;
 import com.theleafapps.shopnick.models.Customer;
 import com.theleafapps.shopnick.models.multiples.Customers;
@@ -40,6 +42,7 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
 
     ActionBar actionBar;
     SharedPreferences sharedPreferences;
+    MyProgressDialog myProgressDialog;
     Customer customer;
     Toolbar toolbar;
     double wallet_value = 0;
@@ -51,7 +54,7 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
     FragmentManager fragmentManager;
     EditText promocode_edit_text;
     String cid = "";
-    List<Integer> cart_item_id_array;
+    ArrayList<Integer> cart_item_id_array;
     JSONArray cartItemIdJsonArray;
 
     @Override
@@ -64,6 +67,7 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
         Intent intent           =   getIntent();
         cart_total              =   intent.getIntExtra("cart_total",0);
         cart_item_id_array      =   intent.getIntegerArrayListExtra("cart_item_id_array");
+        myProgressDialog        =   new MyProgressDialog(this);
 
         if(cart_item_id_array.size()>0){
              for(int id : cart_item_id_array){
@@ -204,11 +208,15 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
                                 = new DeleteMultipleCartItemsTask(CheckoutActivity.this,cartItemIdJsonArray);
                         deleteMultipleCartItemsTask.execute().get();
 
+                        Commons.cartItemCount = 0;
+
                         Intent intent = new Intent(CheckoutActivity.this, PaymentSuccessActivity.class);
                         intent.putExtra("deduction", deduction);
                         intent.putExtra("net_cost", cart_total - deduction);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        MyProgressDialog.show(CheckoutActivity.this,myProgressDialog,"","");
                         startActivity(intent);
+                        finish();
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -220,6 +228,7 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
                     Intent intent = new Intent(CheckoutActivity.this, AddMoneyActivity.class);
                     intent.putExtra("customer_id",customer.customer_id);
                     intent.putExtra("cart_total",cart_total);
+                    intent.putIntegerArrayListExtra("cart_item_id_array",cart_item_id_array);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
@@ -233,9 +242,40 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
             case R.id.coupon_icon:
                 couponCodesDialog.show(fragmentManager, "coupon_code");
                 return true;
+            case R.id.user_profile:
+                Intent intent;
+                intent = new Intent(this,CustomerProfileActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d("Tangho","CheckoutActivity activity >> onRestart Called");
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","CheckoutActivity activity >> onRestart Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Tangho","CheckoutActivity activity >> onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        myProgressDialog.dismiss();
+        super.onDestroy();
+        Log.d("Tangho","CheckoutActivity activity >> onDestroy Called");
     }
 
     @Override

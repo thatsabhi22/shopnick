@@ -29,6 +29,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.CartItem;
 import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.models.ProductImage;
@@ -56,10 +57,11 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     TextView productName,offer_price,mrp,discount,productDesc,product_avlble;
     List<String> url_maps;
     SliderLayout sliderShowFull;
+    MyProgressDialog myProgressDialog;
     Spinner variantSpinner,quantitySpinner;
     Toolbar toolbar;
-    String size,variant;
-    int subCatId,catId,quantity;
+    String size,variant,title;
+    int subCatId,catId,quantity,productId;
     ImageButton buyNowButton;
     RelativeLayout variantLayout;
     Menu menu;
@@ -72,6 +74,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_product_detail);
 
+            myProgressDialog = new MyProgressDialog(this);
             if (menu != null) {
                 menuItem = menu.findItem(R.id.cart_icon);
 
@@ -108,10 +111,10 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
 
             Intent intent   = getIntent();
-            int productId   = Integer.valueOf(intent.getStringExtra("productId"));
+            productId       = Integer.valueOf(intent.getStringExtra("productId"));
             subCatId        = intent.getIntExtra("subCatId", 0);
             catId           = intent.getIntExtra("categoryId", 0);
-            String title    = intent.getStringExtra("title");
+            title           = intent.getStringExtra("title");
 
             if (!TextUtils.isEmpty(title)) {
                 if (title.length() > 10) {
@@ -289,6 +292,10 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                     }
                 }
             });
+
+            if(Commons.myProgressDialog!=null)
+                Commons.myProgressDialog.dismiss();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -336,6 +343,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("Tangho","ProductDetailActivity activity >> onResume Called");
         if(menu!=null) {
             menuItem = menu.findItem(R.id.cart_icon);
             if (Commons.cartItemCount < 1) {
@@ -355,14 +363,16 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 startActivity(intent);
                 return true;
             case android.R.id.home:
-                intent = NavUtils.getParentActivityIntent(this);
-                intent.putExtra("subCatId",subCatId);
-                intent.putExtra("categoryId",catId);
-                NavUtils.navigateUpTo(this,intent);
+                loadProductListActivity();
                 return true;
             case R.id.cart_icon:
-                Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
+                //Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
                 Intent in = new Intent(this,CartActivity.class);
+                in.putExtra("caller","ProductDetailActivity");
+                in.putExtra("subCatId",subCatId);
+                in.putExtra("categoryId",catId);
+                in.putExtra("productId",productId);
+                in.putExtra("title",title);
                 startActivity(in);
                 return true;
             default:
@@ -386,5 +396,39 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     @Override
     public void onSliderClick(BaseSliderView slider) {
 
+    }
+
+    public void loadProductListActivity(){
+        Intent intent;
+        intent = NavUtils.getParentActivityIntent(this);
+        intent.putExtra("subCatId",subCatId);
+        intent.putExtra("categoryId",catId);
+        MyProgressDialog.show(this,myProgressDialog,"","");
+        NavUtils.navigateUpTo(this,intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        loadProductListActivity();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","ProductDetail activity >> onRestart Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Tangho","ProductDetail activity >> onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        myProgressDialog.dismiss();
+        super.onDestroy();
+        Log.d("Tangho","ProductDetail activity >> onDestroy Called");
     }
 }

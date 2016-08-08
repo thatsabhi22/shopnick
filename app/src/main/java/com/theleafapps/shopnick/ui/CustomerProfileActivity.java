@@ -8,12 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.Customer;
 import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
 import com.theleafapps.shopnick.utils.Commons;
@@ -24,11 +26,12 @@ public class CustomerProfileActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     ActionBar actionBar;
+    MyProgressDialog myProgressDialog;
 
     TextView c_first_name_value,c_last_name_value;
     TextView c_address_value,c_zipcode_value,c_country_value;
     TextView c_mobile_value,c_wallet_amount_value;
-    Button c_profile_shop_button;
+    ImageButton c_profile_shop_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class CustomerProfileActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_customer_profile);
         setSupportActionBar(toolbar);
+
+        myProgressDialog = new MyProgressDialog(this);
 
         if(!Commons.hasActiveInternetConnection(this)){
             Intent intent1 = new Intent(this,NoNetworkActivity.class);
@@ -55,7 +60,7 @@ public class CustomerProfileActivity extends AppCompatActivity {
         c_country_value         =   (TextView) findViewById(R.id.c_country_value);
         c_mobile_value          =   (TextView) findViewById(R.id.c_mobile_value);
         c_wallet_amount_value   =   (TextView) findViewById(R.id.c_wallet_amount_value);
-        c_profile_shop_button   =   (Button) findViewById(R.id.c_profile_shop_button);
+        c_profile_shop_button   =   (ImageButton) findViewById(R.id.c_profile_shop_button);
 
         SharedPreferences sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
         String cid = sharedPreferences.getString("cid","");
@@ -92,7 +97,9 @@ public class CustomerProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CustomerProfileActivity.this,ShowcaseActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                MyProgressDialog.show(CustomerProfileActivity.this,myProgressDialog,"","");
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -105,4 +112,31 @@ public class CustomerProfileActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Tangho","CustomerProfileActivity activity >> onResume Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Tangho","CustomerProfileActivity activity >> onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Tangho","CustomerProfileActivity activity >> onDestroy Called");
+        myProgressDialog.dismiss();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","CustomerProfileActivity activity >> onRestart Called");
+    }
+
 }
+

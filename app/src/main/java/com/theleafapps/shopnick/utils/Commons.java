@@ -23,9 +23,9 @@ import java.util.List;
  */
 public class Commons {
 
-    public static MyProgressDialog progressDialog;
-
     public static int cartItemCount;
+
+    public static MyProgressDialog myProgressDialog;
 
     public static LinkedMap<Integer,List<SubCategory>> catIdToSubCatMap = new LinkedMap<>();
 

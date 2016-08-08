@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.ExpandableListAdapter;
 import com.theleafapps.shopnick.adapters.ViewPagerAdapter;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.Category;
 import com.theleafapps.shopnick.models.Customer;
 import com.theleafapps.shopnick.models.ExpandedMenuModel;
@@ -57,6 +58,7 @@ public class ShowcaseActivity extends AppCompatActivity {
     ExpandableListAdapter mMenuAdapter;
     ExpandableListView expandableList;
     HashMap<ExpandedMenuModel, List<String>> listDataChild;
+    MyProgressDialog myProgressDialog;
     MenuItem menuItem;
     Menu menu;
 
@@ -72,7 +74,8 @@ public class ShowcaseActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_showcase);
 
-            toolbar = (Toolbar) findViewById(R.id.toolbar_showcase);
+            myProgressDialog    = new MyProgressDialog(this);
+            toolbar             = (Toolbar) findViewById(R.id.toolbar_showcase);
             setSupportActionBar(toolbar);
 
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_drawer);
@@ -93,6 +96,7 @@ public class ShowcaseActivity extends AppCompatActivity {
                     menuItem.setIcon(R.drawable.cartfull);
                 }
             }
+
 
             customer_name    =   (TextView) findViewById(R.id.customer_name);
             customer_email   =   (TextView) findViewById(R.id.customer_email);
@@ -223,10 +227,14 @@ public class ShowcaseActivity extends AppCompatActivity {
             else{
                 Log.d("Tangho","Network Disconnected");
             }
+
+
         }catch(Exception ex){
             ex.printStackTrace();
         }
     }
+
+
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -239,6 +247,7 @@ public class ShowcaseActivity extends AppCompatActivity {
                 String name = categoriesRec.get(i).category_name;
                 Fragment abc = new OneFragment();
                 Bundle bundle = new Bundle();
+                bundle.putSerializable("progressDialog",myProgressDialog);
                 bundle.putInt("category_id",category_id);
                 abc.setArguments(bundle);
                 adapter.addFrag(abc,name);
@@ -271,6 +280,7 @@ public class ShowcaseActivity extends AppCompatActivity {
             case R.id.cart_icon:
 //                Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
                 intent = new Intent(this,CartActivity.class);
+                intent.putExtra("caller","ShowcaseActivity");
                 startActivity(intent);
                 return true;
             case android.R.id.home:
@@ -308,8 +318,37 @@ public class ShowcaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","Showcase activity >> onRestart Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+        Log.d("Tangho","Showcase activity >> onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myProgressDialog.dismiss();
+        Log.d("Tangho","Showcase activity >> onDestroy Called");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d("Tangho","Showcase activity >> onBackPressed Called");
+    }
+
+
+    @Override
     protected void onResume() {
         super.onResume();
+
+        Log.d("Tangho","Showcase activity >> OnResume Called");
 
         if(menu!=null) {
             menuItem = menu.findItem(R.id.cart_icon);

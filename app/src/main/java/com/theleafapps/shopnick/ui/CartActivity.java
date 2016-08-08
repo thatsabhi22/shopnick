@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.CartCustomAdapter;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.CartItem;
 import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.tasks.GetAllCartItemTask;
@@ -42,6 +45,7 @@ public class CartActivity extends AppCompatActivity implements Communicator {
     FragmentManager fragmentManager;
     ImageButton proceed_payment_button;
     static Context mContext;
+    MyProgressDialog myProgressDialog;
     ArrayList<Integer> cart_item_id_array;
 
     @Override
@@ -52,7 +56,10 @@ public class CartActivity extends AppCompatActivity implements Communicator {
         toolbar = (Toolbar) findViewById(R.id.toolbar_cart);
         setSupportActionBar(toolbar);
 
+        myProgressDialog = new MyProgressDialog(this);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo_small);
 
         if(!Commons.hasActiveInternetConnection(this)){
             Intent intent1 = new Intent(this,NoNetworkActivity.class);
@@ -95,7 +102,7 @@ public class CartActivity extends AppCompatActivity implements Communicator {
         for(CartItem item : cartItemList){
 
             cart_item_id_array.add(item.cart_item_id);
-            total += item.product.unit_mrp * item.quantity;
+            total += item.product.unit_offerprice * item.quantity;
             total += item.product.unit_shipping;
 
         }
@@ -115,7 +122,9 @@ public class CartActivity extends AppCompatActivity implements Communicator {
             public void onClick(View v) {
                 Intent intent = new Intent(CartActivity.this,ShowcaseActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                MyProgressDialog.show(CartActivity.this,myProgressDialog,"","");
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -141,11 +150,38 @@ public class CartActivity extends AppCompatActivity implements Communicator {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            default:
-                finish();
-                return super.onOptionsItemSelected(item);
+        try{
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    String caller       =   getIntent().getStringExtra("caller");
+
+                    if(!TextUtils.isEmpty(caller)){
+                        Class callerClass   =   Class.forName(getPackageName()+ ".ui." + caller);
+                        Intent intent       =   new Intent(this,callerClass);
+                        if(TextUtils.equals(caller,"ProductListActivity")){
+                            intent.putExtra("subCatId",getIntent().getIntExtra("subCatId",0));
+                            intent.putExtra("categoryId",getIntent().getIntExtra("categoryId",0));
+                        }
+                        if(TextUtils.equals(caller,"ProductDetailActivity")){
+                            intent.putExtra("subCatId",getIntent().getIntExtra("subCatId",0));
+                            intent.putExtra("categoryId",getIntent().getIntExtra("categoryId",0));
+                            intent.putExtra("productId",String.valueOf(getIntent().getIntExtra("productId",0)));
+                            intent.putExtra("title",getIntent().getStringExtra("title"));
+                        }
+
+                        MyProgressDialog.show(this,myProgressDialog,"","");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
     private CartItems getCartItems(){
@@ -168,6 +204,25 @@ public class CartActivity extends AppCompatActivity implements Communicator {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","CartActivity activity >> onRestart Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Tangho","CartActivity activity >> onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Tangho","CartActivity activity >> onDestroy Called");
+        myProgressDialog.dismiss();
     }
 
     @Override

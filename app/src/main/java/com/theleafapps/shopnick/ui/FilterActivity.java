@@ -2,10 +2,13 @@ package com.theleafapps.shopnick.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.utils.Commons;
 
 import java.util.ArrayList;
@@ -30,7 +34,10 @@ public class FilterActivity extends AppCompatActivity {
     TextView price_range_msg_tv;
     TabHost filter_tabhost;
     StringBuilder filter_sb;
+    MyProgressDialog myProgressDialog;
     Toolbar toolbar;
+    int catId,subCatId;
+    String title;
     List<String> filterList;
 
 
@@ -40,10 +47,12 @@ public class FilterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
 
+        myProgressDialog        =   new MyProgressDialog(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar_filter_activity);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.logo_small);
 
         if(!Commons.hasActiveInternetConnection(this)){
             Intent intent1 = new Intent(this,NoNetworkActivity.class);
@@ -52,9 +61,9 @@ public class FilterActivity extends AppCompatActivity {
         }
 
         Intent intent           =   getIntent();
-        final int catId         =   intent.getIntExtra("categoryId",0);
-        final int subCatId      =   intent.getIntExtra("subCatId",0);
-        final String title      =   intent.getStringExtra("title");
+        catId                   =   intent.getIntExtra("categoryId",0);
+        subCatId                =   intent.getIntExtra("subCatId",0);
+        title                   =   intent.getStringExtra("title");
 
         price_filter_layout     =   (RelativeLayout) findViewById(R.id.price_filter_layout);
         discount_filter_layout  =   (RelativeLayout) findViewById(R.id.discount_filter_layout);
@@ -155,6 +164,52 @@ public class FilterActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","FilterActivity >>> onRestart Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Tangho","FilterActivity >>> onPause Called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Tangho","FilterActivity >>> onResume Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myProgressDialog.dismiss();
+        Log.d("Tangho","FilterActivity >>> onDestroy Called");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                loadProductListActivity();
+                return true;
+            default:
+                finish();
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void loadProductListActivity(){
+        Intent intent;
+        intent = NavUtils.getParentActivityIntent(this);
+        intent.putExtra("subCatId",subCatId);
+        intent.putExtra("categoryId",catId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        MyProgressDialog.show(this,myProgressDialog,"","");
+        NavUtils.navigateUpTo(this,intent);
+    }
 
     public void tabHandler(View target){
         price_filter_button.setSelected(false);

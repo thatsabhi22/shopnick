@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.Product;
 import com.theleafapps.shopnick.ui.ProductDetailActivity;
 import com.theleafapps.shopnick.utils.MySingleton;
@@ -27,20 +28,21 @@ public class ProductListViewRecyclerAdapter extends
     Context mContext;
     List<Product> productList;
     private ImageLoader mImageLoader;
+    MyProgressDialog myProgressDialog;
     int subCatId;
     int catId;
 
-    public ProductListViewRecyclerAdapter(Context context, List<Product> productList, int subCatId,int catId) {
-        this.productList    =   productList;
-        this.mContext       =   context;
-        this.subCatId       =   subCatId;
-        this.catId          =   catId;
+    public ProductListViewRecyclerAdapter(Context context, List<Product> productList, int subCatId, int catId, MyProgressDialog myProgressDialog) {
+        this.productList        =   productList;
+        this.mContext           =   context;
+        this.subCatId           =   subCatId;
+        this.catId              =   catId;
+        this.myProgressDialog   =   myProgressDialog;
     }
 
     @Override
     public ProductListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_list_cards, null);
-
         layoutView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +58,7 @@ public class ProductListViewRecyclerAdapter extends
                 intent.putExtra("subCatId",subCatId);
                 intent.putExtra("categoryId",catId);
                 intent.putExtra("title",name.getText());
+                MyProgressDialog.show(mContext,myProgressDialog,"","");
                 mContext.startActivity(intent);
 
             }

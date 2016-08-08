@@ -8,10 +8,12 @@ import android.widget.ProgressBar;
 
 import com.theleafapps.shopnick.R;
 
+import java.io.Serializable;
+
 /**
  * Created by aviator on 01/08/16.
  */
-public class MyProgressDialog extends Dialog {
+public class MyProgressDialog extends Dialog implements Serializable {
 
     public static MyProgressDialog show(Context context, MyProgressDialog progressDialog, CharSequence title,
                                         CharSequence message) {

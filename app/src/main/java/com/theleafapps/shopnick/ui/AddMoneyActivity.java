@@ -18,6 +18,7 @@ import com.theleafapps.shopnick.tasks.UpdateCustomerWalletValueTask;
 import com.theleafapps.shopnick.utils.Commons;
 import com.theleafapps.shopnick.utils.Communicator;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class AddMoneyActivity extends AppCompatActivity implements Communicator{
@@ -57,6 +58,8 @@ public class AddMoneyActivity extends AppCompatActivity implements Communicator{
                     Intent intent       =   getIntent();
                     int customer_id     =   intent.getIntExtra("customer_id", 0);
                     double cart_total   =   intent.getFloatExtra("cart_total", 0);
+                    ArrayList<Integer> cart_item_id_array
+                                        =   intent.getIntegerArrayListExtra("cart_item_id_array");
 
                     if (customer_id != 0) {
                         GetCustomerByIdTask getCustomerByIdTask
@@ -76,6 +79,7 @@ public class AddMoneyActivity extends AppCompatActivity implements Communicator{
 
                             Bundle arguments = new Bundle();
                             arguments.putInt("cart_total",(int)cart_total);
+                            arguments.putIntegerArrayList("cart_item_id_array",cart_item_id_array);
                             moneyAddedDialog.setArguments(arguments);
                             moneyAddedDialog.show(fragmentManager,"Money_Added");
                         }

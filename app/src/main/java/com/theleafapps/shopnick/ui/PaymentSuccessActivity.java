@@ -3,17 +3,20 @@ package com.theleafapps.shopnick.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.utils.Commons;
 
 public class PaymentSuccessActivity extends AppCompatActivity {
 
     TextView deducted_amount_tv;
     ImageButton continue_shopping;
+    MyProgressDialog myProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class PaymentSuccessActivity extends AppCompatActivity {
             startActivity(intent1);
         }
 
+        myProgressDialog    =   new MyProgressDialog(this);
         Intent intent       =   getIntent();
         double net_cost     =   intent.getDoubleExtra("net_cost",0);
 
@@ -39,9 +43,36 @@ public class PaymentSuccessActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(PaymentSuccessActivity.this,ShowcaseActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                MyProgressDialog.show(PaymentSuccessActivity.this,myProgressDialog,"","");
                 startActivity(intent);
+                finish();
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d("Tangho","ProductDetail activity >> onRestart Called");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","ProductDetail activity >> onRestart Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Tangho","ProductDetail activity >> onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        myProgressDialog.dismiss();
+        super.onDestroy();
+        Log.d("Tangho","ProductDetail activity >> onDestroy Called");
     }
 }

@@ -119,8 +119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="mrp"
-            android:id="@+id/mrp_value"
+            android:text="offrp"
+            android:id="@+id/offer_price_value"
             android:layout_below="@+id/ruler"
             android:layout_alignLeft="@+id/quantity_label"
             android:layout_alignStart="@+id/quantity_label"
@@ -132,9 +132,9 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="X"
             android:id="@+id/x"
-            android:layout_alignTop="@+id/mrp_value"
-            android:layout_toRightOf="@+id/mrp_value"
-            android:layout_toEndOf="@+id/mrp_value"
+            android:layout_alignTop="@+id/offer_price_value"
+            android:layout_toRightOf="@+id/offer_price_value"
+            android:layout_toEndOf="@+id/offer_price_value"
             android:layout_marginLeft="10dp" />
 
         <TextView
@@ -175,9 +175,9 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Rs. "
             android:id="@+id/currency1"
-            android:layout_alignTop="@+id/mrp_value"
-            android:layout_toLeftOf="@+id/mrp_value"
-            android:layout_toStartOf="@+id/mrp_value"
+            android:layout_alignTop="@+id/offer_price_value"
+            android:layout_toLeftOf="@+id/offer_price_value"
+            android:layout_toStartOf="@+id/offer_price_value"
             android:layout_marginRight="5dp" />
 
         <TextView

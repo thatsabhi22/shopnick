@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.TabbedRecyclerAdapter;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.SubCategory;
 import com.theleafapps.shopnick.utils.Commons;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -22,6 +23,8 @@ public class OneFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private TabbedRecyclerAdapter adapter;
+    MyProgressDialog myProgressDialog;
+
     List<SubCategory> infoList = Collections.emptyList();
 
     public OneFragment() {
@@ -39,6 +42,7 @@ public class OneFragment extends Fragment {
 
         Bundle bundle       =   this.getArguments();
         int category_id     =   bundle.getInt("category_id");
+        myProgressDialog    =   (MyProgressDialog) bundle.getSerializable("progressDialog");
         View inflatedView   =   inflater.inflate(R.layout.fragment_one, container, false);
         recyclerView        =   (RecyclerView) inflatedView.findViewById(R.id.cardRecyclerView);
 
@@ -46,7 +50,7 @@ public class OneFragment extends Fragment {
             infoList        =   Commons.catIdToSubCatMap.get(category_id);
         }
 
-        adapter             =   new TabbedRecyclerAdapter(getActivity(),infoList,category_id);
+        adapter             =   new TabbedRecyclerAdapter(getActivity(),infoList,category_id,myProgressDialog);
         recyclerView.setAdapter(adapter);
 
         final LinearLayoutManager linearLayoutManager

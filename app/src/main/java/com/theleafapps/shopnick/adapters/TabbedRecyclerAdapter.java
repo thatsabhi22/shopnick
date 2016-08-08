@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.theleafapps.shopnick.R;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.SubCategory;
 import com.theleafapps.shopnick.ui.ProductListActivity;
 import com.theleafapps.shopnick.utils.MySingleton;
@@ -27,13 +28,15 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
     private LayoutInflater inflater;
     List<SubCategory> data = Collections.emptyList();
     private ImageLoader mImageLoader;
+    MyProgressDialog myProgressDialog;
     private int category_id;
 
-    public TabbedRecyclerAdapter(Context context, List<SubCategory> data, int category_id) {
-        inflater            =   LayoutInflater.from(context);
-        this.mContext       =   context;
-        this.data           =   data;
-        this.category_id    =   category_id;
+    public TabbedRecyclerAdapter(Context context, List<SubCategory> data, int category_id, MyProgressDialog myProgressDialog) {
+        inflater                =   LayoutInflater.from(context);
+        this.mContext           =   context;
+        this.data               =   data;
+        this.category_id        =   category_id;
+        this.myProgressDialog   =   myProgressDialog;
     }
 
     @Override
@@ -55,6 +58,7 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
                 intent.putExtra("subCatId",subcatId);
                 intent.putExtra("categoryId",category_id);
                 intent.putExtra("title",name.getText());
+                MyProgressDialog.show(mContext,myProgressDialog,"","");
                 mContext.startActivity(intent);
 
             }

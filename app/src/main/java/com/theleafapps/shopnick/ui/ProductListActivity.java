@@ -3,13 +3,13 @@ package com.theleafapps.shopnick.ui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.adapters.ProductListViewRecyclerAdapter;
+import com.theleafapps.shopnick.dialogs.MyProgressDialog;
 import com.theleafapps.shopnick.models.SubCategory;
 import com.theleafapps.shopnick.models.multiples.Products;
 import com.theleafapps.shopnick.tasks.GetProductsBySubCatIdTask;
@@ -38,6 +39,7 @@ public class ProductListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     LinearLayout filter_section_layout;
     TextView sort_tv,filter_tv,no_product_tv;
+    MyProgressDialog myProgressDialog;
     Menu menu;
     MenuItem menuItem;
 
@@ -47,7 +49,9 @@ public class ProductListActivity extends AppCompatActivity {
 
         try {
             super.onCreate(savedInstanceState);
+            myProgressDialog    =   new MyProgressDialog(this);
             setContentView(R.layout.activity_product_list);
+
 
             toolbar = (Toolbar) findViewById(R.id.toolbar_product_list);
             setSupportActionBar(toolbar);
@@ -66,10 +70,10 @@ public class ProductListActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
 
-            sort_tv                 =   (TextView) findViewById(R.id.product_list_sort_tv);
-            filter_tv               =   (TextView) findViewById(R.id.product_list_filter_tv);
-            filter_section_layout   =   (LinearLayout) findViewById(R.id.filter_section_layout);
-            no_product_tv           =   (TextView) findViewById(R.id.no_product_tv);
+            sort_tv                     =   (TextView) findViewById(R.id.product_list_sort_tv);
+            filter_tv                   =   (TextView) findViewById(R.id.product_list_filter_tv);
+            filter_section_layout       =   (LinearLayout) findViewById(R.id.filter_section_layout);
+            no_product_tv               =   (TextView) findViewById(R.id.no_product_tv);
             filter_section_layout.setVisibility(View.GONE);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -109,7 +113,7 @@ public class ProductListActivity extends AppCompatActivity {
 
                 if (productsRec != null && productsRec.products.size() > 0) {
                     ProductListViewRecyclerAdapter rcAdapter = new ProductListViewRecyclerAdapter(
-                            ProductListActivity.this, productsRec.products, subCatId,catId);
+                            ProductListActivity.this, productsRec.products, subCatId,catId,myProgressDialog);
                     recyclerView.setAdapter(rcAdapter);
                 }else{
                     no_product_tv.setVisibility(View.VISIBLE);
@@ -165,6 +169,7 @@ public class ProductListActivity extends AppCompatActivity {
                     }
                 });
             }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -177,6 +182,7 @@ public class ProductListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("Tangho","ProductList activity >> onResume Called");
         if(menu!=null) {
             menuItem = menu.findItem(R.id.cart_icon);
             if (Commons.cartItemCount < 1) {
@@ -187,6 +193,38 @@ public class ProductListActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        loadShowCase();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","ProductList activity >> onRestart Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Tangho","ProductList activity >> onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Tangho","ProductList activity >> onDestroy Called");
+        myProgressDialog.dismiss();
+    }
+
+    private void loadShowCase() {
+        Intent intent = new Intent(this,ShowcaseActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("categoryId",catId-1);
+        MyProgressDialog.show(this,myProgressDialog,"","");
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -206,9 +244,7 @@ public class ProductListActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-                intent = NavUtils.getParentActivityIntent(this);
-                intent.putExtra("categoryId",catId-1);
-                NavUtils.navigateUpTo(this,intent);
+                loadShowCase();
                 return true;
             case R.id.user_profile:
                 intent = new Intent(this,CustomerProfileActivity.class);
@@ -216,7 +252,12 @@ public class ProductListActivity extends AppCompatActivity {
                 return true;
             case R.id.cart_icon:
                 intent = new Intent(this,CartActivity.class);
+                intent.putExtra("caller","ProductListActivity");
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("subCatId",subCatId);
+                intent.putExtra("categoryId",catId);
                 startActivity(intent);
+                finish();
                 return true;
             case R.id.filter_menu:
                 if(filter_section_layout.getVisibility()== View.GONE)
