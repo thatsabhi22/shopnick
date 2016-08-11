@@ -11,18 +11,15 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.models.ExpandedMenuModel;
 import com.theleafapps.shopnick.models.SubCategory;
 import com.theleafapps.shopnick.ui.ProductListActivity;
 import com.theleafapps.shopnick.utils.Commons;
-import com.theleafapps.shopnick.utils.LinkedMap;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by aviator on 22/07/16.

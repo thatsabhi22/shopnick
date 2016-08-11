@@ -8,4 +8,5 @@
     <string name="price_bar">price_bar</string>
     <string name="openDrawer">openDrawer</string>
     <string name="closeDrawer">closeDrawer</string>
+    <string name="disclaimer">This App is only for demo purposes</string>
 </resources>

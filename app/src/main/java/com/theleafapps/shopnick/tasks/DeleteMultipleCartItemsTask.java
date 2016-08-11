@@ -1,11 +1,7 @@
 package com.theleafapps.shopnick.tasks;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
-import com.theleafapps.shopnick.ui.CheckoutActivity;
 import com.theleafapps.shopnick.utils.AppConstants;
 import com.theleafapps.shopnick.utils.PrefUtil;
 

@@ -21,13 +21,28 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/customer_profile_screen_toolbar"
+        android:background="@color/red_500"
+        android:orientation="horizontal"
+        android:id="@+id/disclaimer_customer_profile">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/disclaimer"
+            android:textAlignment="center"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="First Name"
         android:id="@+id/c_first_name"
-        android:layout_below="@+id/customer_profile_screen_toolbar"
+        android:layout_below="@+id/disclaimer_customer_profile"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="31dp"

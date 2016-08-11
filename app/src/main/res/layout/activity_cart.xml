@@ -21,6 +21,21 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/product_cart_screen_toolbar"
+        android:background="@color/red_500"
+        android:orientation="horizontal"
+        android:id="@+id/disclaimer_cart">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/disclaimer"
+            android:textAlignment="center"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +58,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cart_recycler_view"
         android:layout_width="match_parent"
-        android:layout_below="@+id/product_cart_screen_toolbar"
+        android:layout_below="@+id/disclaimer_cart"
         android:layout_height="400dp">
 
     </android.support.v7.widget.RecyclerView>

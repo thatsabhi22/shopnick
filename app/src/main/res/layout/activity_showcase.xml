@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false">
-
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -34,6 +33,20 @@
 
             </android.support.v7.widget.Toolbar>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/red_500"
+                android:orientation="horizontal"
+                android:id="@+id/disclaimer_showcase">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/disclaimer"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"/>
+            </LinearLayout>
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
@@ -57,58 +70,94 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="false">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/navtexture">
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:background="@drawable/navtexture"
+                android:id="@+id/nav_drawer_header_rel_layout">
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/user_profile"
-                android:id="@+id/imageView"
-                android:layout_marginLeft="25dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/user_profile"
+                    android:id="@+id/imageView"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="&lt;customer_name>"
+                    android:id="@+id/customer_name"
+                    android:layout_below="@+id/imageView"
+                    android:layout_alignLeft="@+id/imageView"
+                    android:layout_alignStart="@+id/imageView"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#ffffff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="&lt;customer_email>"
+                    android:id="@+id/customer_email"
+                    android:textColor="#ffffff"
+                    android:layout_below="@+id/customer_name"
+                    android:layout_alignLeft="@+id/customer_name"
+                    android:layout_alignStart="@+id/customer_name"
+                    android:layout_marginTop="3dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="&lt;customer_name>"
-                android:id="@+id/customer_name"
-                android:layout_below="@+id/imageView"
-                android:layout_alignLeft="@+id/imageView"
-                android:layout_alignStart="@+id/imageView"
-                android:layout_marginTop="10dp"
-                android:textColor="#ffffff" />
+                android:gravity="center"
+                android:layout_below="@+id/nav_drawer_header_rel_layout">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="&lt;customer_email>"
-                android:id="@+id/customer_email"
-                android:textColor="#ffffff"
-                android:layout_below="@+id/customer_name"
-                android:layout_alignLeft="@+id/customer_name"
-                android:layout_alignStart="@+id/customer_name"
-                android:layout_marginTop="3dp" />
+                <android.support.v7.widget.ButtonBarLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_bar_layout_nav_drawer"
+                    android:gravity="center"
+                    android:background="@color/windowBackground"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nav_about_us"
+                        android:text="About Us"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nav_credits"
+                        android:text="Credits"/>
+                </android.support.v7.widget.ButtonBarLayout>
 
+                <ExpandableListView
+                    android:id="@+id/exp_navigation_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:listSelector="@android:color/transparent"
+                    android:background="@android:color/white"
+                    android:layout_below="@+id/button_bar_layout_nav_drawer"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                </ExpandableListView>
+
+            </RelativeLayout>
         </RelativeLayout>
-
-        <ExpandableListView
-            android:id="@+id/exp_navigation_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:listSelector="@android:color/transparent"
-            android:layout_marginTop="120dp"
-            android:background="@android:color/white">
-        </ExpandableListView>
-
     </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

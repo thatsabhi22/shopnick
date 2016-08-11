@@ -3,7 +3,6 @@ package com.theleafapps.shopnick.tasks;
 import android.content.Context;
 import android.util.Log;
 
-import com.theleafapps.shopnick.models.Category;
 import com.theleafapps.shopnick.models.multiples.Categories;
 import com.theleafapps.shopnick.utils.AppConstants;
 import com.theleafapps.shopnick.utils.PrefUtil;

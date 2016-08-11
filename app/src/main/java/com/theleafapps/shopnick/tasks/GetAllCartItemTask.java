@@ -1,7 +1,6 @@
 package com.theleafapps.shopnick.tasks;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.theleafapps.shopnick.models.multiples.CartItems;
 import com.theleafapps.shopnick.utils.AppConstants;

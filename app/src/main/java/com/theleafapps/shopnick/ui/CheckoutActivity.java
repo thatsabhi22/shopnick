@@ -35,7 +35,6 @@ import com.theleafapps.shopnick.utils.Communicator;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class CheckoutActivity extends AppCompatActivity implements Communicator {

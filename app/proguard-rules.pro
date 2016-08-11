@@ -15,3 +15,11 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontnote android.net.http.*
+-dontnote org.apache.commons.codec.**
+-dontnote org.apache.http.**
+-dontnote com.google.vending.licensing.ILicensingService
+-dontnote com.fasterxml.jackson.**
+-dontnote com.nineoldandroids.util.ReflectiveProperty
+-dontnote android.support.v4.**
+-dontnote com.squareup.picasso.**

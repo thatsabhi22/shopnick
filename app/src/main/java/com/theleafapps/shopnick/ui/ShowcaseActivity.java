@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,7 @@ public class ShowcaseActivity extends AppCompatActivity {
     HashMap<ExpandedMenuModel, List<String>> listDataChild;
     MyProgressDialog myProgressDialog;
     MenuItem menuItem;
+    Button nav_about_us,nav_credits;
     Menu menu;
 
     private Toolbar toolbar;                                     // Declaring the Toolbar Object
@@ -97,12 +99,23 @@ public class ShowcaseActivity extends AppCompatActivity {
                 }
             }
 
-
+            nav_about_us     =   (Button) findViewById(R.id.nav_about_us);
+            nav_credits      =   (Button) findViewById(R.id.nav_credits);
             customer_name    =   (TextView) findViewById(R.id.customer_name);
             customer_email   =   (TextView) findViewById(R.id.customer_email);
             mDrawerLayout    =   (DrawerLayout) findViewById(R.id.drawerLayout_showcase);
             expandableList   =   (ExpandableListView) findViewById(R.id.exp_navigation_menu);
             navigationView   =   (NavigationView) findViewById(R.id.nav_view);
+
+            nav_about_us.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(ShowcaseActivity.this,"About us clicked",Toast.LENGTH_LONG).show();
+                    Intent intent_about = new Intent(ShowcaseActivity.this,AboutUsActivity.class);
+                    startActivity(intent_about);
+                }
+            });
+
 
             if (navigationView != null) {
                 setupDrawerContent(navigationView);

@@ -25,6 +25,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_list_screen"
+        android:background="@color/red_500"
+        android:orientation="horizontal"
+        android:id="@+id/disclaimer_product_list">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/disclaimer"
+            android:textAlignment="center"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/disclaimer_product_list"
         android:background="@color/pink_200"
         android:orientation="horizontal"
         android:id="@+id/filter_section_layout">

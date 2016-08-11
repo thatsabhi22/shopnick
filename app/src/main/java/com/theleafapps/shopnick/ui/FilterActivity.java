@@ -16,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.theleafapps.shopnick.R;
 import com.theleafapps.shopnick.dialogs.MyProgressDialog;
