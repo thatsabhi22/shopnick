@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.utils;
+package com.theleafapps.pro.shopnick.utils;
 
 /**
  * Created by aviator on 10/07/16.

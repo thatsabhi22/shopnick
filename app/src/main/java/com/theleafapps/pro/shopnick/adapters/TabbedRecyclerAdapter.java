@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.adapters;
+package com.theleafapps.pro.shopnick.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.models.SubCategory;
-import com.theleafapps.shopnick.ui.ProductListActivity;
-import com.theleafapps.shopnick.utils.MySingleton;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.models.SubCategory;
+import com.theleafapps.pro.shopnick.ui.ProductListActivity;
+import com.theleafapps.pro.shopnick.utils.MySingleton;
 
 import java.util.Collections;
 import java.util.List;

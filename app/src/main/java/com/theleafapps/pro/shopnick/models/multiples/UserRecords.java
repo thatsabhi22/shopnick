@@ -1,8 +1,8 @@
-package com.theleafapps.shopnick.models.multiples;
+package com.theleafapps.pro.shopnick.models.multiples;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.theleafapps.shopnick.models.BaseRecord;
-import com.theleafapps.shopnick.models.UserRecord;
+import com.theleafapps.pro.shopnick.models.BaseRecord;
+import com.theleafapps.pro.shopnick.models.UserRecord;
 
 import java.util.ArrayList;
 import java.util.List;

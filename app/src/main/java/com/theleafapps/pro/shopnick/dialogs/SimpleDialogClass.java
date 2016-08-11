@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.dialogs;
+package com.theleafapps.pro.shopnick.dialogs;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.tasks.DeleteCartItemByIdTask;
-import com.theleafapps.shopnick.utils.Commons;
-import com.theleafapps.shopnick.utils.Communicator;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.tasks.DeleteCartItemByIdTask;
+import com.theleafapps.pro.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.utils.Communicator;
 
 /**
  * Created by aviator on 29/11/15.

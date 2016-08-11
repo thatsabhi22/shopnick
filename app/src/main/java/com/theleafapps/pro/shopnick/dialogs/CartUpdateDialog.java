@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.dialogs;
+package com.theleafapps.pro.shopnick.dialogs;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -19,15 +19,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.models.CartItem;
-import com.theleafapps.shopnick.models.Variant;
-import com.theleafapps.shopnick.models.multiples.CartItems;
-import com.theleafapps.shopnick.models.multiples.Variants;
-import com.theleafapps.shopnick.tasks.GetAllVariantsByProductIdTask;
-import com.theleafapps.shopnick.tasks.UpdateCartItemTask;
-import com.theleafapps.shopnick.utils.Communicator;
-import com.theleafapps.shopnick.utils.LinkedMap;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.models.CartItem;
+import com.theleafapps.pro.shopnick.models.Variant;
+import com.theleafapps.pro.shopnick.models.multiples.CartItems;
+import com.theleafapps.pro.shopnick.models.multiples.Variants;
+import com.theleafapps.pro.shopnick.tasks.GetAllVariantsByProductIdTask;
+import com.theleafapps.pro.shopnick.tasks.UpdateCartItemTask;
+import com.theleafapps.pro.shopnick.utils.Communicator;
+import com.theleafapps.pro.shopnick.utils.LinkedMap;
 
 import java.util.ArrayList;
 import java.util.List;

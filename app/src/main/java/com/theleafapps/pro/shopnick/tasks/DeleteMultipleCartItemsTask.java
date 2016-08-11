@@ -1,9 +1,9 @@
-package com.theleafapps.shopnick.tasks;
+package com.theleafapps.pro.shopnick.tasks;
 
 import android.content.Context;
 
-import com.theleafapps.shopnick.utils.AppConstants;
-import com.theleafapps.shopnick.utils.PrefUtil;
+import com.theleafapps.pro.shopnick.utils.AppConstants;
+import com.theleafapps.pro.shopnick.utils.PrefUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.models;
+package com.theleafapps.pro.shopnick.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,23 +23,23 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.adapters.ExpandableListAdapter;
-import com.theleafapps.shopnick.adapters.ViewPagerAdapter;
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.models.Category;
-import com.theleafapps.shopnick.models.Customer;
-import com.theleafapps.shopnick.models.ExpandedMenuModel;
-import com.theleafapps.shopnick.models.SubCategory;
-import com.theleafapps.shopnick.models.multiples.CartItems;
-import com.theleafapps.shopnick.models.multiples.Categories;
-import com.theleafapps.shopnick.models.multiples.SubCategories;
-import com.theleafapps.shopnick.tasks.GetAllCartItemTask;
-import com.theleafapps.shopnick.tasks.GetAllCategoriesTask;
-import com.theleafapps.shopnick.tasks.GetAllSubCategoriesTask;
-import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
-import com.theleafapps.shopnick.ui.fragments.OneFragment;
-import com.theleafapps.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.adapters.ExpandableListAdapter;
+import com.theleafapps.pro.shopnick.adapters.ViewPagerAdapter;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.models.Category;
+import com.theleafapps.pro.shopnick.models.Customer;
+import com.theleafapps.pro.shopnick.models.ExpandedMenuModel;
+import com.theleafapps.pro.shopnick.models.SubCategory;
+import com.theleafapps.pro.shopnick.models.multiples.CartItems;
+import com.theleafapps.pro.shopnick.models.multiples.Categories;
+import com.theleafapps.pro.shopnick.models.multiples.SubCategories;
+import com.theleafapps.pro.shopnick.tasks.GetAllCartItemTask;
+import com.theleafapps.pro.shopnick.tasks.GetAllCategoriesTask;
+import com.theleafapps.pro.shopnick.tasks.GetAllSubCategoriesTask;
+import com.theleafapps.pro.shopnick.tasks.GetCustomerByIdTask;
+import com.theleafapps.pro.shopnick.ui.fragments.OneFragment;
+import com.theleafapps.pro.shopnick.utils.Commons;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.theleafapps.shopnick.ui.NoNetworkActivity">
+    tools:context="com.theleafapps.pro.shopnick.ui.NoNetworkActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp" />
 
-    <com.theleafapps.shopnick.utils.DotProgressBar
+    <com.theleafapps.pro.shopnick.utils.DotProgressBar
         android:layout_width="130dp"
         android:layout_height="25dp"
         android:layout_gravity="center|bottom"

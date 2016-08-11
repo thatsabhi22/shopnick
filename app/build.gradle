@@ -7,7 +7,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.theleafapps.shopnick"
+        applicationId "com.theleafapps.pro.shopnick"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1

@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.utils;
+package com.theleafapps.pro.shopnick.utils;
 
 import java.util.LinkedHashMap;
 import java.util.Set;

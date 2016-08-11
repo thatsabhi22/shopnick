@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.dialogs;
+package com.theleafapps.pro.shopnick.dialogs;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.ui.CheckoutActivity;
-import com.theleafapps.shopnick.utils.Communicator;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.ui.CheckoutActivity;
+import com.theleafapps.pro.shopnick.utils.Communicator;
 
 /**
  * Created by aviator on 21/07/16.

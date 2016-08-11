@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/fasion"
-    tools:context="com.theleafapps.shopnick.ui.SplashActivity">
+    tools:context="com.theleafapps.pro.shopnick.ui.SplashActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         android:layout_marginBottom="125dp"
         android:layout_marginRight="40dp" />
 
-    <com.theleafapps.shopnick.utils.DotProgressBar
+    <com.theleafapps.pro.shopnick.utils.DotProgressBar
         android:layout_width="130dp"
         android:layout_height="25dp"
         android:layout_gravity="center|bottom"

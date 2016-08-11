@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,12 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.models.Customer;
-import com.theleafapps.shopnick.models.multiples.Customers;
-import com.theleafapps.shopnick.tasks.AddCustomerTask;
-import com.theleafapps.shopnick.tasks.GetCustomerByCustomerDevIdTask;
-import com.theleafapps.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.models.Customer;
+import com.theleafapps.pro.shopnick.models.multiples.Customers;
+import com.theleafapps.pro.shopnick.tasks.AddCustomerTask;
+import com.theleafapps.pro.shopnick.tasks.GetCustomerByCustomerDevIdTask;
+import com.theleafapps.pro.shopnick.utils.Commons;
 
 import java.util.concurrent.ExecutionException;
 

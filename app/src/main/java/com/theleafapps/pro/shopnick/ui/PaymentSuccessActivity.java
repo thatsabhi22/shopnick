@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.utils.Commons;
 
 public class PaymentSuccessActivity extends AppCompatActivity {
 

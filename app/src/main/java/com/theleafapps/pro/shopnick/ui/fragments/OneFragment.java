@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui.fragments;
+package com.theleafapps.pro.shopnick.ui.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.adapters.TabbedRecyclerAdapter;
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.models.SubCategory;
-import com.theleafapps.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.adapters.TabbedRecyclerAdapter;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.models.SubCategory;
+import com.theleafapps.pro.shopnick.utils.Commons;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.Collections;

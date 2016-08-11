@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.app.FragmentManager;
 import android.content.Context;
@@ -18,14 +18,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.adapters.CartCustomAdapter;
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.models.CartItem;
-import com.theleafapps.shopnick.models.multiples.CartItems;
-import com.theleafapps.shopnick.tasks.GetAllCartItemTask;
-import com.theleafapps.shopnick.utils.Commons;
-import com.theleafapps.shopnick.utils.Communicator;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.adapters.CartCustomAdapter;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.models.CartItem;
+import com.theleafapps.pro.shopnick.models.multiples.CartItems;
+import com.theleafapps.pro.shopnick.tasks.GetAllCartItemTask;
+import com.theleafapps.pro.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.utils.Communicator;
 
 import java.util.ArrayList;
 import java.util.List;

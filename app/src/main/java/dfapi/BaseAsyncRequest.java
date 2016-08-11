@@ -54,7 +54,7 @@ public class BaseAsyncRequest extends AsyncTask<Void, Void, Boolean> {
     protected Map<String, String> headerParams = new HashMap<>();
 
     // instance url, for example http://localhost:8080/api/v2
-    protected String baseInstanceUrl = com.theleafapps.shopnick.utils.AppConstants.INSTANCE_URL;
+    protected String baseInstanceUrl = com.theleafapps.pro.shopnick.utils.AppConstants.INSTANCE_URL;
 
     // set to true to print the request and response strings to verbose
     protected boolean use_logging = false;

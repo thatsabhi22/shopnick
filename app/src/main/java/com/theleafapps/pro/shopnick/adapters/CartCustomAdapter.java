@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.adapters;
+package com.theleafapps.pro.shopnick.adapters;
 
 import android.app.FragmentManager;
 import android.content.Context;
@@ -13,12 +13,12 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.dialogs.CartUpdateDialog;
-import com.theleafapps.shopnick.dialogs.SimpleDialogClass;
-import com.theleafapps.shopnick.models.CartItem;
-import com.theleafapps.shopnick.models.multiples.CartItems;
-import com.theleafapps.shopnick.utils.MySingleton;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.dialogs.CartUpdateDialog;
+import com.theleafapps.pro.shopnick.dialogs.SimpleDialogClass;
+import com.theleafapps.pro.shopnick.models.CartItem;
+import com.theleafapps.pro.shopnick.models.multiples.CartItems;
+import com.theleafapps.pro.shopnick.utils.MySingleton;
 
 import java.util.List;
 

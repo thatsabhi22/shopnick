@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.utils;
+package com.theleafapps.pro.shopnick.utils;
 
 public interface AppConstants {
     String SESSION_TOKEN = "session_token";

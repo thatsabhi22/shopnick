@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.app.FragmentManager;
 import android.content.Context;
@@ -19,18 +19,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.dialogs.CouponCodesDialog;
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.models.Coupon;
-import com.theleafapps.shopnick.models.Customer;
-import com.theleafapps.shopnick.models.multiples.Customers;
-import com.theleafapps.shopnick.tasks.DeleteMultipleCartItemsTask;
-import com.theleafapps.shopnick.tasks.GetCouponByCodeTask;
-import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
-import com.theleafapps.shopnick.tasks.UpdateCustomerWalletValueTask;
-import com.theleafapps.shopnick.utils.Commons;
-import com.theleafapps.shopnick.utils.Communicator;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.dialogs.CouponCodesDialog;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.models.Coupon;
+import com.theleafapps.pro.shopnick.models.Customer;
+import com.theleafapps.pro.shopnick.models.multiples.Customers;
+import com.theleafapps.pro.shopnick.tasks.DeleteMultipleCartItemsTask;
+import com.theleafapps.pro.shopnick.tasks.GetCouponByCodeTask;
+import com.theleafapps.pro.shopnick.tasks.GetCustomerByIdTask;
+import com.theleafapps.pro.shopnick.tasks.UpdateCustomerWalletValueTask;
+import com.theleafapps.pro.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.utils.Communicator;
 
 import org.json.JSONArray;
 

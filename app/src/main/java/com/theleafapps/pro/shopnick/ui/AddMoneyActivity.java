@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -9,14 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.dialogs.MoneyAddedDialog;
-import com.theleafapps.shopnick.models.Customer;
-import com.theleafapps.shopnick.models.multiples.Customers;
-import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
-import com.theleafapps.shopnick.tasks.UpdateCustomerWalletValueTask;
-import com.theleafapps.shopnick.utils.Commons;
-import com.theleafapps.shopnick.utils.Communicator;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.dialogs.MoneyAddedDialog;
+import com.theleafapps.pro.shopnick.models.Customer;
+import com.theleafapps.pro.shopnick.models.multiples.Customers;
+import com.theleafapps.pro.shopnick.tasks.GetCustomerByIdTask;
+import com.theleafapps.pro.shopnick.tasks.UpdateCustomerWalletValueTask;
+import com.theleafapps.pro.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.utils.Communicator;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;

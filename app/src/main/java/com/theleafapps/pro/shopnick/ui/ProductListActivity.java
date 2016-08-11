@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,14 +17,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.adapters.ProductListViewRecyclerAdapter;
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.models.SubCategory;
-import com.theleafapps.shopnick.models.multiples.Products;
-import com.theleafapps.shopnick.tasks.GetProductsBySubCatIdTask;
-import com.theleafapps.shopnick.tasks.GetSubCatByIdTask;
-import com.theleafapps.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.adapters.ProductListViewRecyclerAdapter;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.models.SubCategory;
+import com.theleafapps.pro.shopnick.models.multiples.Products;
+import com.theleafapps.pro.shopnick.tasks.GetProductsBySubCatIdTask;
+import com.theleafapps.pro.shopnick.tasks.GetSubCatByIdTask;
+import com.theleafapps.pro.shopnick.utils.Commons;
 
 import java.util.concurrent.ExecutionException;
 

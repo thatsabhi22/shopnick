@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.dialogs;
+package com.theleafapps.pro.shopnick.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.theleafapps.shopnick.R;
+import com.theleafapps.pro.shopnick.R;
 
 import java.io.Serializable;
 

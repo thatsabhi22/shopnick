@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.adapters;
+package com.theleafapps.pro.shopnick.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

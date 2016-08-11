@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.models;
+package com.theleafapps.pro.shopnick.models;
 
 
 // no real functionality, just something to extend for polymorphism

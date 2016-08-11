@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.utils;
+package com.theleafapps.pro.shopnick.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,8 +10,8 @@ import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.models.SubCategory;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.models.SubCategory;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

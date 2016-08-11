@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.adapters;
+package com.theleafapps.pro.shopnick.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,11 @@ import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.models.ExpandedMenuModel;
-import com.theleafapps.shopnick.models.SubCategory;
-import com.theleafapps.shopnick.ui.ProductListActivity;
-import com.theleafapps.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.models.ExpandedMenuModel;
+import com.theleafapps.pro.shopnick.models.SubCategory;
+import com.theleafapps.pro.shopnick.ui.ProductListActivity;
+import com.theleafapps.pro.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.R;
 
 import java.util.HashMap;
 import java.util.List;

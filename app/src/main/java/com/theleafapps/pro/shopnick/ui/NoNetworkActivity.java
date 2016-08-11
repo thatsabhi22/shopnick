@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.utils.DotProgressBar;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.utils.DotProgressBar;
 
 public class NoNetworkActivity extends AppCompatActivity {
 

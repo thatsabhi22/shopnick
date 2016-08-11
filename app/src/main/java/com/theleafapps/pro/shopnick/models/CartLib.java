@@ -1,4 +1,4 @@
-//package com.theleafapps.shopnick.models;
+//package com.theleafapps.pro.shopnick.models;
 //
 //import java.math.BigDecimal;
 //import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,11 +14,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.theleafapps.shopnick.R;
-import com.theleafapps.shopnick.dialogs.MyProgressDialog;
-import com.theleafapps.shopnick.models.Customer;
-import com.theleafapps.shopnick.tasks.GetCustomerByIdTask;
-import com.theleafapps.shopnick.utils.Commons;
+import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.dialogs.MyProgressDialog;
+import com.theleafapps.pro.shopnick.models.Customer;
+import com.theleafapps.pro.shopnick.tasks.GetCustomerByIdTask;
+import com.theleafapps.pro.shopnick.utils.Commons;
 
 import java.util.concurrent.ExecutionException;
 

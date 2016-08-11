@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.utils;
+package com.theleafapps.pro.shopnick.utils;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
@@ -16,7 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
 
-import com.theleafapps.shopnick.R;
+import com.theleafapps.pro.shopnick.R;
 
 /**
  * @author Silvestr Predko.

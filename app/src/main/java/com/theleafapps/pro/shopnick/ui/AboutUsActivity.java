@@ -1,4 +1,4 @@
-package com.theleafapps.shopnick.ui;
+package com.theleafapps.pro.shopnick.ui;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.theleafapps.shopnick.R;
+import com.theleafapps.pro.shopnick.R;
 
 import java.util.Calendar;
 
@@ -24,7 +24,7 @@ public class AboutUsActivity extends AppCompatActivity {
         View aboutPage = new AboutPage(this)
                 .isRTL(false)
                 .setImage(R.drawable.logo)
-                .setDescription("Shop nick : One Stop Online fashion destination in Mobile app\n" +
+                .setDescription("Shop nick\nOne Stop Online fashion destination in Mobile app\n" +
                         "\n" +
                         "Explore the latest fashion trends for men and women, and feel the mobility in you online shopping experience.\n" +
                         "\n" +
@@ -36,9 +36,7 @@ public class AboutUsActivity extends AppCompatActivity {
                 .addFacebook("theleafapps")
                 .addTwitter("theleafapps")
                 .addPlayStore("com.theleafapps.pro")
-                .addInstagram("https://www.instagram.com/theleafapps/")
-                .addGitHub("medyo")
-                .addItem(getCopyRightsElement())
+                .addInstagram("theleafapps")
                 .create();
 
         setContentView(aboutPage);
