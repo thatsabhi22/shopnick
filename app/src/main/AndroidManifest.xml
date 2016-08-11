@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.theleafapps.pro.shopnick" >
+    package="com.theleafapps.pro.shopnick">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,84 +10,90 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/MyMaterialTheme" >
+        android:theme="@style/MyMaterialTheme">
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.theleafapps.pro.shopnick.ui.MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.ShowcaseActivity"
+            android:name=".ui.ShowcaseActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.ProductListActivity"
+            android:name=".ui.ProductListActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:parentActivityName="com.theleafapps.pro.shopnick.ui.ShowcaseActivity"
-            android:screenOrientation="portrait" >
+            android:parentActivityName=".ui.ShowcaseActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.theleafapps.pro.shopnick.ui.ShowcaseActivity" />
         </activity>
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.ProductDetailActivity"
+            android:name=".ui.ProductDetailActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:parentActivityName="com.theleafapps.pro.shopnick.ui.ProductListActivity"
-            android:screenOrientation="portrait" >
+            android:parentActivityName=".ui.ProductListActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.theleafapps.pro.shopnick.ui.ProductListActivity" />
         </activity>
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.CartActivity"
+            android:name=".ui.CartActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.CheckoutActivity"
+            android:name=".ui.CheckoutActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:parentActivityName="com.theleafapps.pro.shopnick.ui.CartActivity"
-            android:screenOrientation="portrait" >
+            android:parentActivityName=".ui.CartActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.theleafapps.pro.shopnick.ui.CartActivity" />
         </activity>
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.NoNetworkActivity"
+            android:name=".ui.NoNetworkActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.AuthActivity"
+            android:name=".ui.AuthActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.PaymentSuccessActivity"
+            android:name=".ui.PaymentSuccessActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.AddMoneyActivity"
+            android:name=".ui.AddMoneyActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.CustomerProfileActivity"
+            android:name=".ui.CustomerProfileActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.theleafapps.pro.shopnick.ui.FilterActivity"
+            android:name=".ui.FilterActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:parentActivityName="com.theleafapps.pro.shopnick.ui.ProductListActivity"
-            android:screenOrientation="portrait" >
+            android:parentActivityName=".ui.ProductListActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.theleafapps.pro.shopnick.ui.ProductListActivity" />
         </activity>
-        <activity android:name="com.theleafapps.pro.shopnick.ui.AboutUsActivity" >
+        <activity
+            android:name=".ui.AboutUsActivity"
+            android:parentActivityName=".ui.ShowcaseActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.theleafapps.pro.shopnick.ui.ShowcaseActivity" />
         </activity>
+        <activity android:name=".ui.CreditsActivity"></activity>
     </application>
 
 </manifest>

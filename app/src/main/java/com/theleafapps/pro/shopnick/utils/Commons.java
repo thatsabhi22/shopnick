@@ -1,5 +1,6 @@
 package com.theleafapps.pro.shopnick.utils;
 
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import com.theleafapps.pro.shopnick.models.SubCategory;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -79,6 +81,24 @@ public class Commons {
         dialog.show();
     }
 
+    public static void getActivityTrail(Context ctx) {
+        ActivityManager m = (ActivityManager) ctx
+                .getSystemService(ctx.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> runningTaskInfoList = m.getRunningTasks(10);
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcessesInfoList  = m.getRunningAppProcesses();
+        Iterator<ActivityManager.RunningTaskInfo> itr = runningTaskInfoList.iterator();
+        while (itr.hasNext()) {
+            ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) itr.next();
+            int id = runningTaskInfo.id;
+            CharSequence desc = runningTaskInfo.description;
+            int numOfActivities = runningTaskInfo.numActivities;
+            String topActivity = runningTaskInfo.topActivity
+                    .getShortClassName();
+            String baseActivity = runningTaskInfo.baseActivity.getShortClassName();
+            //Log.d("Tangho","Trail >>>>" + topActivity+"\n" + "numOfActivities >>>>>" + numOfActivities);
+            Log.d("Trailho","Base >> "+ baseActivity + "Current >>" + topActivity);
+        }
+    }
 //    String key      =   "dumlagakehaisha";
 //    //            String encMsg   =   EncryptUtils.xorMessage(android_id,key);
 //    String encMsg   =   "1";

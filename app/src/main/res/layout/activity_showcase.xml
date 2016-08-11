@@ -126,6 +126,7 @@
                 <android.support.v7.widget.ButtonBarLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
                     android:id="@+id/button_bar_layout_nav_drawer"
                     android:gravity="center"
                     android:background="@color/windowBackground"
@@ -133,14 +134,22 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true">
-                    <Button
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/nav_about_us"
+                        android:src="@drawable/about"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@color/windowBackground"
                         android:text="About Us"/>
-                    <Button
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:src="@drawable/credits"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@color/windowBackground"
                         android:id="@+id/nav_credits"
                         android:text="Credits"/>
                 </android.support.v7.widget.ButtonBarLayout>

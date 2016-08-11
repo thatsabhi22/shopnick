@@ -1,13 +1,16 @@
 package com.theleafapps.pro.shopnick.ui;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.theleafapps.pro.shopnick.R;
+import com.theleafapps.pro.shopnick.utils.Commons;
 
 import java.util.Calendar;
 
@@ -21,14 +24,14 @@ public class AboutUsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
+//        Commons.getActivityTrail(this);
+
         View aboutPage = new AboutPage(this)
                 .isRTL(false)
                 .setImage(R.drawable.logo)
                 .setDescription("Shop nick\nOne Stop Online fashion destination in Mobile app\n" +
                         "\n" +
-                        "Explore the latest fashion trends for men and women, and feel the mobility in you online shopping experience.\n" +
-                        "\n" +
-                        "Shop nick brings you latest merchandise which adds up to your style statement.")
+                        "Explore the latest fashion trends for men and women, and feel the mobility in you online shopping experience.\n")
                 .addItem(new Element().setTitle("Version 1.0"))
                 .addGroup("Connect with us")
                 .addEmail("getintouch@theleafapps.com")
@@ -57,6 +60,32 @@ public class AboutUsActivity extends AppCompatActivity {
             }
         });
         return copyRightsElement;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Tangho","AboutUs activity >> onRestart Called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+        Log.d("Tangho","AboutUs activity >> onPause Called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Tangho","AboutUs activity >> onDestroy Called");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d("Tangho","AboutUs activity >> onBackPressed Called");
+        Intent intent = new Intent(this,ShowcaseActivity.class);
     }
 
 }

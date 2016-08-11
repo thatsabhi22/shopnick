@@ -50,7 +50,7 @@ public class ProductListActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             myProgressDialog    =   new MyProgressDialog(this);
             setContentView(R.layout.activity_product_list);
-
+            //Commons.getActivityTrail(this);
 
             toolbar = (Toolbar) findViewById(R.id.toolbar_product_list);
             setSupportActionBar(toolbar);

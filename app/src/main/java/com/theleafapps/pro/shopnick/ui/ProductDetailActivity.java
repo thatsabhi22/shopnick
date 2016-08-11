@@ -74,6 +74,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_product_detail);
 
+            //Commons.getActivityTrail(this);
             myProgressDialog = new MyProgressDialog(this);
             if (menu != null) {
                 menuItem = menu.findItem(R.id.cart_icon);

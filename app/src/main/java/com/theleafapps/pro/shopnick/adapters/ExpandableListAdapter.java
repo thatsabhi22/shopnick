@@ -44,7 +44,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public int getGroupCount() {
         int i = mListDataHeader.size();
-        Log.d("GROUPCOUNT", String.valueOf(i));
+//        Log.d("GROUPCOUNT", String.valueOf(i));
         return this.mListDataHeader.size();
     }
 
@@ -62,8 +62,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        Log.d("CHILD", mListDataChild.get(this.mListDataHeader.get(groupPosition))
-                .get(childPosition).toString());
+//        Log.d("CHILD", mListDataChild.get(this.mListDataHeader.get(groupPosition))
+//                .get(childPosition).toString());
         return this.mListDataChild.get(this.mListDataHeader.get(groupPosition))
                 .get(childPosition);
     }
