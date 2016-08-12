@@ -8,6 +8,7 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.theleafapps.pro.shopnick.R;
 import com.theleafapps.pro.shopnick.models.Customer;
@@ -29,32 +30,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         try {
-            SharedPreferences sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-
-//            sharedPreferences.edit().remove("cid").commit();
-
-            if(TextUtils.isEmpty(sharedPreferences.getString("cid",""))){
-                and_id = Settings.Secure.getString(this.getContentResolver(),
-                        Settings.Secure.ANDROID_ID);
-                GetCustomerByCustomerDevIdTask getCustomerByCustomerDevIdTask = new
-                        GetCustomerByCustomerDevIdTask(this,and_id);
-                getCustomerByCustomerDevIdTask.execute().get();
-                Customer customer = getCustomerByCustomerDevIdTask.customerRec;
-
-                if(customer!=null){
-                    editor.putString("cid", String.valueOf(customer.customer_id));
-                    editor.apply();
-                }
-                else{
-                    Customer sampleCustomer = createSampleCustomer();
-                    if(sampleCustomer!=null){
-                        editor.putString("cid", String.valueOf(sampleCustomer.customer_id));
-                        editor.apply();
-                    }
-                }
-            }
-
             new Handler().postDelayed(new Runnable() {
 
                 /*
@@ -66,17 +41,24 @@ public class SplashActivity extends AppCompatActivity {
                 public void run() {
                     // This method will be executed once the timer is over
                     // Start your app main activity
-                    Intent intent;
+                    try {
+                        Intent intent;
 
-                    if (Commons.hasActiveInternetConnection(SplashActivity.this)) {
-                        intent = new Intent(SplashActivity.this, ShowcaseActivity.class);
-                    } else {
-                        intent = new Intent(SplashActivity.this, NoNetworkActivity.class);
+                        if (Commons.hasActiveInternetConnection(SplashActivity.this)) {
+                            processCustomer();
+                            intent = new Intent(SplashActivity.this, ShowcaseActivity.class);
+                        } else {
+                            intent = new Intent(SplashActivity.this, NoNetworkActivity.class);
+                        }
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        // close this activity
+                        finish();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
                     }
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    // close this activity
-                    finish();
                 }
             }, SPLASH_TIME_OUT);
         }catch (Exception e) {
@@ -84,11 +66,39 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    private void processCustomer() throws InterruptedException, ExecutionException {
+        SharedPreferences sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+//            sharedPreferences.edit().remove("cid").commit();
+
+        if(TextUtils.isEmpty(sharedPreferences.getString("cid",""))){
+            and_id = Settings.Secure.getString(this.getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+            GetCustomerByCustomerDevIdTask getCustomerByCustomerDevIdTask = new
+                    GetCustomerByCustomerDevIdTask(this,and_id);
+            getCustomerByCustomerDevIdTask.execute().get();
+            Customer customer = getCustomerByCustomerDevIdTask.customerRec;
+
+            if(customer!=null){
+                editor.putString("cid", String.valueOf(customer.customer_id));
+                editor.apply();
+            }
+            else{
+                Customer sampleCustomer = createSampleCustomer();
+                if(sampleCustomer!=null){
+                    editor.putString("cid", String.valueOf(sampleCustomer.customer_id));
+                    editor.apply();
+                }
+            }
+        }
+    }
+
     private Customer createSampleCustomer() {
         Customer customer = new Customer();
 
         try {
-
+            Log.d("Tangho",">>>>>Inside createSampleCustome Method");
             Double value                = 10000.0;
             customer.customer_dev_id    = and_id;
             customer.city               = "Austin";
@@ -101,6 +111,7 @@ public class SplashActivity extends AppCompatActivity {
             customer.wallet_value       = value.floatValue();
             customer.zipcode            = "900000";
             customer.mobile             = "9999999999";
+            Log.d("Tangho",">>>>>Customer Object filled");
 
             Customers customers = new Customers();
             customers.customers.add(customer);
@@ -108,6 +119,7 @@ public class SplashActivity extends AppCompatActivity {
             AddCustomerTask addCustomerTask = new AddCustomerTask(this, customers);
             addCustomerTask.execute().get();
 
+            Log.d("Tangho",">>>>> AddCustomerTask completed with customerid > " + addCustomerTask.customerId);
             customer.customer_id        = addCustomerTask.customerId;
 
         } catch (InterruptedException e) {
