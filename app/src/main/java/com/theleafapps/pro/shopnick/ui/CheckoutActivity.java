@@ -195,7 +195,7 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
 
                 if(wallet_value > cart_total) {
                     try {
-                        customer.wallet_value   =   customer.wallet_value - cart_total - deduction;
+                        customer.wallet_value   =   customer.wallet_value - (cart_total - deduction);
                         Customers customersObj  =   new Customers();
                         customersObj.customers.add(customer);
 

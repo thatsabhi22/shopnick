@@ -15,6 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn com.squareup.picasso.**
+-dontwarn com.fasterxml.jackson.**
+-dontwarn org.apache.**
 -dontnote android.net.http.*
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
@@ -23,3 +27,23 @@
 -dontnote com.nineoldandroids.util.ReflectiveProperty
 -dontnote android.support.v4.**
 -dontnote com.squareup.picasso.**
+
+####################################################################  REMOVE LOGGING
+
+-assumenosideeffects class android.util.Log {
+    public static *** e(...);
+    public static *** w(...);
+    public static *** wtf(...);
+    public static *** d(...);
+    public static *** v(...);
+    public static *** i(...);
+}
+
+####################################################################  ORG.APACHE.HTTP
+
+-keep class org.apache.http.**
+-keep interface org.apache.http.**
+-keep class com.fasterxml.** { *; }
+
+
+

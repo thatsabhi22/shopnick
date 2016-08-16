@@ -69,7 +69,15 @@ public class AddMoneyActivity extends AppCompatActivity implements Communicator{
                         customer = getCustomerByIdTask.customerRec;
 
                         if(customer!=null) {
-                            customer.wallet_value   =   10000.0;
+                            if(cart_total <= 10000)
+                                customer.wallet_value   =   10000.0;
+                            if(cart_total > 10000)
+                                customer.wallet_value   =   20000.0;
+                            if(cart_total > 20000)
+                                customer.wallet_value   =   30000.0;
+                            if(cart_total > 30000)
+                                customer.wallet_value   =   50000.0;
+
                             Customers customersObj  =   new Customers();
                             customersObj.customers.add(customer);
 
@@ -80,6 +88,7 @@ public class AddMoneyActivity extends AppCompatActivity implements Communicator{
                             Bundle arguments = new Bundle();
                             arguments.putInt("cart_total",(int)cart_total);
                             arguments.putIntegerArrayList("cart_item_id_array",cart_item_id_array);
+                            arguments.putDouble("wallet_value",customer.wallet_value);
                             moneyAddedDialog.setArguments(arguments);
                             moneyAddedDialog.show(fragmentManager,"Money_Added");
                         }

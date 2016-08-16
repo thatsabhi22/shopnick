@@ -83,7 +83,7 @@
         android:textColor="@color/accent_material_light"
         android:layout_alignTop="@+id/currency5"
         android:layout_toRightOf="@+id/currency5"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="50dp" />
 
     <View
         android:layout_width="fill_parent"

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.theleafapps.pro.shopnick.R;
 import com.theleafapps.pro.shopnick.ui.CheckoutActivity;
@@ -22,6 +23,8 @@ public class MoneyAddedDialog extends DialogFragment implements View.OnClickList
     Communicator comm;
     Bundle bundle;
     Button ok;
+    double cart_total;
+    TextView money_tv;
 
     @Override
     public void onAttach(Activity activity) {
@@ -33,8 +36,11 @@ public class MoneyAddedDialog extends DialogFragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         bundle      =   getArguments();
+        cart_total  =   bundle.getDouble("wallet_value");
         View view   =   inflater.inflate(R.layout.dialog_layout_wallet_money_added,null);
         ok          =   (Button) view.findViewById(R.id.ok_money_added_button);
+        money_tv    =   (TextView) view.findViewById(R.id.money_added_text);
+        money_tv.setText("Your Wallet has been updated to \nRs. "+ cart_total +"\n\nHappy Shopping !!");
         ok.setOnClickListener(this);
         setCancelable(false);
         return view;
