@@ -25,7 +25,8 @@ import java.util.List;
 /**
  * Created by aviator on 08/07/16.
  */
-public class CartCustomAdapter extends RecyclerView.Adapter<CartCustomAdapter.MyViewHolder>  implements View.OnClickListener{
+public class CartCustomAdapter extends
+        RecyclerView.Adapter<CartCustomAdapter.MyViewHolder>  implements View.OnClickListener{
 
     Context mContext;
     CartItems cartItems;

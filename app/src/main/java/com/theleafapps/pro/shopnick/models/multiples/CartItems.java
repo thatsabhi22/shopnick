@@ -16,4 +16,3 @@ public class CartItems extends BaseRecord {
     public List<CartItem> cartItemList = new ArrayList<>();
 
 }
-
