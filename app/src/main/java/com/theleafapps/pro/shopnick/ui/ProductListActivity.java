@@ -221,7 +221,7 @@ public class ProductListActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ShowcaseActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("categoryId",catId-1);
-        MyProgressDialog.show(this,myProgressDialog,"","");
+//        MyProgressDialog.show(this,myProgressDialog,"","");
         startActivity(intent);
     }
 

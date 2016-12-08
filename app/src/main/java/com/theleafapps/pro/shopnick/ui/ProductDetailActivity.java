@@ -404,7 +404,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
         intent = NavUtils.getParentActivityIntent(this);
         intent.putExtra("subCatId",subCatId);
         intent.putExtra("categoryId",catId);
-        MyProgressDialog.show(this,myProgressDialog,"","");
+//        MyProgressDialog.show(this,myProgressDialog,"","");
         NavUtils.navigateUpTo(this,intent);
     }
 
