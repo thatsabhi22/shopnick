@@ -19,17 +19,17 @@ import dfapi.BaseAsyncRequest;
 /**
  * Created by aviator on 06/08/16.
  */
-public class GetSubCatByIdTask extends BaseAsyncRequest{
+public class GetSubCatByIdTask extends BaseAsyncRequest {
 
 
-    Context context;
     public SubCategories subCategoriesRec;
     public SubCategory subCategoryRec;
+    Context context;
     int subCatId;
 
-    public GetSubCatByIdTask(Context context, int subCatId){
-        this.context    = context;
-        this.subCatId   = subCatId;
+    public GetSubCatByIdTask(Context context, int subCatId) {
+        this.context = context;
+        this.subCatId = subCatId;
     }
 
     @Override
@@ -55,14 +55,14 @@ public class GetSubCatByIdTask extends BaseAsyncRequest{
         //Log.d("Tang Ho"," >>>>> " + response);
         subCategoriesRec =
                 (SubCategories) ApiInvoker.deserialize(response, "", SubCategories.class);
-        if(subCategoriesRec.subCategories.size()> 0)
+        if (subCategoriesRec.subCategories.size() > 0)
             subCategoryRec = subCategoriesRec.subCategories.get(0);
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && subCategoriesRec != null){
-            Log.d("Tang Ho"," >>>>> Success");
+        if (success && subCategoriesRec != null) {
+            Log.d("Tang Ho", " >>>>> Success");
         }
     }
 

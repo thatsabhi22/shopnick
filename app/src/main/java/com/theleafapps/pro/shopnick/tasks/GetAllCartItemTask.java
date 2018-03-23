@@ -23,9 +23,9 @@ public class GetAllCartItemTask extends BaseAsyncRequest {
     Context context;
     int customerId;
 
-    public GetAllCartItemTask(Context context, int customer_id){
-        this.context       =   context;
-        this.customerId    =   customer_id;
+    public GetAllCartItemTask(Context context, int customer_id) {
+        this.context = context;
+        this.customerId = customer_id;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class GetAllCartItemTask extends BaseAsyncRequest {
         // request without related would return just {id, contact_group_id, contact_id}
         // set the related field to go get the contact mRecordsList referenced by
         // each contact_group_relationship record
-         queryParams.put("related", "product_by_product_id");
+        queryParams.put("related", "product_by_product_id");
 
         // need to include the API key and session token
         applicationApiKey = AppConstants.API_KEY;
@@ -60,7 +60,7 @@ public class GetAllCartItemTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && cartItemsReceived != null && cartItemsReceived.cartItemList.size() > 0){
+        if (success && cartItemsReceived != null && cartItemsReceived.cartItemList.size() > 0) {
 
         }
     }

@@ -23,8 +23,8 @@ public class GetAllCategoriesTask extends BaseAsyncRequest {
     public Categories categoriesReceived;
     Context context;
 
-    public GetAllCategoriesTask(Context context){
-            this.context = context;
+    public GetAllCategoriesTask(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -36,9 +36,9 @@ public class GetAllCategoriesTask extends BaseAsyncRequest {
         verb = "GET";
 
         // filter to only select the contacts in this group
-            queryParams = new HashMap<>();
-//            queryParams.put("filter", "SORT BY sequence");
-            queryParams.put("order", "sequence%20ASC");
+        queryParams = new HashMap<>();
+        // queryParams.put("filter", "SORT BY sequence");
+        queryParams.put("order", "sequence%20ASC");
 
         // request without related would return just {id, contact_group_id, contact_id}
         // set the related field to go get the contact mRecordsList referenced by
@@ -59,8 +59,8 @@ public class GetAllCategoriesTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && categoriesReceived != null && categoriesReceived.categories.size() > 0){
-            Log.d("Tang Ho"," >>>>> AllCategories Received");
+        if (success && categoriesReceived != null && categoriesReceived.categories.size() > 0) {
+            Log.d("Tang Ho", " >>>>> AllCategories Received");
         }
     }
 }

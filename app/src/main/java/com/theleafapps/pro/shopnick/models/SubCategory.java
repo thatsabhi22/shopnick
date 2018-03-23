@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by aviator on 22/04/16.
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class SubCategory extends BaseRecord{
+public class SubCategory extends BaseRecord {
 
     @JsonProperty("sub_category_id")
     public int sub_category_id;
@@ -30,9 +30,9 @@ public class SubCategory extends BaseRecord{
     @Override
     public void setAllNonNull() {
 
-        sub_category_name   =   getNonNull(sub_category_name);
-        sub_category_desc   =   getNonNull(sub_category_desc);
-        image_url           =   getNonNull(image_url);
+        sub_category_name = getNonNull(sub_category_name);
+        sub_category_desc = getNonNull(sub_category_desc);
+        image_url = getNonNull(image_url);
 
     }
 

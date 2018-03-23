@@ -35,12 +35,12 @@ public class MoneyAddedDialog extends DialogFragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        bundle      =   getArguments();
-        cart_total  =   bundle.getDouble("wallet_value");
-        View view   =   inflater.inflate(R.layout.dialog_layout_wallet_money_added,null);
-        ok          =   (Button) view.findViewById(R.id.ok_money_added_button);
-        money_tv    =   (TextView) view.findViewById(R.id.money_added_text);
-        money_tv.setText("Your Wallet has been updated to \nRs. "+ cart_total +"\n\nHappy Shopping !!");
+        bundle = getArguments();
+        cart_total = bundle.getDouble("wallet_value");
+        View view = inflater.inflate(R.layout.dialog_layout_wallet_money_added, null);
+        ok = (Button) view.findViewById(R.id.ok_money_added_button);
+        money_tv = (TextView) view.findViewById(R.id.money_added_text);
+        money_tv.setText("Your Wallet has been updated to \nRs. " + cart_total + "\n\nHappy Shopping !!");
         ok.setOnClickListener(this);
         setCancelable(false);
         return view;
@@ -48,7 +48,7 @@ public class MoneyAddedDialog extends DialogFragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.ok_money_added_button){
+        if (v.getId() == R.id.ok_money_added_button) {
             dismiss();
             Intent intent = new Intent(getActivity(), CheckoutActivity.class);
             intent.putExtras(bundle);

@@ -25,40 +25,40 @@ import java.util.List;
 public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAdapter.MyViewHolder> {
 
     Context mContext;
-    private LayoutInflater inflater;
     List<SubCategory> data = Collections.emptyList();
-    private ImageLoader mImageLoader;
     MyProgressDialog myProgressDialog;
+    private LayoutInflater inflater;
+    private ImageLoader mImageLoader;
     private int category_id;
 
     public TabbedRecyclerAdapter(Context context, List<SubCategory> data, int category_id, MyProgressDialog myProgressDialog) {
-        inflater                =   LayoutInflater.from(context);
-        this.mContext           =   context;
-        this.data               =   data;
-        this.category_id        =   category_id;
-        this.myProgressDialog   =   myProgressDialog;
+        inflater = LayoutInflater.from(context);
+        this.mContext = context;
+        this.data = data;
+        this.category_id = category_id;
+        this.myProgressDialog = myProgressDialog;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view =  inflater.inflate(R.layout.cards,parent,false);
+        View view = inflater.inflate(R.layout.cards, parent, false);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView name       =   (TextView) v.findViewById(R.id.text_card_name);
-                TextView subCatId   =   (TextView) v.findViewById(R.id.idView);
+                TextView name = (TextView) v.findViewById(R.id.text_card_name);
+                TextView subCatId = (TextView) v.findViewById(R.id.idView);
 
 //                Toast.makeText(mContext,"Card Clicked ->" + name.getText() + " | Category ->"
 //                        + category_id + " | SubCategoryId -> " + subCatId.getText() , Toast.LENGTH_SHORT).show();
 
                 int subcatId = Integer.valueOf(subCatId.getText().toString());
                 Intent intent = new Intent(mContext, ProductListActivity.class);
-                intent.putExtra("subCatId",subcatId);
-                intent.putExtra("categoryId",category_id);
-                intent.putExtra("title",name.getText());
-                MyProgressDialog.show(mContext,myProgressDialog,"","");
+                intent.putExtra("subCatId", subcatId);
+                intent.putExtra("categoryId", category_id);
+                intent.putExtra("title", name.getText());
+                MyProgressDialog.show(mContext, myProgressDialog, "", "");
                 mContext.startActivity(intent);
 
             }
@@ -76,7 +76,7 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
 
         mImageLoader = MySingleton.getInstance(mContext).getImageLoader();
         holder.text_card_name.setText(current.sub_category_name);
-        holder.image_card_cover.setImageUrl(current.image_url,mImageLoader);
+        holder.image_card_cover.setImageUrl(current.image_url, mImageLoader);
         holder.text_desc.setText(current.sub_category_desc);
         holder.text_id.setText((String.valueOf(current.sub_category_id)));
     }
@@ -96,10 +96,10 @@ public class TabbedRecyclerAdapter extends RecyclerView.Adapter<TabbedRecyclerAd
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            image_card_cover    =   (NetworkImageView) itemView.findViewById(R.id.image_card_cover);
-            text_card_name      =   (TextView) itemView.findViewById(R.id.text_card_name);
-            text_desc           =   (TextView) itemView.findViewById(R.id.text_desc);
-            text_id             =   (TextView) itemView.findViewById(R.id.idView);
+            image_card_cover = (NetworkImageView) itemView.findViewById(R.id.image_card_cover);
+            text_card_name = (TextView) itemView.findViewById(R.id.text_card_name);
+            text_desc = (TextView) itemView.findViewById(R.id.text_desc);
+            text_id = (TextView) itemView.findViewById(R.id.idView);
         }
     }
 }

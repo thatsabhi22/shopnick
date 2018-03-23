@@ -5,15 +5,17 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/nav_sub_cat_id_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/nav_sub_cat_id_tv"/>
+        android:visibility="gone" />
+
     <TextView
+        android:id="@+id/nav_cat_id_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:id="@+id/nav_cat_id_tv"/>
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/submenu"
         android:layout_width="fill_parent"
@@ -21,5 +23,5 @@
         android:layout_marginLeft="20dp"
         android:padding="10dp"
         android:textColor="#000000"
-        android:textSize="18sp"/>
+        android:textSize="18sp" />
 </LinearLayout>

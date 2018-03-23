@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.theleafapps.pro.shopnick.ui.CartActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/product_cart_screen_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:id="@+id/product_cart_screen_toolbar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_cart"
@@ -22,103 +22,105 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/disclaimer_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/product_cart_screen_toolbar"
         android:background="@color/red_500"
-        android:orientation="horizontal"
-        android:id="@+id/disclaimer_cart">
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/disclaimer"
             android:textAlignment="center"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/emptycart_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You Cart is Empty !!"
-        android:id="@+id/emptycart_tv"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:text="You Cart is Empty !!"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageButton
+        android:id="@+id/continue_shopping"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/continue_shopping"
-        android:src="@drawable/contshopbutton"
         android:layout_below="@+id/emptycart_tv"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
-        android:background="?android:attr/selectableItemBackground" />
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/contshopbutton" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cart_recycler_view"
         android:layout_width="match_parent"
-        android:layout_below="@+id/disclaimer_cart"
-        android:layout_height="400dp">
+        android:layout_height="400dp"
+        android:layout_below="@+id/disclaimer_cart">
 
     </android.support.v7.widget.RecyclerView>
 
-    <android.support.v7.widget.CardView
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/total_cart_value_card_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_alignParentBottom="true"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardCornerRadius="3dp"
-        android:layout_marginBottom="5dp"
+        android:paddingLeft="10dp"
         android:textAlignment="center"
-        android:paddingLeft="10dp">
+        card_view:cardCornerRadius="3dp"
+        card_view:cardUseCompatPadding="true">
+
         <RelativeLayout
             android:id="@+id/grand_total_relative_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#e17494">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/total_label_tv"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Grand Total : "
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Rs 0"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/total_label_tv"
-            android:layout_toEndOf="@+id/total_label_tv"
-            android:textStyle="bold"
-            android:textColor="@color/amber_50"
-            android:id="@+id/grand_total_value_tv" />
+            <TextView
+                android:id="@+id/total_label_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:text="Grand Total : "
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/grand_total_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/total_label_tv"
+                android:layout_toRightOf="@+id/total_label_tv"
+                android:text="Rs 0"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/amber_50"
+                android:textStyle="bold" />
 
             <ImageButton
+                android:id="@+id/proceed_for_payment_button"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/proceed"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
                 android:background="#e17494"
-                android:layout_centerVertical="true"
-                android:id="@+id/proceed_for_payment_button"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:src="@drawable/proceed" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>

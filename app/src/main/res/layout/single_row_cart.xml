@@ -1,247 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/product_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
-    card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="8dp"
-    android:layout_marginBottom="5dp">
+    card_view:cardUseCompatPadding="true">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingBottom="15dp">
 
         <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/cartItemImageView"
             android:layout_width="54dp"
             android:layout_height="54dp"
-            android:src="@drawable/noimage"
-            android:id="@+id/cartItemImageView"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp" />
+            android:src="@drawable/noimage" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="product_name"
             android:id="@+id/product_name_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/cartItemImageView"
+            android:layout_toEndOf="@+id/cartItemImageView"
             android:layout_toRightOf="@+id/cartItemImageView"
-            android:layout_toEndOf="@+id/cartItemImageView" />
+            android:text="product_name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Size           : "
             android:id="@+id/size_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/product_name_value"
-            android:layout_toRightOf="@+id/cartItemImageView"
+            android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/cartItemImageView"
-            android:layout_marginTop="5dp" />
+            android:layout_toRightOf="@+id/cartItemImageView"
+            android:text="Size           : "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="product_size"
             android:id="@+id/size_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/size_label"
-            android:layout_toRightOf="@+id/size_label"
+            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/size_label"
-            android:layout_marginLeft="10dp" />
+            android:layout_toRightOf="@+id/size_label"
+            android:text="product_size"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/deleteCartItemButton"
-            android:src="@drawable/deletecartitem"
-            android:clickable="true"
-            android:layout_alignTop="@+id/product_name_value"
-            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="45dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/product_name_value"
             android:layout_marginRight="15dp"
-            android:padding="5dp" />
+            android:layout_marginTop="45dp"
+            android:clickable="true"
+            android:padding="5dp"
+            android:src="@drawable/deletecartitem" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Quantity   : "
             android:id="@+id/quantity_label"
-            android:layout_below="@+id/size_label"
-            android:layout_toRightOf="@+id/cartItemImageView"
-            android:layout_toEndOf="@+id/cartItemImageView"
-            android:layout_marginTop="5dp" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="product_quantity"
+            android:layout_below="@+id/size_label"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/cartItemImageView"
+            android:layout_toRightOf="@+id/cartItemImageView"
+            android:text="Quantity   : "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
             android:id="@+id/product_quantity_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/quantity_label"
-            android:layout_toRightOf="@+id/quantity_label"
+            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/quantity_label"
-            android:layout_marginLeft="10dp" />
+            android:layout_toRightOf="@+id/quantity_label"
+            android:text="product_quantity"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <ImageView
+            android:id="@+id/updateCartItemButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/updateCartItemButton"
-            android:src="@drawable/cartupdatebutton"
             android:layout_alignTop="@+id/product_quantity_value"
-            android:layout_toRightOf="@+id/product_quantity_value"
-            android:layout_toEndOf="@+id/product_quantity_value"
             android:layout_marginLeft="7dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@+id/product_quantity_value"
+            android:layout_toRightOf="@+id/product_quantity_value"
+            android:src="@drawable/cartupdatebutton" />
 
         <View
-            android:layout_width="fill_parent"
             android:id="@+id/ruler"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/updateCartItemButton"
+            android:layout_marginBottom="4dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="50dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="4dp"
-            android:layout_height="1dp"
-            android:layout_below="@+id/updateCartItemButton"
             android:background="#000000" />
 
         <TextView
+            android:id="@+id/offer_price_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="offrp"
-            android:id="@+id/offer_price_value"
-            android:layout_below="@+id/ruler"
             android:layout_alignLeft="@+id/quantity_label"
             android:layout_alignStart="@+id/quantity_label"
-            android:layout_marginTop="5dp" />
+            android:layout_below="@+id/ruler"
+            android:layout_marginTop="5dp"
+            android:text="offrp"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="X"
             android:id="@+id/x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/offer_price_value"
-            android:layout_toRightOf="@+id/offer_price_value"
+            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/offer_price_value"
-            android:layout_marginLeft="10dp" />
+            android:layout_toRightOf="@+id/offer_price_value"
+            android:text="X"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="qty_val_prod"
             android:id="@+id/multiply_product_qty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/x"
-            android:layout_toRightOf="@+id/x"
+            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/x"
-            android:layout_marginLeft="10dp" />
+            android:layout_toRightOf="@+id/x"
+            android:text="qty_val_prod"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="="
             android:id="@+id/equals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/multiply_product_qty"
-            android:layout_toRightOf="@+id/multiply_product_qty"
+            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@+id/multiply_product_qty"
-            android:layout_marginLeft="10dp" />
+            android:layout_toRightOf="@+id/multiply_product_qty"
+            android:text="="
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="net_cost"
             android:id="@+id/net_cost"
-            android:layout_alignTop="@+id/currency2"
-            android:layout_toRightOf="@+id/currency2"
-            android:layout_toEndOf="@+id/currency2" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Rs. "
+            android:layout_alignTop="@+id/currency2"
+            android:layout_toEndOf="@+id/currency2"
+            android:layout_toRightOf="@+id/currency2"
+            android:text="net_cost"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
             android:id="@+id/currency1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/offer_price_value"
+            android:layout_marginRight="5dp"
             android:layout_toLeftOf="@+id/offer_price_value"
             android:layout_toStartOf="@+id/offer_price_value"
-            android:layout_marginRight="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Rs. "
-            android:id="@+id/currency2"
-            android:layout_alignTop="@+id/equals"
-            android:layout_toRightOf="@+id/equals"
-            android:layout_toEndOf="@+id/equals"
-            android:layout_marginLeft="10dp" />
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
+            android:id="@+id/currency2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="cart_item_id"
+            android:layout_alignTop="@+id/equals"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/equals"
+            android:layout_toRightOf="@+id/equals"
+            android:text="Rs. "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
             android:id="@+id/cart_item_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_above="@+id/product_name_value"
+            android:layout_toEndOf="@+id/currency1"
             android:layout_toRightOf="@+id/currency1"
-            android:layout_toEndOf="@+id/currency1" />
+            android:text="cart_item_id"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:visibility="gone" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Shipping Charges"
-        android:id="@+id/unit_shipping_label"
-        android:layout_below="@+id/multiply_product_qty"
-        android:layout_alignRight="@+id/multiply_product_qty"
-        android:layout_alignEnd="@+id/multiply_product_qty"
-        android:layout_marginTop="5dp" />
+        <TextView
+            android:id="@+id/unit_shipping_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/multiply_product_qty"
+            android:layout_alignRight="@+id/multiply_product_qty"
+            android:layout_below="@+id/multiply_product_qty"
+            android:layout_marginTop="5dp"
+            android:text="Shipping Charges"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="="
-        android:id="@+id/textView3"
-        android:layout_alignTop="@+id/unit_shipping_label"
-        android:layout_alignLeft="@+id/equals"
-        android:layout_alignStart="@+id/equals" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/equals"
+            android:layout_alignStart="@+id/equals"
+            android:layout_alignTop="@+id/unit_shipping_label"
+            android:text="="
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Rs. "
-        android:id="@+id/textView4"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_alignLeft="@+id/currency2"
-        android:layout_alignStart="@+id/currency2" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/currency2"
+            android:layout_alignStart="@+id/currency2"
+            android:layout_alignTop="@+id/textView3"
+            android:text="Rs. "
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="0"
-        android:id="@+id/unit_shipping_value"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignRight="@+id/net_cost"
-        android:layout_alignEnd="@+id/net_cost" />
-</RelativeLayout>
+        <TextView
+            android:id="@+id/unit_shipping_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView4"
+            android:layout_alignBottom="@+id/textView4"
+            android:layout_alignEnd="@+id/net_cost"
+            android:layout_alignRight="@+id/net_cost"
+            android:text="0"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

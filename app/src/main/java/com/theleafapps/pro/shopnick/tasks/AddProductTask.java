@@ -16,42 +16,42 @@ import dfapi.BaseAsyncRequest;
  */
 public class AddProductTask extends BaseAsyncRequest {
 
-        Context context;
-        private int productId;
-        Products products;
+    Context context;
+    Products products;
+    private int productId;
 
-        public AddProductTask(Context context, Products products){
-            this.context     =   context;
-            this.products    =   products;
+    public AddProductTask(Context context, Products products) {
+        this.context = context;
+        this.products = products;
+    }
+
+    @Override
+    protected void doSetup() throws ApiException {
+        callerName = "AddProductTask";
+
+        serviceName = AppConstants.DB_SVC;
+        endPoint = "product";
+
+        verb = "POST";
+
+        requestString = ApiInvoker.serialize(products);
+
+        applicationApiKey = AppConstants.API_KEY;
+        sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
+    }
+
+    @Override
+    protected void processResponse(String response) throws ApiException, org.json.JSONException {
+        // response has whole contact record, but we just want the id
+        Products productsList = (Products) ApiInvoker.deserialize(response, "", Products.class);
+        productId = productsList.products.get(0).product_id;
+    }
+
+    @Override
+    protected void onCompletion(boolean success) {
+        if (success) {
+            Log.d("Tang Ho", "Success");
         }
-
-        @Override
-        protected void doSetup() throws ApiException {
-            callerName = "AddProductTask";
-
-            serviceName = AppConstants.DB_SVC;
-            endPoint = "product";
-
-            verb = "POST";
-
-            requestString = ApiInvoker.serialize(products);
-
-            applicationApiKey = AppConstants.API_KEY;
-            sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
-        }
-
-        @Override
-        protected void processResponse(String response) throws ApiException, org.json.JSONException {
-            // response has whole contact record, but we just want the id
-            Products productsList   =   (Products) ApiInvoker.deserialize(response, "", Products.class);
-            productId               =   productsList.products.get(0).product_id;
-        }
-
-        @Override
-        protected void onCompletion(boolean success) {
-            if(success) {
-                Log.d("Tang Ho","Success");
-            }
-        }
+    }
 
 }

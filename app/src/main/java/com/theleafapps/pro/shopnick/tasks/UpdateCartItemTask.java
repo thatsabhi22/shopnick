@@ -16,13 +16,13 @@ import dfapi.BaseAsyncRequest;
  */
 public class UpdateCartItemTask extends BaseAsyncRequest {
 
-    Context context;
     public int cartItemId;
+    Context context;
     CartItems cartItems;
 
-    public UpdateCartItemTask(Context context, CartItems cartItems){
-        this.context        =   context;
-        this.cartItems      =   cartItems;
+    public UpdateCartItemTask(Context context, CartItems cartItems) {
+        this.context = context;
+        this.cartItems = cartItems;
     }
 
     @Override
@@ -42,14 +42,14 @@ public class UpdateCartItemTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, org.json.JSONException {
-        CartItems cartItems   =   (CartItems) ApiInvoker.deserialize(response, "", CartItems.class);
-        cartItemId            =   cartItems.cartItemList.get(0).cart_item_id;
+        CartItems cartItems = (CartItems) ApiInvoker.deserialize(response, "", CartItems.class);
+        cartItemId = cartItems.cartItemList.get(0).cart_item_id;
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success) {
-            Log.d("Tang Ho","Success");
+        if (success) {
+            Log.d("Tang Ho", "Success");
         }
     }
 }

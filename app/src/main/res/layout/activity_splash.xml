@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/fasion"
     tools:context="com.theleafapps.pro.shopnick.ui.SplashActivity">
 
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/logo"
-        android:src="@drawable/logo"
-        android:layout_marginRight="39dp"
-        android:layout_marginBottom="185dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="39dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="185dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:src="@drawable/logo" />
 
     <ImageView
+        android:id="@+id/logoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/logoName"
-        android:src="@drawable/name"
-        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/logo"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/logo"
         android:layout_marginBottom="125dp"
-        android:layout_marginRight="40dp" />
+        android:layout_marginRight="40dp"
+        android:src="@drawable/name" />
 
     <com.theleafapps.pro.shopnick.utils.DotProgressBar
+        android:id="@+id/dot_progress_bar"
         android:layout_width="130dp"
         android:layout_height="25dp"
+        android:layout_alignEnd="@+id/logoName"
+        android:layout_alignLeft="@+id/logoName"
+        android:layout_alignRight="@+id/logoName"
+        android:layout_alignStart="@+id/logoName"
+        android:layout_alignTop="@+id/logoName"
         android:layout_gravity="center|bottom"
+        android:layout_marginTop="68dp"
         custom:amount="3"
-        android:id="@+id/dot_progress_bar"
         custom:duration="@android:integer/config_mediumAnimTime"
         custom:endColor="@color/light_blue_A400"
-        custom:startColor="@color/light_blue_A700"
-        android:layout_marginTop="68dp"
-        android:layout_alignTop="@+id/logoName"
-        android:layout_alignLeft="@+id/logoName"
-        android:layout_alignStart="@+id/logoName"
-        android:layout_alignRight="@+id/logoName"
-        android:layout_alignEnd="@+id/logoName" />
+        custom:startColor="@color/light_blue_A700" />
 
 
 </RelativeLayout>

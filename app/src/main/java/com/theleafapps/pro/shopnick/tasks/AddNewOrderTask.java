@@ -16,13 +16,13 @@ import dfapi.BaseAsyncRequest;
  */
 public class AddNewOrderTask extends BaseAsyncRequest {
 
-    Context context;
     public int orderId;
+    Context context;
     Orders orders;
 
-    public AddNewOrderTask(Context context, Orders orders){
-        this.context   =   context;
-        this.orders    =   orders;
+    public AddNewOrderTask(Context context, Orders orders) {
+        this.context = context;
+        this.orders = orders;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AddNewOrderTask extends BaseAsyncRequest {
 
         requestString = ApiInvoker.serialize(orders);
 
-        requestString = requestString.replace("\"order_id\":0,","");
+        requestString = requestString.replace("\"order_id\":0,", "");
 
         applicationApiKey = AppConstants.API_KEY;
         sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
@@ -45,14 +45,14 @@ public class AddNewOrderTask extends BaseAsyncRequest {
     @Override
     protected void processResponse(String response) throws ApiException, org.json.JSONException {
         // response has whole contact record, but we just want the id
-        Orders ordersList   =   (Orders) ApiInvoker.deserialize(response, "", Orders.class);
-        orderId             =   ordersList.orders.get(0).order_id;
+        Orders ordersList = (Orders) ApiInvoker.deserialize(response, "", Orders.class);
+        orderId = ordersList.orders.get(0).order_id;
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success) {
-            Log.d("Tang Ho","Success");
+        if (success) {
+            Log.d("Tang Ho", "Success");
         }
     }
 }

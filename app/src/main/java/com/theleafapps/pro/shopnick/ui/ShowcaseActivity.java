@@ -3,6 +3,7 @@ package com.theleafapps.pro.shopnick.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,7 +11,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -47,11 +47,11 @@ import java.util.List;
 
 public class ShowcaseActivity extends AppCompatActivity {
 
-    TextView customer_name,customer_email;
+    static String NAME = "Leaf Apps";
+    static String EMAIL = "theleafapps@gmail.com";
+    TextView customer_name, customer_email;
     List<Category> categoriesRec;
     List<SubCategory> subCategoriesRec;
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
     List<ExpandedMenuModel> listDataHeader;
     NavigationView navigationView;
     DrawerLayout mDrawerLayout;
@@ -60,14 +60,11 @@ public class ShowcaseActivity extends AppCompatActivity {
     HashMap<ExpandedMenuModel, List<String>> listDataChild;
     MyProgressDialog myProgressDialog;
     MenuItem menuItem;
-    ImageButton nav_about_us,nav_credits;
+    ImageButton nav_about_us, nav_credits;
     Menu menu;
-
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
     private Toolbar toolbar;                                     // Declaring the Toolbar Object
-
-    static String NAME  =   "Leaf Apps";
-    static String EMAIL =   "theleafapps@gmail.com";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,21 +72,21 @@ public class ShowcaseActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_showcase);
 
-            myProgressDialog    = new MyProgressDialog(this);
-            toolbar             = (Toolbar) findViewById(R.id.toolbar_showcase);
+            myProgressDialog = new MyProgressDialog(this);
+            toolbar = (Toolbar) findViewById(R.id.toolbar_showcase);
             setSupportActionBar(toolbar);
 
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.nav_drawer);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setIcon(R.drawable.logo_small);
 
-            if(!Commons.hasActiveInternetConnection(this)){
-                Intent intent1 = new Intent(this,NoNetworkActivity.class);
+            if (!Commons.hasActiveInternetConnection(this)) {
+                Intent intent1 = new Intent(this, NoNetworkActivity.class);
                 intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent1);
             }
 
-            if(menu!=null) {
+            if (menu != null) {
                 menuItem = menu.findItem(R.id.cart_icon);
                 if (Commons.cartItemCount < 1) {
                     menuItem.setIcon(R.drawable.cart);
@@ -100,19 +97,19 @@ public class ShowcaseActivity extends AppCompatActivity {
 
             //Commons.getActivityTrail(this);
 
-            nav_about_us     =   (ImageButton) findViewById(R.id.nav_about_us);
-            nav_credits      =   (ImageButton) findViewById(R.id.nav_credits);
-            customer_name    =   (TextView) findViewById(R.id.customer_name);
-            customer_email   =   (TextView) findViewById(R.id.customer_email);
-            mDrawerLayout    =   (DrawerLayout) findViewById(R.id.drawerLayout_showcase);
-            expandableList   =   (ExpandableListView) findViewById(R.id.exp_navigation_menu);
-            navigationView   =   (NavigationView) findViewById(R.id.nav_view);
+            nav_about_us = (ImageButton) findViewById(R.id.nav_about_us);
+            nav_credits = (ImageButton) findViewById(R.id.nav_credits);
+            customer_name = (TextView) findViewById(R.id.customer_name);
+            customer_email = (TextView) findViewById(R.id.customer_email);
+            mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_showcase);
+            expandableList = (ExpandableListView) findViewById(R.id.exp_navigation_menu);
+            navigationView = (NavigationView) findViewById(R.id.nav_view);
 
             nav_about_us.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(ShowcaseActivity.this,"About us clicked",Toast.LENGTH_LONG).show();
-                    Intent intent_about = new Intent(ShowcaseActivity.this,AboutUsActivity.class);
+                    Intent intent_about = new Intent(ShowcaseActivity.this, AboutUsActivity.class);
                     startActivity(intent_about);
                 }
             });
@@ -120,7 +117,7 @@ public class ShowcaseActivity extends AppCompatActivity {
             nav_credits.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent_about = new Intent(ShowcaseActivity.this,CreditsActivity.class);
+                    Intent intent_about = new Intent(ShowcaseActivity.this, CreditsActivity.class);
                     startActivity(intent_about);
                 }
             });
@@ -146,32 +143,32 @@ public class ShowcaseActivity extends AppCompatActivity {
             });
 
             SharedPreferences sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
-            String cid = sharedPreferences.getString("cid","");
+            String cid = sharedPreferences.getString("cid", "");
 
-            if(!TextUtils.isEmpty(cid) && Integer.parseInt(cid) != 0){
-                GetCustomerByIdTask getCustomerByIdTask = new GetCustomerByIdTask(this,Integer.parseInt(cid));
+            if (!TextUtils.isEmpty(cid) && Integer.parseInt(cid) != 0) {
+                GetCustomerByIdTask getCustomerByIdTask = new GetCustomerByIdTask(this, Integer.parseInt(cid));
                 getCustomerByIdTask.execute().get();
 
-                Customer customer   =   getCustomerByIdTask.customerRec;
-                NAME                =   customer.first_name + " " + customer.last_name;
-                EMAIL               =   customer.email;
+                Customer customer = getCustomerByIdTask.customerRec;
+                NAME = customer.first_name + " " + customer.last_name;
+                EMAIL = customer.email;
             }
             customer_name.setText(NAME);
             customer_email.setText(EMAIL);
 
-            if(Commons.hasActiveInternetConnection(this)){
-                Log.d("Tangho","Network Connected");
+            if (Commons.hasActiveInternetConnection(this)) {
+                Log.d("Tangho", "Network Connected");
 
-                Intent intent   =   getIntent();
-                int catId       =   intent.getIntExtra("categoryId",0);
+                Intent intent = getIntent();
+                int catId = intent.getIntExtra("categoryId", 0);
 
-                if(!TextUtils.isEmpty(cid) && Integer.parseInt(cid)!=0){
-                    GetAllCartItemTask getAllCartItemTask = new GetAllCartItemTask(this,Integer.parseInt(cid));
+                if (!TextUtils.isEmpty(cid) && Integer.parseInt(cid) != 0) {
+                    GetAllCartItemTask getAllCartItemTask = new GetAllCartItemTask(this, Integer.parseInt(cid));
                     getAllCartItemTask.execute().get();
 
 
                     CartItems cartItems = getAllCartItemTask.cartItemsReceived;
-                    if(cartItems!=null && cartItems.cartItemList.size()>0){
+                    if (cartItems != null && cartItems.cartItemList.size() > 0) {
                         Commons.cartItemCount = cartItems.cartItemList.size();
                     }
                 }
@@ -180,13 +177,13 @@ public class ShowcaseActivity extends AppCompatActivity {
                  * Getting All Categories
                  ******/
                 GetAllCategoriesTask getAllCategoriesTask
-                                    =   new GetAllCategoriesTask(this);
-                boolean x           =   getAllCategoriesTask.execute().get();
-                Categories cat      =   getAllCategoriesTask.categoriesReceived;
+                        = new GetAllCategoriesTask(this);
+                boolean x = getAllCategoriesTask.execute().get();
+                Categories cat = getAllCategoriesTask.categoriesReceived;
 
                 if (cat != null && cat.categories.size() > 0) {
                     //Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
-                    categoriesRec   =   cat.categories;
+                    categoriesRec = cat.categories;
 
                     getAllCategoriesTask = null;
                 }
@@ -196,33 +193,32 @@ public class ShowcaseActivity extends AppCompatActivity {
                  * Getting All Sub Categories
                  ******/
 
-                if(Commons.catIdToSubCatMap.size() == 0){
+                if (Commons.catIdToSubCatMap.size() == 0) {
                     GetAllSubCategoriesTask getAllSubCategoriesTask = new GetAllSubCategoriesTask(this);
                     boolean y = getAllSubCategoriesTask.execute().get();
 
                     SubCategories subCat = getAllSubCategoriesTask.subCategoriesReceived;
 
                     if (cat != null && cat.categories.size() > 0) {
-    //                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
+                        //                Toast.makeText(this, cat.categories.size() + " Categories have been received", Toast.LENGTH_SHORT).show();
                         subCategoriesRec = subCat.subCategories;
 
                         /*****
                          * Storing All SubCategories corresponding to CategoryId in Common Hashmap
                          ******/
 
-                        for(SubCategory sc : subCategoriesRec){
+                        for (SubCategory sc : subCategoriesRec) {
 
-                            if(TextUtils.isEmpty(sc.image_url)) {
-                                sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name.replace(" ","");
+                            if (TextUtils.isEmpty(sc.image_url)) {
+                                sc.image_url = "http://dummyimage.com/180x100/000/fff&text=" + sc.sub_category_name.replace(" ", "");
                             }
 
-                            if(Commons.catIdToSubCatMap.containsKey(sc.category_id)){
+                            if (Commons.catIdToSubCatMap.containsKey(sc.category_id)) {
                                 Commons.catIdToSubCatMap.get(sc.category_id).add(sc);
-                            }
-                            else{
+                            } else {
                                 List<SubCategory> list = new ArrayList<>();
                                 list.add(sc);
-                                Commons.catIdToSubCatMap.put(sc.category_id,list);
+                                Commons.catIdToSubCatMap.put(sc.category_id, list);
                             }
                         }
                     }
@@ -241,16 +237,15 @@ public class ShowcaseActivity extends AppCompatActivity {
                 tabLayout = (TabLayout) findViewById(R.id.tabs);
                 tabLayout.setupWithViewPager(viewPager);
 
-                if(catId > 0)
+                if (catId > 0)
                     viewPager.setCurrentItem(catId);
 
-            }
-            else{
-                Log.d("Tangho","Network Disconnected");
+            } else {
+                Log.d("Tangho", "Network Disconnected");
             }
 
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -258,18 +253,18 @@ public class ShowcaseActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        if(categoriesRec!=null && categoriesRec.size() > 0){
+        if (categoriesRec != null && categoriesRec.size() > 0) {
 
-            for(int i = 0;i<categoriesRec.size();i++) {
+            for (int i = 0; i < categoriesRec.size(); i++) {
 
                 int category_id = categoriesRec.get(i).category_id;
                 String name = categoriesRec.get(i).category_name;
                 Fragment abc = new OneFragment();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("progressDialog",myProgressDialog);
-                bundle.putInt("category_id",category_id);
+                bundle.putSerializable("progressDialog", myProgressDialog);
+                bundle.putInt("category_id", category_id);
                 abc.setArguments(bundle);
-                adapter.addFrag(abc,name);
+                adapter.addFrag(abc, name);
             }
         }
         viewPager.setAdapter(adapter);
@@ -281,7 +276,7 @@ public class ShowcaseActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_product_detail, menu);
         MenuItem menuItem = menu.findItem(R.id.cart_icon);
         this.menu = menu;
-        if(Commons.cartItemCount>0)
+        if (Commons.cartItemCount > 0)
             menuItem.setIcon(R.drawable.cartfull);
         else
             menuItem.setIcon(R.drawable.cart);
@@ -293,13 +288,13 @@ public class ShowcaseActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.user_profile:
-                intent = new Intent(this,CustomerProfileActivity.class);
+                intent = new Intent(this, CustomerProfileActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.cart_icon:
 //                Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
-                intent = new Intent(this,CartActivity.class);
-                intent.putExtra("caller","ShowcaseActivity");
+                intent = new Intent(this, CartActivity.class);
+                intent.putExtra("caller", "ShowcaseActivity");
                 startActivity(intent);
                 return true;
             case android.R.id.home:
@@ -311,12 +306,12 @@ public class ShowcaseActivity extends AppCompatActivity {
     }
 
     private void prepareListData() {
-        int i=0;
+        int i = 0;
         listDataHeader = new ArrayList<ExpandedMenuModel>();
         listDataChild = new HashMap<ExpandedMenuModel, List<String>>();
 
-        if(categoriesRec!=null && categoriesRec.size() > 0){
-            for(Category category : categoriesRec){
+        if (categoriesRec != null && categoriesRec.size() > 0) {
+            for (Category category : categoriesRec) {
 
                 ExpandedMenuModel item = new ExpandedMenuModel();
                 item.setIconName(category.category_name);
@@ -327,7 +322,7 @@ public class ShowcaseActivity extends AppCompatActivity {
                 List<String> heading = new ArrayList<String>();
                 List<SubCategory> subCats = Commons.catIdToSubCatMap.get(category.category_id);
 
-                for(SubCategory subcat:subCats){
+                for (SubCategory subcat : subCats) {
                     heading.add(subcat.sub_category_name);
                 }
                 listDataChild.put(listDataHeader.get(i), heading);
@@ -339,28 +334,28 @@ public class ShowcaseActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("Tangho","Showcase activity >> onRestart Called");
+        Log.d("Tangho", "Showcase activity >> onRestart Called");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(myProgressDialog.isShowing())
+        if (myProgressDialog.isShowing())
             finish();
-        Log.d("Tangho","Showcase activity >> onPause Called");
+        Log.d("Tangho", "Showcase activity >> onPause Called");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         myProgressDialog.dismiss();
-        Log.d("Tangho","Showcase activity >> onDestroy Called");
+        Log.d("Tangho", "Showcase activity >> onDestroy Called");
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.d("Tangho","Showcase activity >> onBackPressed Called");
+        Log.d("Tangho", "Showcase activity >> onBackPressed Called");
     }
 
 
@@ -368,9 +363,9 @@ public class ShowcaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Log.d("Tangho","Showcase activity >> OnResume Called");
+        Log.d("Tangho", "Showcase activity >> OnResume Called");
 
-        if(menu!=null) {
+        if (menu != null) {
             menuItem = menu.findItem(R.id.cart_icon);
             if (Commons.cartItemCount < 1) {
                 menuItem.setIcon(R.drawable.cart);

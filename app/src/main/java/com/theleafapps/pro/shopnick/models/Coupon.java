@@ -26,8 +26,8 @@ public class Coupon extends BaseRecord {
 
     @Override
     public void setAllNonNull() {
-        coupon_code  = getNonNull(coupon_code);
-        coupon_value   = getNonNull(coupon_value);
-        type      = getNonNull(type);
+        coupon_code = getNonNull(coupon_code);
+        coupon_value = getNonNull(coupon_value);
+        type = getNonNull(type);
     }
 }

@@ -3,10 +3,10 @@ package com.theleafapps.pro.shopnick.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -21,8 +21,8 @@ import java.util.concurrent.ExecutionException;
 
 public class SplashActivity extends AppCompatActivity {
 
-    String and_id;
     private static int SPLASH_TIME_OUT = 3000;
+    String and_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 }
             }, SPLASH_TIME_OUT);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -72,21 +72,20 @@ public class SplashActivity extends AppCompatActivity {
 
 //            sharedPreferences.edit().remove("cid").commit();
 
-        if(TextUtils.isEmpty(sharedPreferences.getString("cid",""))){
+        if (TextUtils.isEmpty(sharedPreferences.getString("cid", ""))) {
             and_id = Settings.Secure.getString(this.getContentResolver(),
                     Settings.Secure.ANDROID_ID);
             GetCustomerByCustomerDevIdTask getCustomerByCustomerDevIdTask = new
-                    GetCustomerByCustomerDevIdTask(this,and_id);
+                    GetCustomerByCustomerDevIdTask(this, and_id);
             getCustomerByCustomerDevIdTask.execute().get();
             Customer customer = getCustomerByCustomerDevIdTask.customerRec;
 
-            if(customer!=null){
+            if (customer != null) {
                 editor.putString("cid", String.valueOf(customer.customer_id));
                 editor.apply();
-            }
-            else{
+            } else {
                 Customer sampleCustomer = createSampleCustomer();
-                if(sampleCustomer!=null){
+                if (sampleCustomer != null) {
                     editor.putString("cid", String.valueOf(sampleCustomer.customer_id));
                     editor.apply();
                 }
@@ -98,20 +97,20 @@ public class SplashActivity extends AppCompatActivity {
         Customer customer = new Customer();
 
         try {
-            Log.d("Tangho",">>>>>Inside createSampleCustome Method");
-            Double value                = 10000.0;
-            customer.customer_dev_id    = and_id;
-            customer.city               = "Austin";
-            customer.email              = "john@doe.com";
-            customer.first_name         = "John";
-            customer.last_name          = "Doe";
-            customer.city               = "Ipsum City";
-            customer.country            = "Wonderland";
-            customer.address            = "15, Lorem Street";
-            customer.wallet_value       = value.floatValue();
-            customer.zipcode            = "900000";
-            customer.mobile             = "9999999999";
-            Log.d("Tangho",">>>>>Customer Object filled");
+            Log.d("Tangho", ">>>>>Inside createSampleCustome Method");
+            Double value = 10000.0;
+            customer.customer_dev_id = and_id;
+            customer.city = "Austin";
+            customer.email = "john@doe.com";
+            customer.first_name = "John";
+            customer.last_name = "Doe";
+            customer.city = "Ipsum City";
+            customer.country = "Wonderland";
+            customer.address = "15, Lorem Street";
+            customer.wallet_value = value.floatValue();
+            customer.zipcode = "900000";
+            customer.mobile = "9999999999";
+            Log.d("Tangho", ">>>>>Customer Object filled");
 
             Customers customers = new Customers();
             customers.customers.add(customer);
@@ -119,8 +118,8 @@ public class SplashActivity extends AppCompatActivity {
             AddCustomerTask addCustomerTask = new AddCustomerTask(this, customers);
             addCustomerTask.execute().get();
 
-            Log.d("Tangho",">>>>> AddCustomerTask completed with customerid > " + addCustomerTask.customerId);
-            customer.customer_id        = addCustomerTask.customerId;
+            Log.d("Tangho", ">>>>> AddCustomerTask completed with customerid > " + addCustomerTask.customerId);
+            customer.customer_id = addCustomerTask.customerId;
 
         } catch (InterruptedException e) {
             e.printStackTrace();

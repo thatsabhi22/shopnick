@@ -30,17 +30,17 @@ public class CouponCodesDialog extends DialogFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        bundle      =   getArguments();
-        View view   =   inflater.inflate(R.layout.dialog_layout_coupon_codes,null);
-        ok          =   (Button) view.findViewById(R.id.ok);
+        bundle = getArguments();
+        View view = inflater.inflate(R.layout.dialog_layout_coupon_codes, null);
+        ok = (Button) view.findViewById(R.id.ok);
         ok.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.ok){
-                dismiss();
+        if (v.getId() == R.id.ok) {
+            dismiss();
         }
     }
 }

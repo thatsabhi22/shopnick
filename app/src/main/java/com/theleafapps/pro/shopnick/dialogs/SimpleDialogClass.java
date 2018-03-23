@@ -17,10 +17,10 @@ import com.theleafapps.pro.shopnick.utils.Communicator;
 /**
  * Created by aviator on 29/11/15.
  */
-public class SimpleDialogClass extends DialogFragment implements View.OnClickListener{
+public class SimpleDialogClass extends DialogFragment implements View.OnClickListener {
 
     Bundle bundle;
-    Button yes,no;
+    Button yes, no;
     Communicator comm;
     int cart_item_id;
 
@@ -33,10 +33,10 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        bundle      =   getArguments();
-        View view   =   inflater.inflate(R.layout.dialog_layout,null);
-        yes         =   (Button) view.findViewById(R.id.deleteQueryYes);
-        no          =   (Button) view.findViewById(R.id.deleteQueryNo);
+        bundle = getArguments();
+        View view = inflater.inflate(R.layout.dialog_layout, null);
+        yes = (Button) view.findViewById(R.id.deleteQueryYes);
+        no = (Button) view.findViewById(R.id.deleteQueryNo);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
         setCancelable(false);
@@ -46,11 +46,11 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        try{
-            if (v.getId()==R.id.deleteQueryYes){
+        try {
+            if (v.getId() == R.id.deleteQueryYes) {
                 cart_item_id = bundle.getInt("cart_item_id");
 
-                DeleteCartItemByIdTask deleteCartItemByIdTask = new DeleteCartItemByIdTask(getActivity().getApplicationContext(),cart_item_id);
+                DeleteCartItemByIdTask deleteCartItemByIdTask = new DeleteCartItemByIdTask(getActivity().getApplicationContext(), cart_item_id);
                 deleteCartItemByIdTask.execute().get();
 
                 Commons.cartItemCount--;
@@ -58,11 +58,10 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
                 bundle.clear();
                 comm.dialogMessage("Yes Was Clicked with position");
                 dismiss();
-            }
-            else{
+            } else {
                 dismiss();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

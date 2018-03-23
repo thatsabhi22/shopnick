@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Product extends BaseRecord{
+public class Product extends BaseRecord {
 
     @JsonProperty("product_id")
     public int product_id;

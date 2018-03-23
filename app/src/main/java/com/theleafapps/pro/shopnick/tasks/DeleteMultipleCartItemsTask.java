@@ -21,7 +21,7 @@ public class DeleteMultipleCartItemsTask extends BaseAsyncRequest {
     Context context;
     private JSONArray idArray;
 
-    public DeleteMultipleCartItemsTask(Context context, JSONArray idArray){
+    public DeleteMultipleCartItemsTask(Context context, JSONArray idArray) {
         this.context = context;
         this.idArray = idArray;
     }
@@ -45,7 +45,7 @@ public class DeleteMultipleCartItemsTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success){
+        if (success) {
             //Toast.makeText(context,"Cart Items deleted",Toast.LENGTH_LONG).show();
         }
     }

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Created by aviator on 18/07/16.
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Customer extends BaseRecord{
+public class Customer extends BaseRecord {
 
     @JsonProperty("customer_id")
     public int customer_id;
@@ -45,12 +45,12 @@ public class Customer extends BaseRecord{
     @Override
     public void setAllNonNull() {
 
-        first_name  = getNonNull(last_name);
-        last_name   = getNonNull(last_name);
-        mobile      = getNonNull(mobile);
-        address     = getNonNull(address);
-        city        = getNonNull(city);
-        country     = getNonNull(country);
+        first_name = getNonNull(last_name);
+        last_name = getNonNull(last_name);
+        mobile = getNonNull(mobile);
+        address = getNonNull(address);
+        city = getNonNull(city);
+        country = getNonNull(country);
     }
 }
 

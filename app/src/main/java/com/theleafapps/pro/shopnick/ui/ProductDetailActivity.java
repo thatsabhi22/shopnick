@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Paint;
-
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,9 +36,9 @@ import com.theleafapps.pro.shopnick.models.Variant;
 import com.theleafapps.pro.shopnick.models.multiples.CartItems;
 import com.theleafapps.pro.shopnick.models.multiples.ProductImages;
 import com.theleafapps.pro.shopnick.tasks.AddCartItemTask;
+import com.theleafapps.pro.shopnick.tasks.GetAllProductImagesByIdTask;
 import com.theleafapps.pro.shopnick.tasks.GetAllVariantsByProductIdTask;
 import com.theleafapps.pro.shopnick.tasks.GetProductByIdTask;
-import com.theleafapps.pro.shopnick.tasks.GetAllProductImagesByIdTask;
 import com.theleafapps.pro.shopnick.utils.Commons;
 import com.theleafapps.pro.shopnick.utils.LinkedMap;
 
@@ -54,14 +53,14 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
     Product productRec;
     ProductImages productImagesRec;
-    TextView productName,offer_price,mrp,discount,productDesc,product_avlble;
+    TextView productName, offer_price, mrp, discount, productDesc, product_avlble;
     List<String> url_maps;
     SliderLayout sliderShowFull;
     MyProgressDialog myProgressDialog;
-    Spinner variantSpinner,quantitySpinner;
+    Spinner variantSpinner, quantitySpinner;
     Toolbar toolbar;
-    String size,variant,title;
-    int subCatId,catId,quantity,productId;
+    String size, variant, title;
+    int subCatId, catId, quantity, productId;
     ImageButton buyNowButton;
     RelativeLayout variantLayout;
     Menu menu;
@@ -85,8 +84,8 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                     menuItem.setIcon(R.drawable.cart);
             }
 
-            url_maps    =   new ArrayList<>();
-            toolbar     =   (Toolbar) findViewById(R.id.toolbar_product_detail);
+            url_maps = new ArrayList<>();
+            toolbar = (Toolbar) findViewById(R.id.toolbar_product_detail);
             setSupportActionBar(toolbar);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -98,24 +97,24 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 startActivity(intent1);
             }
 
-            product_avlble  = (TextView) findViewById(R.id.product_available);
-            sliderShowFull  = (SliderLayout) findViewById(R.id.product_detail_image);
-            productName     = (TextView) findViewById(R.id.product_detail_name);
-            offer_price     = (TextView) findViewById(R.id.product_detail_offer_price);
-            mrp             = (TextView) findViewById(R.id.product_detail_mrp);
-            discount        = (TextView) findViewById(R.id.product_detail_discount);
-            productDesc     = (TextView) findViewById(R.id.product_detail_desc);
-            variantSpinner  = (Spinner) findViewById(R.id.variant_spinner);
+            product_avlble = (TextView) findViewById(R.id.product_available);
+            sliderShowFull = (SliderLayout) findViewById(R.id.product_detail_image);
+            productName = (TextView) findViewById(R.id.product_detail_name);
+            offer_price = (TextView) findViewById(R.id.product_detail_offer_price);
+            mrp = (TextView) findViewById(R.id.product_detail_mrp);
+            discount = (TextView) findViewById(R.id.product_detail_discount);
+            productDesc = (TextView) findViewById(R.id.product_detail_desc);
+            variantSpinner = (Spinner) findViewById(R.id.variant_spinner);
             quantitySpinner = (Spinner) findViewById(R.id.quantity_spinner);
-            buyNowButton    = (ImageButton) findViewById(R.id.buyNowButton);
-            variantLayout   = (RelativeLayout) findViewById(R.id.variant_layout);
+            buyNowButton = (ImageButton) findViewById(R.id.buyNowButton);
+            variantLayout = (RelativeLayout) findViewById(R.id.variant_layout);
 
 
-            Intent intent   = getIntent();
-            productId       = Integer.valueOf(intent.getStringExtra("productId"));
-            subCatId        = intent.getIntExtra("subCatId", 0);
-            catId           = intent.getIntExtra("categoryId", 0);
-            title           = intent.getStringExtra("title");
+            Intent intent = getIntent();
+            productId = Integer.valueOf(intent.getStringExtra("productId"));
+            subCatId = intent.getIntExtra("subCatId", 0);
+            catId = intent.getIntExtra("categoryId", 0);
+            title = intent.getStringExtra("title");
 
             if (!TextUtils.isEmpty(title)) {
                 if (title.length() > 10) {
@@ -135,22 +134,22 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
                 GetAllProductImagesByIdTask getProductImagesByIdTask = new GetAllProductImagesByIdTask(this, productId);
 
-                boolean x        =  getProductImagesByIdTask.execute().get();
-                productImagesRec =  getProductImagesByIdTask.productImagesRec;
+                boolean x = getProductImagesByIdTask.execute().get();
+                productImagesRec = getProductImagesByIdTask.productImagesRec;
 
                 if (productImagesRec != null && productImagesRec.productImages.size() > 0) {
 
                     for (ProductImage productImages : productImagesRec.productImages) {
 
-                        try{
+                        try {
                             URL url = new URL(productImages.image_url);
                             url_maps.add(productImages.image_url);
-                        }catch (MalformedURLException ex) {
+                        } catch (MalformedURLException ex) {
 
                         }
                     }
 
-                    if(url_maps.size()==0){
+                    if (url_maps.size() == 0) {
                         url_maps.add(productRec.image_url);
                     }
 
@@ -258,20 +257,20 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 public void onClick(View v) {
 
                     if (!TextUtils.isEmpty(variant)) {
-                        CartItem cartItem    = new CartItem();
-                        cartItem.product_id  = productRec.product_id;
-                        cartItem.quantity    = quantity;
-                        cartItem.variant     = variant;
+                        CartItem cartItem = new CartItem();
+                        cartItem.product_id = productRec.product_id;
+                        cartItem.quantity = quantity;
+                        cartItem.variant = variant;
 
                         SharedPreferences sharedPreferences
-                                             = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
+                                = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
                         cartItem.customer_id = Integer.valueOf(sharedPreferences.getString("cid", ""));
 
-                        CartItems cartItems  = new CartItems();
+                        CartItems cartItems = new CartItems();
                         cartItems.cartItemList.add(cartItem);
 
                         AddCartItemTask addCartItemTask
-                                             = new AddCartItemTask(ProductDetailActivity.this, cartItems);
+                                = new AddCartItemTask(ProductDetailActivity.this, cartItems);
 
                         try {
 
@@ -294,14 +293,14 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 }
             });
 
-            if(Commons.myProgressDialog!=null)
+            if (Commons.myProgressDialog != null)
                 Commons.myProgressDialog.dismiss();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -327,15 +326,15 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     }
 
     private void setCorrectImageXY() {
-        ViewTreeObserver vto    =   sliderShowFull.getViewTreeObserver();
+        ViewTreeObserver vto = sliderShowFull.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 sliderShowFull.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                int width       =   sliderShowFull.getMeasuredWidth();
+                int width = sliderShowFull.getMeasuredWidth();
                 RelativeLayout.LayoutParams params
-                                =   (RelativeLayout.LayoutParams) sliderShowFull.getLayoutParams();
-                params.height   =   width;
+                        = (RelativeLayout.LayoutParams) sliderShowFull.getLayoutParams();
+                params.height = width;
                 sliderShowFull.setLayoutParams(params);
             }
         });
@@ -344,8 +343,8 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("Tangho","ProductDetailActivity activity >> onResume Called");
-        if(menu!=null) {
+        Log.d("Tangho", "ProductDetailActivity activity >> onResume Called");
+        if (menu != null) {
             menuItem = menu.findItem(R.id.cart_icon);
             if (Commons.cartItemCount < 1) {
                 menuItem.setIcon(R.drawable.cart);
@@ -360,7 +359,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
         Intent intent;
         switch (item.getItemId()) {
             case R.id.user_profile:
-                intent = new Intent(this,CustomerProfileActivity.class);
+                intent = new Intent(this, CustomerProfileActivity.class);
                 startActivity(intent);
                 return true;
             case android.R.id.home:
@@ -368,12 +367,12 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
                 return true;
             case R.id.cart_icon:
                 //Toast.makeText(this,"Cart Menu Clicked",Toast.LENGTH_LONG).show();
-                Intent in = new Intent(this,CartActivity.class);
-                in.putExtra("caller","ProductDetailActivity");
-                in.putExtra("subCatId",subCatId);
-                in.putExtra("categoryId",catId);
-                in.putExtra("productId",productId);
-                in.putExtra("title",title);
+                Intent in = new Intent(this, CartActivity.class);
+                in.putExtra("caller", "ProductDetailActivity");
+                in.putExtra("subCatId", subCatId);
+                in.putExtra("categoryId", catId);
+                in.putExtra("productId", productId);
+                in.putExtra("title", title);
                 startActivity(in);
                 return true;
             default:
@@ -387,7 +386,7 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
         inflater.inflate(R.menu.menu_product_detail, menu);
         MenuItem menuItem = menu.findItem(R.id.cart_icon);
         this.menu = menu;
-        if(Commons.cartItemCount>0)
+        if (Commons.cartItemCount > 0)
             menuItem.setIcon(R.drawable.cartfull);
         else
             menuItem.setIcon(R.drawable.cart);
@@ -399,13 +398,13 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
 
     }
 
-    public void loadProductListActivity(){
+    public void loadProductListActivity() {
         Intent intent;
         intent = NavUtils.getParentActivityIntent(this);
-        intent.putExtra("subCatId",subCatId);
-        intent.putExtra("categoryId",catId);
+        intent.putExtra("subCatId", subCatId);
+        intent.putExtra("categoryId", catId);
 //        MyProgressDialog.show(this,myProgressDialog,"","");
-        NavUtils.navigateUpTo(this,intent);
+        NavUtils.navigateUpTo(this, intent);
     }
 
     @Override
@@ -417,19 +416,19 @@ public class ProductDetailActivity extends AppCompatActivity implements BaseSlid
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("Tangho","ProductDetail activity >> onRestart Called");
+        Log.d("Tangho", "ProductDetail activity >> onRestart Called");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("Tangho","ProductDetail activity >> onPause Called");
+        Log.d("Tangho", "ProductDetail activity >> onPause Called");
     }
 
     @Override
     protected void onDestroy() {
         myProgressDialog.dismiss();
         super.onDestroy();
-        Log.d("Tangho","ProductDetail activity >> onDestroy Called");
+        Log.d("Tangho", "ProductDetail activity >> onDestroy Called");
     }
 }

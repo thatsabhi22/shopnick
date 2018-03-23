@@ -21,13 +21,13 @@ import dfapi.BaseAsyncRequest;
  */
 public class GetCouponByCodeTask extends BaseAsyncRequest {
 
-    Context context;
     public Coupons couponsRec;
     public Coupon couponRec;
+    Context context;
     int couponId;
     String couponCode;
 
-    public GetCouponByCodeTask(Context context, String couponCode){
+    public GetCouponByCodeTask(Context context, String couponCode) {
         this.context = context;
         this.couponCode = couponCode;
     }
@@ -59,14 +59,14 @@ public class GetCouponByCodeTask extends BaseAsyncRequest {
         //Log.d("Tang Ho"," >>>>> " + response);
         couponsRec =
                 (Coupons) ApiInvoker.deserialize(response, "", Coupons.class);
-        if(couponsRec.coupons.size()> 0)
+        if (couponsRec.coupons.size() > 0)
             couponRec = couponsRec.coupons.get(0);
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && couponsRec != null){
-            Log.d("Tang Ho"," >>>>> Success");
+        if (success && couponsRec != null) {
+            Log.d("Tang Ho", " >>>>> Success");
         }
     }
 

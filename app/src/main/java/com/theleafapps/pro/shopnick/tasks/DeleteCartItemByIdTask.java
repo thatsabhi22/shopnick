@@ -21,7 +21,7 @@ public class DeleteCartItemByIdTask extends BaseAsyncRequest {
     Context context;
     int cart_item_id;
 
-    public DeleteCartItemByIdTask(Context context, int cart_item_id){
+    public DeleteCartItemByIdTask(Context context, int cart_item_id) {
         this.cart_item_id = cart_item_id;
         this.context = context;
     }
@@ -52,7 +52,7 @@ public class DeleteCartItemByIdTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success){
+        if (success) {
             Log.d("Tang Ho", "success");
         }
     }

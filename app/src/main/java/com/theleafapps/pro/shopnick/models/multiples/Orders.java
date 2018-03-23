@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by aviator on 30/06/16.
  */
-public class Orders  extends BaseRecord {
+public class Orders extends BaseRecord {
 
     @JsonProperty("resource")
     public List<Order> orders = new ArrayList<>();

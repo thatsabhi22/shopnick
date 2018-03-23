@@ -5,26 +5,25 @@
     android:padding="20dp">
 
     <TextView
+        android:id="@+id/money_added_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text=
-            "Your Wallet has been updated to \nRs. 10000\n\nHappy Shopping !!"
-        android:id="@+id/money_added_text"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Your Wallet has been updated to \nRs. 10000\n\nHappy Shopping !!"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
+        android:id="@+id/ok_money_added_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="80dp"
         android:layout_height="30dp"
-        android:text="OK"
-        android:id="@+id/ok_money_added_button"
-        android:background="@color/windowBackground"
-        android:layout_below="@+id/money_added_text"
-        android:layout_alignRight="@+id/money_added_text"
         android:layout_alignEnd="@+id/money_added_text"
-        android:layout_marginTop="15dp" />
+        android:layout_alignRight="@+id/money_added_text"
+        android:layout_below="@+id/money_added_text"
+        android:layout_marginTop="15dp"
+        android:background="@color/windowBackground"
+        android:text="OK" />
 
 </RelativeLayout>

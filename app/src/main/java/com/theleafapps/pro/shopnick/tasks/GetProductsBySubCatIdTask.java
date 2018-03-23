@@ -21,16 +21,16 @@ import dfapi.BaseAsyncRequest;
  */
 public class GetProductsBySubCatIdTask extends BaseAsyncRequest {
 
-    Context context;
     public Products productsRec;
+    Context context;
     int subCatId;
-    String sort_str,fltr_str;
+    String sort_str, fltr_str;
 
-    public GetProductsBySubCatIdTask(Context context, int subCataId, String sort_str, String fltr_str){
-        this.context    =   context;
-        this.subCatId   =   subCataId;
-        this.sort_str   =   sort_str;
-        this.fltr_str   =   fltr_str;
+    public GetProductsBySubCatIdTask(Context context, int subCataId, String sort_str, String fltr_str) {
+        this.context = context;
+        this.subCatId = subCataId;
+        this.sort_str = sort_str;
+        this.fltr_str = fltr_str;
     }
 
     @Override
@@ -42,15 +42,14 @@ public class GetProductsBySubCatIdTask extends BaseAsyncRequest {
 
         // filter to only select the contacts in this group
 
-        String queryString  =   null;
+        String queryString = null;
 
-        if(!TextUtils.isEmpty(fltr_str)){
-            fltr_str =  "AND"  + fltr_str;
-            queryString  =   "(sub_category_id=" + subCatId+")" + fltr_str;
-        }
-        else{
+        if (!TextUtils.isEmpty(fltr_str)) {
+            fltr_str = "AND" + fltr_str;
+            queryString = "(sub_category_id=" + subCatId + ")" + fltr_str;
+        } else {
             fltr_str = "";
-            queryString  =   "sub_category_id=" + subCatId + fltr_str;
+            queryString = "sub_category_id=" + subCatId + fltr_str;
         }
 
         queryParams = new HashMap<>();
@@ -71,8 +70,8 @@ public class GetProductsBySubCatIdTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && productsRec != null && productsRec.products.size() > 0){
-            Log.d("Tang Ho"," >>>>> Success");
+        if (success && productsRec != null && productsRec.products.size() > 0) {
+            Log.d("Tang Ho", " >>>>> Success");
         }
     }
 }

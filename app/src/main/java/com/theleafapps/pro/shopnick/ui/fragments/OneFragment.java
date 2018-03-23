@@ -21,11 +21,10 @@ import java.util.List;
 
 public class OneFragment extends Fragment {
 
+    MyProgressDialog myProgressDialog;
+    List<SubCategory> infoList = Collections.emptyList();
     private RecyclerView recyclerView;
     private TabbedRecyclerAdapter adapter;
-    MyProgressDialog myProgressDialog;
-
-    List<SubCategory> infoList = Collections.emptyList();
 
     public OneFragment() {
         // Required empty public constructor
@@ -40,21 +39,21 @@ public class OneFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Bundle bundle       =   this.getArguments();
-        int category_id     =   bundle.getInt("category_id");
-        myProgressDialog    =   (MyProgressDialog) bundle.getSerializable("progressDialog");
-        View inflatedView   =   inflater.inflate(R.layout.fragment_one, container, false);
-        recyclerView        =   (RecyclerView) inflatedView.findViewById(R.id.cardRecyclerView);
+        Bundle bundle = this.getArguments();
+        int category_id = bundle.getInt("category_id");
+        myProgressDialog = (MyProgressDialog) bundle.getSerializable("progressDialog");
+        View inflatedView = inflater.inflate(R.layout.fragment_one, container, false);
+        recyclerView = (RecyclerView) inflatedView.findViewById(R.id.cardRecyclerView);
 
-        if(Commons.catIdToSubCatMap.containsKey(category_id)) {
-            infoList        =   Commons.catIdToSubCatMap.get(category_id);
+        if (Commons.catIdToSubCatMap.containsKey(category_id)) {
+            infoList = Commons.catIdToSubCatMap.get(category_id);
         }
 
-        adapter             =   new TabbedRecyclerAdapter(getActivity(),infoList,category_id,myProgressDialog);
+        adapter = new TabbedRecyclerAdapter(getActivity(), infoList, category_id, myProgressDialog);
         recyclerView.setAdapter(adapter);
 
         final LinearLayoutManager linearLayoutManager
-                            = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
+                = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(

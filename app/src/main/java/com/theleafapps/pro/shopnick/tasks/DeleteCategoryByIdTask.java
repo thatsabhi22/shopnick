@@ -2,6 +2,7 @@ package com.theleafapps.pro.shopnick.tasks;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.theleafapps.pro.shopnick.utils.AppConstants;
 import com.theleafapps.pro.shopnick.utils.PrefUtil;
 
@@ -73,7 +74,7 @@ public class DeleteCategoryByIdTask extends BaseAsyncRequest {
     Context context;
     int category_id;
 
-    public DeleteCategoryByIdTask(Context context, int category_id){
+    public DeleteCategoryByIdTask(Context context, int category_id) {
         this.category_id = category_id;
         this.context = context;
     }
@@ -104,7 +105,7 @@ public class DeleteCategoryByIdTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success){
+        if (success) {
             Log.d("Tang Ho", "success");
         }
     }

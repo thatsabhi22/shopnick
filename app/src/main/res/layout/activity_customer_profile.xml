@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.theleafapps.pro.shopnick.ui.CustomerProfileActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/customer_profile_screen_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:id="@+id/customer_profile_screen_toolbar">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_customer_profile"
@@ -22,258 +22,259 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+        android:id="@+id/disclaimer_customer_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/customer_profile_screen_toolbar"
         android:background="@color/red_500"
-        android:orientation="horizontal"
-        android:id="@+id/disclaimer_customer_profile">
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/disclaimer"
             android:textAlignment="center"
-            android:textColor="#ffffff"/>
+            android:textColor="#ffffff" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/c_first_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="First Name"
-        android:id="@+id/c_first_name"
-        android:layout_below="@+id/disclaimer_customer_profile"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/disclaimer_customer_profile"
         android:layout_marginLeft="31dp"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:text="First Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <View
+        android:id="@+id/ruler1"
         android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/c_first_name"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="1dp"
-        android:layout_below="@+id/c_first_name"
-        android:background="#000000"
-        android:id="@+id/ruler1" />
+        android:background="#000000" />
 
     <TextView
+        android:id="@+id/c_last_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Last Name"
-        android:id="@+id/c_last_name"
-        android:layout_below="@+id/c_first_name"
         android:layout_alignLeft="@+id/c_first_name"
         android:layout_alignStart="@+id/c_first_name"
-        android:layout_marginTop="25dp" />
+        android:layout_below="@+id/c_first_name"
+        android:layout_marginTop="25dp"
+        android:text="Last Name"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <View
+        android:id="@+id/ruler2"
         android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/c_last_name"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="1dp"
-        android:layout_below="@+id/c_last_name"
-        android:id="@+id/ruler2"
         android:background="#000000" />
 
 
     <TextView
+        android:id="@+id/c_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Address\n "
-        android:id="@+id/c_address"
-        android:layout_below="@+id/c_last_name"
         android:layout_alignLeft="@+id/c_last_name"
         android:layout_alignStart="@+id/c_last_name"
-        android:layout_marginTop="25dp" />
+        android:layout_below="@+id/c_last_name"
+        android:layout_marginTop="25dp"
+        android:text="Address\n "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <View
+        android:id="@+id/ruler3"
         android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/c_address"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="1dp"
-        android:id="@+id/ruler3"
-        android:layout_below="@+id/c_address"
         android:background="#000000" />
 
     <TextView
+        android:id="@+id/c_zipcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Zipcode"
-        android:id="@+id/c_zipcode"
-        android:layout_below="@+id/c_address"
         android:layout_alignLeft="@+id/c_address"
         android:layout_alignStart="@+id/c_address"
-        android:layout_marginTop="25dp" />
+        android:layout_below="@+id/c_address"
+        android:layout_marginTop="25dp"
+        android:text="Zipcode"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <View
+        android:id="@+id/ruler4"
         android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/c_zipcode"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="1dp"
-        android:id="@+id/ruler4"
-        android:layout_below="@+id/c_zipcode"
         android:background="#000000" />
 
     <TextView
+        android:id="@+id/c_country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Country"
-        android:id="@+id/c_country"
-        android:layout_below="@+id/c_zipcode"
         android:layout_alignLeft="@+id/c_zipcode"
         android:layout_alignStart="@+id/c_zipcode"
-        android:layout_marginTop="25dp" />
+        android:layout_below="@+id/c_zipcode"
+        android:layout_marginTop="25dp"
+        android:text="Country"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <View
+        android:id="@+id/ruler5"
         android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/c_country"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="1dp"
-        android:id="@+id/ruler5"
-        android:layout_below="@+id/c_country"
         android:background="#000000" />
 
     <TextView
+        android:id="@+id/c_mobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Mobile"
-        android:id="@+id/c_mobile"
-        android:layout_below="@+id/c_country"
         android:layout_alignLeft="@+id/c_country"
         android:layout_alignStart="@+id/c_country"
-        android:layout_marginTop="25dp" />
+        android:layout_below="@+id/c_country"
+        android:layout_marginTop="25dp"
+        android:text="Mobile"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <View
+        android:id="@+id/ruler6"
         android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/c_mobile"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="1dp"
-        android:id="@+id/ruler6"
-        android:layout_below="@+id/c_mobile"
         android:background="#000000" />
 
     <TextView
+        android:id="@+id/c_wallet_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Wallet Value"
-        android:id="@+id/c_wallet_value"
-        android:layout_below="@+id/c_mobile"
         android:layout_alignLeft="@+id/c_mobile"
         android:layout_alignStart="@+id/c_mobile"
-        android:layout_marginTop="25dp" />
+        android:layout_below="@+id/c_mobile"
+        android:layout_marginTop="25dp"
+        android:text="Wallet Value"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <View
+        android:id="@+id/ruler7"
         android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/c_wallet_value"
+        android:layout_marginBottom="4dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:layout_height="1dp"
-        android:id="@+id/ruler7"
-        android:layout_below="@+id/c_wallet_value"
         android:background="#000000" />
 
     <ImageButton
+        android:id="@+id/c_profile_shop_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Continue  Shopping"
-        android:id="@+id/c_profile_shop_button"
-        android:src="@drawable/contshopbutton"
-        android:background="?android:attr/selectableItemBackground"
         android:layout_below="@+id/ruler7"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/contshopbutton"
+        android:text="Continue  Shopping" />
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="&lt;first_name>"
         android:id="@+id/c_first_name_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/c_first_name"
-        android:layout_toRightOf="@+id/c_first_name"
+        android:layout_marginLeft="70dp"
         android:layout_toEndOf="@+id/c_first_name"
-        android:layout_marginLeft="70dp" />
+        android:layout_toRightOf="@+id/c_first_name"
+        android:text="&lt;first_name>"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="&lt;last_name>"
         android:id="@+id/c_last_name_value"
-        android:layout_alignTop="@+id/c_last_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/c_first_name_value"
-        android:layout_alignStart="@+id/c_first_name_value" />
+        android:layout_alignStart="@+id/c_first_name_value"
+        android:layout_alignTop="@+id/c_last_name"
+        android:text="&lt;last_name>"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="&lt;address>"
         android:id="@+id/c_address_value"
-        android:layout_alignTop="@+id/c_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/c_last_name_value"
-        android:layout_alignStart="@+id/c_last_name_value" />
+        android:layout_alignStart="@+id/c_last_name_value"
+        android:layout_alignTop="@+id/c_address"
+        android:text="&lt;address>"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="&lt;zipcode>"
         android:id="@+id/c_zipcode_value"
-        android:layout_alignTop="@+id/c_zipcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/c_address_value"
-        android:layout_alignStart="@+id/c_address_value" />
+        android:layout_alignStart="@+id/c_address_value"
+        android:layout_alignTop="@+id/c_zipcode"
+        android:text="&lt;zipcode>"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="&lt;country>"
         android:id="@+id/c_country_value"
-        android:layout_alignTop="@+id/c_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/c_zipcode_value"
-        android:layout_alignStart="@+id/c_zipcode_value" />
+        android:layout_alignStart="@+id/c_zipcode_value"
+        android:layout_alignTop="@+id/c_country"
+        android:text="&lt;country>"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="&lt;mobile>"
         android:id="@+id/c_mobile_value"
-        android:layout_alignTop="@+id/c_mobile"
-        android:layout_alignLeft="@+id/c_country_value"
-        android:layout_alignStart="@+id/c_country_value" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="&lt;wallet_value>"
+        android:layout_alignLeft="@+id/c_country_value"
+        android:layout_alignStart="@+id/c_country_value"
+        android:layout_alignTop="@+id/c_mobile"
+        android:text="&lt;mobile>"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
         android:id="@+id/c_wallet_amount_value"
-        android:layout_alignTop="@+id/c_wallet_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/c_mobile_value"
-        android:layout_alignStart="@+id/c_mobile_value" />
+        android:layout_alignStart="@+id/c_mobile_value"
+        android:layout_alignTop="@+id/c_wallet_value"
+        android:text="&lt;wallet_value>"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

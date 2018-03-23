@@ -19,14 +19,14 @@ import dfapi.BaseAsyncRequest;
 /**
  * Created by aviator on 18/07/16.
  */
-public class GetCustomerByCustomerDevIdTask extends BaseAsyncRequest{
+public class GetCustomerByCustomerDevIdTask extends BaseAsyncRequest {
 
-    Context context;
-    String customerDevId;
     public Customers customersRec;
     public Customer customerRec;
+    Context context;
+    String customerDevId;
 
-    public GetCustomerByCustomerDevIdTask(Context context, String customerDevId){
+    public GetCustomerByCustomerDevIdTask(Context context, String customerDevId) {
         this.context = context;
         this.customerDevId = customerDevId;
     }
@@ -58,14 +58,14 @@ public class GetCustomerByCustomerDevIdTask extends BaseAsyncRequest{
         //Log.d("Tang Ho"," >>>>> " + response);
         customersRec =
                 (Customers) ApiInvoker.deserialize(response, "", Customers.class);
-        if(customersRec.customers.size()> 0)
+        if (customersRec.customers.size() > 0)
             customerRec = customersRec.customers.get(0);
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && customersRec != null){
-            Log.d("Tang Ho"," >>>>> Success");
+        if (success && customersRec != null) {
+            Log.d("Tang Ho", " >>>>> Success");
         }
     }
 }

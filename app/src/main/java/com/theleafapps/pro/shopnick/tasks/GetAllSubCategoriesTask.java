@@ -18,10 +18,10 @@ import dfapi.BaseAsyncRequest;
  */
 public class GetAllSubCategoriesTask extends BaseAsyncRequest {
 
-    Context context;
     public SubCategories subCategoriesReceived;
+    Context context;
 
-    public GetAllSubCategoriesTask(Context context){
+    public GetAllSubCategoriesTask(Context context) {
         this.context = context;
     }
 
@@ -58,8 +58,8 @@ public class GetAllSubCategoriesTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && subCategoriesReceived != null && subCategoriesReceived.subCategories.size() > 0){
-            Log.d("Tang Ho"," >>>>> AllSubCategories Received");
+        if (success && subCategoriesReceived != null && subCategoriesReceived.subCategories.size() > 0) {
+            Log.d("Tang Ho", " >>>>> AllSubCategories Received");
         }
     }
 }

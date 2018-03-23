@@ -26,7 +26,7 @@ import java.util.List;
  * Created by aviator on 08/07/16.
  */
 public class CartCustomAdapter extends
-        RecyclerView.Adapter<CartCustomAdapter.MyViewHolder>  implements View.OnClickListener{
+        RecyclerView.Adapter<CartCustomAdapter.MyViewHolder> implements View.OnClickListener {
 
     Context mContext;
     CartItems cartItems;
@@ -39,13 +39,13 @@ public class CartCustomAdapter extends
     String product_name_bundle;
 
     public CartCustomAdapter(Context context, CartItems cartItems, FragmentManager fragmentManager) {
-        inflater                =   LayoutInflater.from(context);
-        this.mContext           =   context;
-        this.cartItems          =   cartItems;
-        this.fragmentManager    =   fragmentManager;
+        inflater = LayoutInflater.from(context);
+        this.mContext = context;
+        this.cartItems = cartItems;
+        this.fragmentManager = fragmentManager;
 
-        if(this.cartItems!=null)
-            this.cartItemList   =   cartItems.cartItemList;
+        if (this.cartItems != null)
+            this.cartItemList = cartItems.cartItemList;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CartCustomAdapter extends
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view =  inflater.inflate(R.layout.single_row_cart,parent,false);
+        View view = inflater.inflate(R.layout.single_row_cart, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -66,13 +66,13 @@ public class CartCustomAdapter extends
 
         mImageLoader = MySingleton.getInstance(mContext).getImageLoader();
 
-        if(!TextUtils.isEmpty(current.product.image_url)){
+        if (!TextUtils.isEmpty(current.product.image_url)) {
             String image_url = current.product.image_url;
-            image_url = image_url.replace(".jpg","s.jpg");
+            image_url = image_url.replace(".jpg", "s.jpg");
             current.product.image_url = image_url;
         }
 
-        holder.cart_product_image.setImageUrl(current.product.image_url,mImageLoader);
+        holder.cart_product_image.setImageUrl(current.product.image_url, mImageLoader);
         holder.product_name.setText(current.product.product_name);
         holder.product_size.setText(current.variant);
         holder.product_qty.setText(String.valueOf(current.quantity));
@@ -81,13 +81,13 @@ public class CartCustomAdapter extends
         holder.net_cost.setText(String.valueOf(current.product.unit_offerprice * current.quantity));
         holder.cart_item_id.setText(String.valueOf(current.cart_item_id));
         holder.unit_shipping.setText(String.valueOf(current.product.unit_shipping));
-        product_id          =   current.product_id;
-        product_name_bundle =   current.product.product_name;
+        product_id = current.product_id;
+        product_name_bundle = current.product.product_name;
     }
 
     @Override
     public int getItemCount() {
-        if(cartItems!=null && cartItems.cartItemList.size() != 0) {
+        if (cartItems != null && cartItems.cartItemList.size() != 0) {
             return cartItems.cartItemList.size();
         }
         return 0;
@@ -96,9 +96,9 @@ public class CartCustomAdapter extends
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         NetworkImageView cart_product_image;
-        ImageView delete_cart_item,update_cart_item;
-        TextView product_name,product_size,product_qty,unit_shipping;
-        TextView net_cost,product_offerprice,multiply_product_qty;
+        ImageView delete_cart_item, update_cart_item;
+        TextView product_name, product_size, product_qty, unit_shipping;
+        TextView net_cost, product_offerprice, multiply_product_qty;
         TextView cart_item_id;
         SimpleDialogClass simpleDialog;
         CartUpdateDialog cartUpdateDialog;
@@ -107,26 +107,26 @@ public class CartCustomAdapter extends
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            bundle                  =   new Bundle();
-            simpleDialog            =   new SimpleDialogClass();
-            cartUpdateDialog        =   new CartUpdateDialog();
-            delete_cart_item        =   (ImageView) itemView.findViewById(R.id.deleteCartItemButton);
-            update_cart_item        =   (ImageView) itemView.findViewById(R.id.updateCartItemButton);
-            cart_product_image      =   (NetworkImageView) itemView.findViewById(R.id.cartItemImageView);
-            product_name            =   (TextView) itemView.findViewById(R.id.product_name_value);
-            product_size            =   (TextView) itemView.findViewById(R.id.size_value);
-            product_qty             =   (TextView) itemView.findViewById(R.id.product_quantity_value);
-            product_offerprice      =   (TextView) itemView.findViewById(R.id.offer_price_value);
-            multiply_product_qty    =   (TextView) itemView.findViewById(R.id.multiply_product_qty);
-            net_cost                =   (TextView) itemView.findViewById(R.id.net_cost);
-            unit_shipping           =   (TextView) itemView.findViewById(R.id.unit_shipping_value);
-            cart_item_id            =   (TextView) itemView.findViewById(R.id.cart_item_id);
+            bundle = new Bundle();
+            simpleDialog = new SimpleDialogClass();
+            cartUpdateDialog = new CartUpdateDialog();
+            delete_cart_item = (ImageView) itemView.findViewById(R.id.deleteCartItemButton);
+            update_cart_item = (ImageView) itemView.findViewById(R.id.updateCartItemButton);
+            cart_product_image = (NetworkImageView) itemView.findViewById(R.id.cartItemImageView);
+            product_name = (TextView) itemView.findViewById(R.id.product_name_value);
+            product_size = (TextView) itemView.findViewById(R.id.size_value);
+            product_qty = (TextView) itemView.findViewById(R.id.product_quantity_value);
+            product_offerprice = (TextView) itemView.findViewById(R.id.offer_price_value);
+            multiply_product_qty = (TextView) itemView.findViewById(R.id.multiply_product_qty);
+            net_cost = (TextView) itemView.findViewById(R.id.net_cost);
+            unit_shipping = (TextView) itemView.findViewById(R.id.unit_shipping_value);
+            cart_item_id = (TextView) itemView.findViewById(R.id.cart_item_id);
 
 
             delete_cart_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    bundle.putInt("cart_item_id",Integer.parseInt(cart_item_id.getText().toString()));
+                    bundle.putInt("cart_item_id", Integer.parseInt(cart_item_id.getText().toString()));
                     simpleDialog.setArguments(bundle);
                     simpleDialog.show(fragmentManager, "delete_cart_item");
                 }
@@ -135,9 +135,9 @@ public class CartCustomAdapter extends
             update_cart_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    bundle.putInt("cart_item_id",Integer.parseInt(cart_item_id.getText().toString()));
-                    bundle.putInt("product_id",product_id);
-                    bundle.putString("product_name",product_name_bundle);
+                    bundle.putInt("cart_item_id", Integer.parseInt(cart_item_id.getText().toString()));
+                    bundle.putInt("product_id", product_id);
+                    bundle.putString("product_name", product_name_bundle);
                     cartUpdateDialog.setArguments(bundle);
                     cartUpdateDialog.show(fragmentManager, "update_cart_item");
                 }

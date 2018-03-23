@@ -16,13 +16,13 @@ import dfapi.BaseAsyncRequest;
  */
 public class UpdateCustomerWalletValueTask extends BaseAsyncRequest {
 
-    Context context;
     public int customerId;
+    Context context;
     Customers customers;
 
-    public UpdateCustomerWalletValueTask(Context context, Customers customers){
-        this.context        =   context;
-        this.customers      =   customers;
+    public UpdateCustomerWalletValueTask(Context context, Customers customers) {
+        this.context = context;
+        this.customers = customers;
     }
 
     @Override
@@ -42,14 +42,14 @@ public class UpdateCustomerWalletValueTask extends BaseAsyncRequest {
 
     @Override
     protected void processResponse(String response) throws ApiException, org.json.JSONException {
-        Customers customerList  =   (Customers) ApiInvoker.deserialize(response, "", Customers.class);
-        customerId              =   customerList.customers.get(0).customer_id;
+        Customers customerList = (Customers) ApiInvoker.deserialize(response, "", Customers.class);
+        customerId = customerList.customers.get(0).customer_id;
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success) {
-            Log.d("Tang Ho","Success");
+        if (success) {
+            Log.d("Tang Ho", "Success");
         }
     }
 

@@ -1,108 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
-    >
+    android:padding="15dp">
 
     <TextView
+        android:id="@+id/update_cart_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Update Cart Item !!"
-        android:id="@+id/update_cart_item_title"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:text="Update Cart Item !!"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Size"
         android:id="@+id/variant_label"
-        android:layout_marginTop="46dp"
-        android:layout_below="@+id/update_cart_item_title"
-        android:layout_alignLeft="@+id/update_cart_item_title"
-        android:layout_alignStart="@+id/update_cart_item_title" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Quantity"
-        android:id="@+id/quantity_label"
-        android:layout_below="@+id/variant_available_tv"
-        android:layout_alignLeft="@+id/variant_label"
-        android:layout_alignStart="@+id/variant_label"
-        android:layout_marginTop="20dp" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cart_update_dialog_variant_spinner"
-        android:spinnerMode="dialog"
-        android:layout_alignTop="@+id/variant_label"
-        android:layout_toRightOf="@+id/cart_update_dialog_update_button"
-        android:layout_alignRight="@+id/cart_update_dialog_cancel_button"
-        android:layout_alignEnd="@+id/cart_update_dialog_cancel_button" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cart_update_dialog_quantity_spinner"
-        android:layout_alignTop="@+id/quantity_label"
-        android:layout_alignLeft="@+id/cart_update_dialog_variant_spinner"
-        android:layout_alignStart="@+id/cart_update_dialog_variant_spinner"
-        android:spinnerMode="dialog"
-        android:layout_alignRight="@+id/cart_update_dialog_variant_spinner"
-        android:layout_alignEnd="@+id/cart_update_dialog_variant_spinner" />
-
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:text="Update"
-        android:id="@+id/cart_update_dialog_update_button"
-        android:background="#e5ffe5"
-        android:layout_below="@+id/cart_update_dialog_quantity_spinner"
-        android:layout_toRightOf="@+id/quantity_label"
-        android:layout_toEndOf="@+id/quantity_label"
-        android:layout_marginTop="30dp" />
-
-    <Button
-        android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:text="Cancel"
-        android:id="@+id/cart_update_dialog_cancel_button"
-        android:background="@color/windowBackground"
-        android:layout_toRightOf="@+id/cart_update_dialog_update_button"
-        android:layout_toEndOf="@+id/cart_update_dialog_update_button"
-        android:layout_below="@+id/cart_update_dialog_quantity_spinner"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="product_name"
-        android:id="@+id/update_cart_dialog_product_name_value"
-        android:layout_below="@+id/update_cart_item_title"
         android:layout_alignLeft="@+id/update_cart_item_title"
         android:layout_alignStart="@+id/update_cart_item_title"
-        android:layout_marginTop="13dp" />
+        android:layout_below="@+id/update_cart_item_title"
+        android:layout_marginTop="46dp"
+        android:text="Size"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
+        android:id="@+id/quantity_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="available"
-        android:visibility="invisible"
-        android:id="@+id/variant_available_tv"
-        android:layout_below="@+id/variant_label"
         android:layout_alignLeft="@+id/variant_label"
-        android:layout_alignStart="@+id/variant_label" />
+        android:layout_alignStart="@+id/variant_label"
+        android:layout_below="@+id/variant_available_tv"
+        android:layout_marginTop="20dp"
+        android:text="Quantity"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Spinner
+        android:id="@+id/cart_update_dialog_variant_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cart_update_dialog_cancel_button"
+        android:layout_alignRight="@+id/cart_update_dialog_cancel_button"
+        android:layout_alignTop="@+id/variant_label"
+        android:layout_toRightOf="@+id/cart_update_dialog_update_button"
+        android:spinnerMode="dialog" />
+
+    <Spinner
+        android:id="@+id/cart_update_dialog_quantity_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cart_update_dialog_variant_spinner"
+        android:layout_alignLeft="@+id/cart_update_dialog_variant_spinner"
+        android:layout_alignRight="@+id/cart_update_dialog_variant_spinner"
+        android:layout_alignStart="@+id/cart_update_dialog_variant_spinner"
+        android:layout_alignTop="@+id/quantity_label"
+        android:spinnerMode="dialog" />
+
+    <Button
+        android:id="@+id/cart_update_dialog_update_button"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/cart_update_dialog_quantity_spinner"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/quantity_label"
+        android:layout_toRightOf="@+id/quantity_label"
+        android:background="#e5ffe5"
+        android:text="Update" />
+
+    <Button
+        android:id="@+id/cart_update_dialog_cancel_button"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/cart_update_dialog_quantity_spinner"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/cart_update_dialog_update_button"
+        android:layout_toRightOf="@+id/cart_update_dialog_update_button"
+        android:background="@color/windowBackground"
+        android:text="Cancel" />
+
+    <TextView
+        android:id="@+id/update_cart_dialog_product_name_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/update_cart_item_title"
+        android:layout_alignStart="@+id/update_cart_item_title"
+        android:layout_below="@+id/update_cart_item_title"
+        android:layout_marginTop="13dp"
+        android:text="product_name"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/variant_available_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/variant_label"
+        android:layout_alignStart="@+id/variant_label"
+        android:layout_below="@+id/variant_label"
+        android:text="available"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:visibility="invisible" />
 </RelativeLayout>

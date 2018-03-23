@@ -20,14 +20,14 @@ import dfapi.BaseAsyncRequest;
 /**
  * Created by aviator on 21/06/16.
  */
-public class GetAllVariantsByProductIdTask extends BaseAsyncRequest{
+public class GetAllVariantsByProductIdTask extends BaseAsyncRequest {
 
-    Context context;
-    int productId;
     public Variants variantsRec;
     public List<Variant> variantList;
+    Context context;
+    int productId;
 
-    public GetAllVariantsByProductIdTask(Context context, int productId){
+    public GetAllVariantsByProductIdTask(Context context, int productId) {
         this.context = context;
         this.productId = productId;
     }
@@ -61,14 +61,14 @@ public class GetAllVariantsByProductIdTask extends BaseAsyncRequest{
         //Log.d("Tang Ho"," >>>>> " + response);
         variantsRec =
                 (Variants) ApiInvoker.deserialize(response, "", Variants.class);
-        if(variantsRec!=null)
-        variantList = variantsRec.variants;
+        if (variantsRec != null)
+            variantList = variantsRec.variants;
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && variantsRec != null){
-            Log.d("Tang Ho"," >>>>> Successfully Received Variants By ProductId ->" + productId);
+        if (success && variantsRec != null) {
+            Log.d("Tang Ho", " >>>>> Successfully Received Variants By ProductId ->" + productId);
         }
     }
 

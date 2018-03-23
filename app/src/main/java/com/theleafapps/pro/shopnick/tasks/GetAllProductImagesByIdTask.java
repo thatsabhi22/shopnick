@@ -21,12 +21,12 @@ import dfapi.BaseAsyncRequest;
  */
 public class GetAllProductImagesByIdTask extends BaseAsyncRequest {
 
-    Context context;
     public ProductImages productImagesRec;
     public ProductImage productImageRec;
+    Context context;
     int productId;
 
-    public GetAllProductImagesByIdTask(Context context, int productId){
+    public GetAllProductImagesByIdTask(Context context, int productId) {
         this.context = context;
         this.productId = productId;
     }
@@ -42,7 +42,7 @@ public class GetAllProductImagesByIdTask extends BaseAsyncRequest {
         // filter to only select the contacts in this group
         queryParams = new HashMap<>();
         queryParams.put("filter", "product_id=" + productId);
-//        queryParams.put("order", "sequence%20ASC");
+        // queryParams.put("order", "sequence%20ASC");
 
         // request without related would return just {id, contact_group_id, contact_id}
         // set the related field to go get the contact mRecordsList referenced by
@@ -64,8 +64,8 @@ public class GetAllProductImagesByIdTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && productImagesRec != null){
-            Log.d("Tang Ho"," >>>>> Success");
+        if (success && productImagesRec != null) {
+            Log.d("Tang Ho", " >>>>> Success");
         }
     }
 

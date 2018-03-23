@@ -15,22 +15,26 @@ import java.io.Serializable;
  */
 public class MyProgressDialog extends Dialog implements Serializable {
 
+    public MyProgressDialog(Context context) {
+        super(context, R.style.NewDialog);
+    }
+
     public static MyProgressDialog show(Context context, MyProgressDialog progressDialog, CharSequence title,
                                         CharSequence message) {
-        return show(context,progressDialog, title, message, false);
+        return show(context, progressDialog, title, message, false);
     }
 
     public static MyProgressDialog show(Context context, MyProgressDialog progressDialog, CharSequence title,
                                         CharSequence message, boolean indeterminate) {
-        return show(context,progressDialog, title, message, indeterminate, false, null);
+        return show(context, progressDialog, title, message, indeterminate, false, null);
     }
 
     public static MyProgressDialog show(Context context, MyProgressDialog progressDialog, CharSequence title,
                                         CharSequence message, boolean indeterminate, boolean cancelable, Object o) {
-        return show(context,progressDialog, title, message, indeterminate, cancelable, null);
+        return show(context, progressDialog, title, message, indeterminate, cancelable, null);
     }
 
-    public static MyProgressDialog show(Context context,MyProgressDialog dialog, CharSequence title,
+    public static MyProgressDialog show(Context context, MyProgressDialog dialog, CharSequence title,
                                         CharSequence message, boolean indeterminate,
                                         boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
         dialog.setTitle(title);
@@ -45,11 +49,7 @@ public class MyProgressDialog extends Dialog implements Serializable {
         return dialog;
     }
 
-    public static void dismissDialog(){
+    public static void dismissDialog() {
 
-    }
-
-    public MyProgressDialog(Context context) {
-        super(context, R.style.NewDialog);
     }
 }

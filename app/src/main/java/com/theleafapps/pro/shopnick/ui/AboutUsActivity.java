@@ -1,8 +1,8 @@
 package com.theleafapps.pro.shopnick.ui;
 
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -63,26 +63,26 @@ public class AboutUsActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("Tangho","AboutUs activity >> onRestart Called");
+        Log.d("Tangho", "AboutUs activity >> onRestart Called");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         finish();
-        Log.d("Tangho","AboutUs activity >> onPause Called");
+        Log.d("Tangho", "AboutUs activity >> onPause Called");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("Tangho","AboutUs activity >> onDestroy Called");
+        Log.d("Tangho", "AboutUs activity >> onDestroy Called");
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.d("Tangho","AboutUs activity >> onBackPressed Called");
+        Log.d("Tangho", "AboutUs activity >> onBackPressed Called");
     }
 
 }

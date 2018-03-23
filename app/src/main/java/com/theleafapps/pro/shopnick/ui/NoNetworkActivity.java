@@ -1,8 +1,8 @@
 package com.theleafapps.pro.shopnick.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,13 +20,13 @@ public class NoNetworkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_no_network);
 
-        refreshButton               = (ImageView) findViewById(R.id.refreshIcon);
+        refreshButton = (ImageView) findViewById(R.id.refreshIcon);
         dot_progress_bar_no_network = (DotProgressBar) findViewById(R.id.dot_progress_bar_no_network);
 
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(NoNetworkActivity.this,SplashActivity.class);
+                intent = new Intent(NoNetworkActivity.this, SplashActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }

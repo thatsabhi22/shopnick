@@ -2,7 +2,6 @@ package com.theleafapps.pro.shopnick.models.multiples;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.theleafapps.pro.shopnick.models.BaseRecord;
 import com.theleafapps.pro.shopnick.models.ProductImage;
 
@@ -14,7 +13,7 @@ import java.util.List;
  */
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ProductImages extends BaseRecord{
+public class ProductImages extends BaseRecord {
 
     @JsonProperty("resource")
     public List<ProductImage> productImages = new ArrayList<>();

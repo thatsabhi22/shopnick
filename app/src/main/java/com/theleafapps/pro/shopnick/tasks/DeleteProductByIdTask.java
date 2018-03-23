@@ -21,7 +21,7 @@ public class DeleteProductByIdTask extends BaseAsyncRequest {
     Context context;
     int product_id;
 
-    public DeleteProductByIdTask(Context context, int product_id){
+    public DeleteProductByIdTask(Context context, int product_id) {
         this.product_id = product_id;
         this.context = context;
     }
@@ -52,7 +52,7 @@ public class DeleteProductByIdTask extends BaseAsyncRequest {
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success)
+        if (success)
             Log.d("Tang Ho", "Successfully Deleted Product with id ->" + product_id);
-        }
+    }
 }

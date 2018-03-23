@@ -1,7 +1,7 @@
 package com.theleafapps.pro.shopnick.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,8 +14,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d("qwe","eweq");
+        Log.d("qwe", "eweq");
 
-        Toast.makeText(this,"Main Activity Run",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Main Activity Run", Toast.LENGTH_LONG).show();
     }
 }

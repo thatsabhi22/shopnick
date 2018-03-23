@@ -1,7 +1,7 @@
 package com.theleafapps.pro.shopnick.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.theleafapps.pro.shopnick.R;
 

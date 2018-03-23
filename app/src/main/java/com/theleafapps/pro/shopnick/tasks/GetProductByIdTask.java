@@ -9,6 +9,7 @@ import com.theleafapps.pro.shopnick.utils.AppConstants;
 import com.theleafapps.pro.shopnick.utils.PrefUtil;
 
 import org.json.JSONException;
+
 import java.util.HashMap;
 
 import dfapi.ApiException;
@@ -20,12 +21,12 @@ import dfapi.BaseAsyncRequest;
  */
 public class GetProductByIdTask extends BaseAsyncRequest {
 
-    Context context;
     public Products productsRec;
     public Product productRec;
+    Context context;
     int productId;
 
-    public GetProductByIdTask(Context context, int productId){
+    public GetProductByIdTask(Context context, int productId) {
         this.context = context;
         this.productId = productId;
     }
@@ -59,14 +60,14 @@ public class GetProductByIdTask extends BaseAsyncRequest {
         //Log.d("Tang Ho"," >>>>> " + response);
         productsRec =
                 (Products) ApiInvoker.deserialize(response, "", Products.class);
-        if(productsRec.products.size()> 0)
+        if (productsRec.products.size() > 0)
             productRec = productsRec.products.get(0);
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success && productsRec != null){
-            Log.d("Tang Ho"," >>>>> Success");
+        if (success && productsRec != null) {
+            Log.d("Tang Ho", " >>>>> Success");
         }
     }
 

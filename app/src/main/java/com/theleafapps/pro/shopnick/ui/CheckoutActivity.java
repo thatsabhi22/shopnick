@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -45,10 +45,10 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
     Customer customer;
     Toolbar toolbar;
     double wallet_value = 0;
-    float cart_total   = 0;
-    double deduction   = 0;
-    TextView wallet_value_tv,total_amount_value_tv,promocode_result_tv;
-    Button confirm_order_button,coupon_code_apply_button;
+    float cart_total = 0;
+    double deduction = 0;
+    TextView wallet_value_tv, total_amount_value_tv, promocode_result_tv;
+    Button confirm_order_button, coupon_code_apply_button;
     CouponCodesDialog couponCodesDialog;
     FragmentManager fragmentManager;
     EditText promocode_edit_text;
@@ -61,51 +61,51 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
-        cart_item_id_array      =   new ArrayList<>();
-        cartItemIdJsonArray     =   new JSONArray();
-        Intent intent           =   getIntent();
-        cart_total              =   intent.getIntExtra("cart_total",0);
-        cart_item_id_array      =   intent.getIntegerArrayListExtra("cart_item_id_array");
-        myProgressDialog        =   new MyProgressDialog(this);
+        cart_item_id_array = new ArrayList<>();
+        cartItemIdJsonArray = new JSONArray();
+        Intent intent = getIntent();
+        cart_total = intent.getIntExtra("cart_total", 0);
+        cart_item_id_array = intent.getIntegerArrayListExtra("cart_item_id_array");
+        myProgressDialog = new MyProgressDialog(this);
 
-        if(cart_item_id_array.size()>0){
-             for(int id : cart_item_id_array){
-                 cartItemIdJsonArray.put(id);
-             }
+        if (cart_item_id_array.size() > 0) {
+            for (int id : cart_item_id_array) {
+                cartItemIdJsonArray.put(id);
+            }
         }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_checkout);
         setSupportActionBar(toolbar);
 
-        if(!Commons.hasActiveInternetConnection(this)){
-            Intent intent1 = new Intent(this,NoNetworkActivity.class);
+        if (!Commons.hasActiveInternetConnection(this)) {
+            Intent intent1 = new Intent(this, NoNetworkActivity.class);
             intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
         }
 
-        actionBar =  getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("Payment");
 
-        wallet_value_tv         =   (TextView) findViewById(R.id.checkout_wallet_amount_value);
-        total_amount_value_tv   =   (TextView) findViewById(R.id.checkout_total_amount_value);
-        confirm_order_button    =   (Button)   findViewById(R.id.confirm_order_button);
-        coupon_code_apply_button=   (Button)   findViewById(R.id.apply_promocode_button);
-        promocode_edit_text     =   (EditText) findViewById(R.id.promocode_edit_text);
-        promocode_result_tv     =   (TextView) findViewById(R.id.promocode_result_tv);
-        couponCodesDialog       =   new CouponCodesDialog();
-        fragmentManager         =   getFragmentManager();
+        wallet_value_tv = (TextView) findViewById(R.id.checkout_wallet_amount_value);
+        total_amount_value_tv = (TextView) findViewById(R.id.checkout_total_amount_value);
+        confirm_order_button = (Button) findViewById(R.id.confirm_order_button);
+        coupon_code_apply_button = (Button) findViewById(R.id.apply_promocode_button);
+        promocode_edit_text = (EditText) findViewById(R.id.promocode_edit_text);
+        promocode_result_tv = (TextView) findViewById(R.id.promocode_result_tv);
+        couponCodesDialog = new CouponCodesDialog();
+        fragmentManager = getFragmentManager();
 
         try {
-            sharedPreferences   =   getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
-            cid                 =   sharedPreferences.getString("cid", "");
+            sharedPreferences = getSharedPreferences("Shopnick", Context.MODE_PRIVATE);
+            cid = sharedPreferences.getString("cid", "");
 
             if (!TextUtils.isEmpty(cid) && Integer.parseInt(cid) != 0) {
                 GetCustomerByIdTask getCustomerByIdTask = new GetCustomerByIdTask(this, Integer.parseInt(cid));
                 getCustomerByIdTask.execute().get();
 
-                customer        =   getCustomerByIdTask.customerRec;
-                wallet_value    =   customer.wallet_value;
+                customer = getCustomerByIdTask.customerRec;
+                wallet_value = customer.wallet_value;
 
             }
         } catch (InterruptedException e) {
@@ -120,60 +120,57 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
         coupon_code_apply_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String coupon_string    =   promocode_edit_text.getText().toString();
-                double min_cart_value   =   0.0;
-                String coupon_type      =   "";
-                int value               =   0;
+                String coupon_string = promocode_edit_text.getText().toString();
+                double min_cart_value = 0.0;
+                String coupon_type = "";
+                int value = 0;
 
-                if(TextUtils.isEmpty(coupon_string)){
+                if (TextUtils.isEmpty(coupon_string)) {
                     promocode_result_tv.setText("Please Enter a Promocode");
                     promocode_result_tv.setVisibility(View.VISIBLE);
                     promocode_result_tv.setTextColor(Color.RED);
-                }
-                else if(coupon_string.length() < 4){
+                } else if (coupon_string.length() < 4) {
                     promocode_result_tv.setText("Please Enter a Valid Promocode");
                     promocode_result_tv.setVisibility(View.VISIBLE);
                     promocode_result_tv.setTextColor(Color.RED);
-                }
-                else {
-                    GetCouponByCodeTask getCouponByCodeTask = new GetCouponByCodeTask(CheckoutActivity.this,coupon_string);
+                } else {
+                    GetCouponByCodeTask getCouponByCodeTask = new GetCouponByCodeTask(CheckoutActivity.this, coupon_string);
                     try {
                         getCouponByCodeTask.execute().get();
 
                         Coupon coupon = getCouponByCodeTask.couponRec;
 
-                        if(coupon == null){
+                        if (coupon == null) {
                             promocode_result_tv.setText("Please Enter a Valid Promocode");
                             promocode_result_tv.setVisibility(View.VISIBLE);
                             promocode_result_tv.setTextColor(Color.RED);
-                        }
-                        else{
+                        } else {
 
-                            min_cart_value      =   coupon.min_cart_value;
-                            coupon_type         =   coupon.type;
-                            value               =   Integer.parseInt(coupon.coupon_value);
+                            min_cart_value = coupon.min_cart_value;
+                            coupon_type = coupon.type;
+                            value = Integer.parseInt(coupon.coupon_value);
 
-                            if(TextUtils.equals(coupon_type,"PER")){
-                                if(cart_total > min_cart_value) {
+                            if (TextUtils.equals(coupon_type, "PER")) {
+                                if (cart_total > min_cart_value) {
                                     deduction = (cart_total * value) / 100;
                                     promocode_result_tv.setVisibility(View.VISIBLE);
                                     promocode_result_tv.setTextColor(Color.parseColor("#3cb371"));
                                     promocode_result_tv.setText("Rs. " + deduction + " will be deducted from your cart value");
-                                    confirm_order_button.setText("Pay Rs. "+ (cart_total-deduction));
-                                }else{
+                                    confirm_order_button.setText("Pay Rs. " + (cart_total - deduction));
+                                } else {
                                     promocode_result_tv.setVisibility(View.VISIBLE);
                                     promocode_result_tv.setTextColor(Color.RED);
                                     promocode_result_tv.setText("Coupon is applicable for cart value more than Rs. " + min_cart_value);
 
                                 }
-                            }else if(TextUtils.equals(coupon_type,"VAL")){
-                                if(cart_total > min_cart_value) {
+                            } else if (TextUtils.equals(coupon_type, "VAL")) {
+                                if (cart_total > min_cart_value) {
                                     deduction = value;
                                     promocode_result_tv.setVisibility(View.VISIBLE);
                                     promocode_result_tv.setTextColor(Color.parseColor("#3cb371"));
                                     promocode_result_tv.setText("Rs. " + deduction + " will be deducted from your cart value");
-                                    confirm_order_button.setText("Pay Rs. "+ (cart_total-deduction));
-                                }else{
+                                    confirm_order_button.setText("Pay Rs. " + (cart_total - deduction));
+                                } else {
                                     promocode_result_tv.setVisibility(View.VISIBLE);
                                     promocode_result_tv.setTextColor(Color.RED);
                                     promocode_result_tv.setText("Coupon is applicable for cart value more than Rs. " + min_cart_value);
@@ -193,10 +190,10 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
             @Override
             public void onClick(View v) {
 
-                if(wallet_value > cart_total) {
+                if (wallet_value > cart_total) {
                     try {
-                        customer.wallet_value   =   customer.wallet_value - (cart_total - deduction);
-                        Customers customersObj  =   new Customers();
+                        customer.wallet_value = customer.wallet_value - (cart_total - deduction);
+                        Customers customersObj = new Customers();
                         customersObj.customers.add(customer);
 
                         UpdateCustomerWalletValueTask updateCustomerWalletValueTask
@@ -204,7 +201,7 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
                         updateCustomerWalletValueTask.execute().get();
 
                         DeleteMultipleCartItemsTask deleteMultipleCartItemsTask
-                                = new DeleteMultipleCartItemsTask(CheckoutActivity.this,cartItemIdJsonArray);
+                                = new DeleteMultipleCartItemsTask(CheckoutActivity.this, cartItemIdJsonArray);
                         deleteMultipleCartItemsTask.execute().get();
 
                         Commons.cartItemCount = 0;
@@ -213,7 +210,7 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
                         intent.putExtra("deduction", deduction);
                         intent.putExtra("net_cost", cart_total - deduction);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        MyProgressDialog.show(CheckoutActivity.this,myProgressDialog,"","");
+                        MyProgressDialog.show(CheckoutActivity.this, myProgressDialog, "", "");
                         startActivity(intent);
                         finish();
 
@@ -222,12 +219,11 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
                     } catch (ExecutionException e) {
                         e.printStackTrace();
                     }
-                }
-                else{
+                } else {
                     Intent intent = new Intent(CheckoutActivity.this, AddMoneyActivity.class);
-                    intent.putExtra("customer_id",customer.customer_id);
-                    intent.putExtra("cart_total",cart_total);
-                    intent.putIntegerArrayListExtra("cart_item_id_array",cart_item_id_array);
+                    intent.putExtra("customer_id", customer.customer_id);
+                    intent.putExtra("cart_total", cart_total);
+                    intent.putIntegerArrayListExtra("cart_item_id_array", cart_item_id_array);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
@@ -243,7 +239,7 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
                 return true;
             case R.id.user_profile:
                 Intent intent;
-                intent = new Intent(this,CustomerProfileActivity.class);
+                intent = new Intent(this, CustomerProfileActivity.class);
                 startActivity(intent);
                 return true;
             default:
@@ -254,27 +250,27 @@ public class CheckoutActivity extends AppCompatActivity implements Communicator 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.d("Tangho","CheckoutActivity activity >> onRestart Called");
+        Log.d("Tangho", "CheckoutActivity activity >> onRestart Called");
 
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("Tangho","CheckoutActivity activity >> onRestart Called");
+        Log.d("Tangho", "CheckoutActivity activity >> onRestart Called");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("Tangho","CheckoutActivity activity >> onPause Called");
+        Log.d("Tangho", "CheckoutActivity activity >> onPause Called");
     }
 
     @Override
     protected void onDestroy() {
         myProgressDialog.dismiss();
         super.onDestroy();
-        Log.d("Tangho","CheckoutActivity activity >> onDestroy Called");
+        Log.d("Tangho", "CheckoutActivity activity >> onDestroy Called");
     }
 
     @Override

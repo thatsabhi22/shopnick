@@ -25,27 +25,23 @@ import java.util.List;
  */
 public class Commons {
 
-    public static int cartItemCount;
-
-    public static MyProgressDialog myProgressDialog;
-
-    public static LinkedMap<Integer,List<SubCategory>> catIdToSubCatMap = new LinkedMap<>();
-
-    public static  final CharSequence[] sort_options = {
+    public static final CharSequence[] sort_options = {
             "Popularity", "Price Low to High", "Price High to Low", "Discount High to Low"
     };
+    public static int cartItemCount;
+    public static MyProgressDialog myProgressDialog;
+    public static LinkedMap<Integer, List<SubCategory>> catIdToSubCatMap = new LinkedMap<>();
 
     public static boolean hasActiveInternetConnection(Context context) {
 
         ConnectivityManager cm =
-                (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
 
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
+        if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
@@ -73,7 +69,7 @@ public class Commons {
                 Settings.Secure.ANDROID_ID);
     }
 
-    public static void showProgressDialog(ProgressDialog dialog){
+    public static void showProgressDialog(ProgressDialog dialog) {
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
@@ -85,7 +81,7 @@ public class Commons {
         ActivityManager m = (ActivityManager) ctx
                 .getSystemService(ctx.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> runningTaskInfoList = m.getRunningTasks(10);
-        List<ActivityManager.RunningAppProcessInfo> runningAppProcessesInfoList  = m.getRunningAppProcesses();
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcessesInfoList = m.getRunningAppProcesses();
         Iterator<ActivityManager.RunningTaskInfo> itr = runningTaskInfoList.iterator();
         while (itr.hasNext()) {
             ActivityManager.RunningTaskInfo runningTaskInfo = (ActivityManager.RunningTaskInfo) itr.next();
@@ -96,19 +92,7 @@ public class Commons {
                     .getShortClassName();
             String baseActivity = runningTaskInfo.baseActivity.getShortClassName();
             //Log.d("Tangho","Trail >>>>" + topActivity+"\n" + "numOfActivities >>>>>" + numOfActivities);
-            Log.d("Trailho","Base >> "+ baseActivity + "Current >>" + topActivity);
+            Log.d("Trailho", "Base >> " + baseActivity + "Current >>" + topActivity);
         }
     }
-//    String key      =   "dumlagakehaisha";
-//    //            String encMsg   =   EncryptUtils.xorMessage(android_id,key);
-//    String encMsg   =   "1";
-//
-//    Log.d("Tangho", encMsg + " XOR-ed to: " + (encMsg = EncryptUtils.xorMessage(encMsg, key)));
-//
-//    String encoded = EncryptUtils.base64encode(encMsg);
-//
-//    Log.d("Tangho",
-//            " is encoded to: " + encoded + " and that is decoding to: " +
-//            (encMsg = EncryptUtils.base64decode(encoded)));
-//    Log.d("Tangho","XOR-ing back to original: " + EncryptUtils.xorMessage(encMsg, key));
 }

@@ -16,13 +16,13 @@ import dfapi.BaseAsyncRequest;
  */
 public class AddCustomerTask extends BaseAsyncRequest {
 
-    Context context;
     public int customerId;
+    Context context;
     Customers customersObj;
 
-    public AddCustomerTask(Context context, Customers customers){
-        this.context        =   context;
-        this.customersObj      =   customers;
+    public AddCustomerTask(Context context, Customers customers) {
+        this.context = context;
+        this.customersObj = customers;
     }
 
     @Override
@@ -34,8 +34,8 @@ public class AddCustomerTask extends BaseAsyncRequest {
 
         verb = "POST";
 
-        requestString = ApiInvoker.serialize(customersObj).replace("\"customer_id\":0,","");
-        requestString = requestString.replace(",\"customer_id\":0","");
+        requestString = ApiInvoker.serialize(customersObj).replace("\"customer_id\":0,", "");
+        requestString = requestString.replace(",\"customer_id\":0", "");
 
         applicationApiKey = AppConstants.API_KEY;
         sessionToken = PrefUtil.getString(context, AppConstants.SESSION_TOKEN);
@@ -44,14 +44,14 @@ public class AddCustomerTask extends BaseAsyncRequest {
     @Override
     protected void processResponse(String response) throws ApiException, org.json.JSONException {
         // response has whole contact record, but we just want the id
-        Customers customersObj   =   (Customers) ApiInvoker.deserialize(response, "", Customers.class);
-        customerId               =   customersObj.customers.get(0).customer_id;
+        Customers customersObj = (Customers) ApiInvoker.deserialize(response, "", Customers.class);
+        customerId = customersObj.customers.get(0).customer_id;
     }
 
     @Override
     protected void onCompletion(boolean success) {
-        if(success) {
-            Log.d("Tang Ho","Success");
+        if (success) {
+            Log.d("Tang Ho", "Success");
         }
     }
 
